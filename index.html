@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="el">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Υπολογισμός Φ.Π.Α.</title>
+    <meta name="description" content="Very simple Greek V.A.T. calculator">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <meta name="author" content="XhmikosR">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="page-header">
+            <h1 class="text-center">Υπολογισμός Φ.Π.Α.</h1>
+        </div>
+
+        <form id="calcForm" class="form-horizontal">
+            <div class="form-group">
+                <label for="totalCost" class="col-sm-2 control-label">ΣΥΝΟΛΟ (€)</label>
+                <div class="col-sm-10">
+                    <input id="totalCost" class="form-control" type="number" autofocus required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="vatRate" class="col-sm-2 control-label">Φ.Π.Α. (%)</label>
+                <div class="col-sm-10">
+                    <input id="vatRate" class="form-control" type="number" value="24.00" min="0.10" max="99.99" step="0.01" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="totalVat" class="col-sm-2 control-label">Φ.Π.Α. (€)</label>
+                <div class="col-sm-10">
+                    <input id="totalVat" class="form-control" type="text" readonly disabled>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="totalNetCost" class="col-sm-2 control-label">ΠΟΣΟ ΧΩΡΙΣ Φ.Π.Α. (€)</label>
+                <div class="col-sm-10">
+                    <input id="totalNetCost" class="form-control" type="number" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <input id="calcBtn" class="btn btn-primary" type="submit" value="Υπολογισμός" disabled>
+                    <input id="resetBtn" class="btn btn-danger" type="reset" value="Επαναφορά">
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            var totalCost = document.getElementById('totalCost');
+            var vatRate = document.getElementById('vatRate');
+            var totalVat = document.getElementById('totalVat');
+            var totalNetCost = document.getElementById('totalNetCost');
+            var calcBtn = document.getElementById('calcBtn');
+            var resetBtn = document.getElementById('resetBtn');
+            var calcForm = document.getElementById('calcForm');
+
+            function calculateVAT () {
+                if (totalCost.hasAttribute('disabled')) {
+                    totalCost.value = (Number(totalNetCost.value) + (Number(vatRate.value / 100) * totalNetCost.value)).toFixed(2);
+                    totalVat.value = (Number(totalCost.value) - Number(totalNetCost.value)).toFixed(2);
+
+                    totalVat.removeAttribute('disabled', '');
+                    totalCost.removeAttribute('disabled', '');
+                    totalCost.setAttribute('readonly', '');
+                } else {
+                    totalNetCost.value = (Number(totalCost.value) / (1 + Number(vatRate.value / 100))).toFixed(2);
+                    totalVat.value = (Number(totalCost.value) - Number(totalNetCost.value)).toFixed(2);
+
+                    totalVat.removeAttribute('disabled', '');
+                    totalNetCost.removeAttribute('disabled', '');
+                    totalNetCost.setAttribute('readonly', '');
+                }
+
+                calcBtn.setAttribute('disabled', '');
+            }
+
+            function resetCalculator () {
+                totalCost.value = 0;
+                totalNetCost.value = 0;
+                totalVat.value = 0;
+
+                totalCost.removeAttribute('readonly');
+                totalNetCost.removeAttribute('readonly');
+                totalCost.removeAttribute('disabled');
+                totalNetCost.removeAttribute('disabled');
+
+                calcBtn.removeAttribute('disabled');
+            }
+
+            totalCost.addEventListener('input', function () {
+                totalNetCost.setAttribute('disabled', '');
+                totalNetCost.setAttribute('readonly', '');
+                calcBtn.removeAttribute('disabled');
+            });
+
+            totalNetCost.addEventListener('input', function () {
+                totalCost.setAttribute('disabled', '');
+                totalCost.setAttribute('readonly', '');
+                calcBtn.removeAttribute('disabled');
+            });
+
+            vatRate.addEventListener('input', function () {
+                calcBtn.removeAttribute('disabled');
+            });
+
+            calcForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+            });
+
+            calcBtn.addEventListener('click', calculateVAT);
+            resetBtn.addEventListener('click', resetCalculator);
+        })();
+    </script>
+
+  </body>
+</html>
