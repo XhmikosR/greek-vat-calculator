@@ -1,0 +1,36 @@
+{
+  "name": "greek-vat-calculator",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A simple online Greek VAT calculator.",
+  "author": "XhmikosR",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XhmikosR/greek-vat-calculator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/XhmikosR/greek-vat-calculator/issues"
+  },
+  "homepage": "https://xhmikosr.github.io/greek-vat-calculator/",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-bootlint": "^0.10.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-htmlmin": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-html": "^8.0.2",
+    "grunt-static-inline": "^0.1.9",
+    "grunt-uncss": "^0.6.1",
+    "load-grunt-tasks": "^3.5.2",
+    "time-grunt": "^1.4.0"
+  },
+  "engines": {
+    "node": ">=6"
+  }
+}
