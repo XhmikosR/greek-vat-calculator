@@ -14,15 +14,15 @@
             totalCost.value = (Number(totalNetCost.value) + (Number(vatRate.value / 100) * totalNetCost.value)).toFixed(2);
             totalVat.value = (Number(totalCost.value) - Number(totalNetCost.value)).toFixed(2);
 
-            totalVat.removeAttribute('disabled', '');
-            totalCost.removeAttribute('disabled', '');
+            totalVat.removeAttribute('disabled');
+            totalCost.removeAttribute('disabled');
             totalCost.setAttribute('readonly', '');
         } else {
             totalNetCost.value = (Number(totalCost.value) / (1 + Number(vatRate.value / 100))).toFixed(2);
             totalVat.value = (Number(totalCost.value) - Number(totalNetCost.value)).toFixed(2);
 
-            totalVat.removeAttribute('disabled', '');
-            totalNetCost.removeAttribute('disabled', '');
+            totalVat.removeAttribute('disabled');
+            totalNetCost.removeAttribute('disabled');
             totalNetCost.setAttribute('readonly', '');
         }
 
@@ -34,6 +34,10 @@
         totalNetCost.value = 0;
         totalVat.value = 0;
 
+        totalCost.parentNode.parentNode.classList.remove('has-error');
+        totalNetCost.parentNode.parentNode.classList.remove('has-error');
+        vatRate.parentNode.parentNode.classList.remove('has-error');
+
         totalCost.removeAttribute('readonly');
         totalNetCost.removeAttribute('readonly');
         totalCost.removeAttribute('disabled');
@@ -43,19 +47,39 @@
     }
 
     totalCost.addEventListener('input', function () {
-        totalNetCost.setAttribute('disabled', '');
-        totalNetCost.setAttribute('readonly', '');
-        calcBtn.removeAttribute('disabled');
+        if (totalCost.validity.valid) {
+            totalCost.parentNode.parentNode.classList.remove('has-error');
+
+            totalNetCost.setAttribute('disabled', '');
+            totalNetCost.setAttribute('readonly', '');
+            calcBtn.removeAttribute('disabled');
+        } else {
+            totalCost.parentNode.parentNode.classList.add('has-error');
+            calcBtn.setAttribute('disabled', '');
+        }
     });
 
     totalNetCost.addEventListener('input', function () {
-        totalCost.setAttribute('disabled', '');
-        totalCost.setAttribute('readonly', '');
-        calcBtn.removeAttribute('disabled');
+        if (totalNetCost.validity.valid) {
+            totalNetCost.parentNode.parentNode.classList.remove('has-error');
+
+            totalCost.setAttribute('disabled', '');
+            totalCost.setAttribute('readonly', '');
+            calcBtn.removeAttribute('disabled');
+        } else {
+            totalNetCost.parentNode.parentNode.classList.add('has-error');
+            calcBtn.setAttribute('disabled', '');
+        }
     });
 
     vatRate.addEventListener('input', function () {
-        calcBtn.removeAttribute('disabled');
+        if (vatRate.validity.valid) {
+            vatRate.parentNode.parentNode.classList.remove('has-error');
+            calcBtn.removeAttribute('disabled');
+        } else {
+            vatRate.parentNode.parentNode.classList.add('has-error');
+            calcBtn.setAttribute('disabled', '');
+        }
     });
 
     calcForm.addEventListener('submit', function (e) {

@@ -25,6 +25,9 @@ module.exports = function(grunt) {
 
         uncss: {
             options: {
+                ignore: [
+                    /\.has-error/
+                ],
                 htmlroot: '<%= dirs.tmp %>',
                 stylesheets: ['/bootstrap.css']
             },
