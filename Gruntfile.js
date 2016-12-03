@@ -100,7 +100,7 @@ module.exports = function(grunt) {
         },
 
         htmllint: {
-            src: '<%= dirs.dest %>/*.html'
+            src: ['<%= dirs.dest %>/*.html', '!<%= dirs.dest %>/google*.html']
         },
 
         connect: {
