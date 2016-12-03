@@ -15,11 +15,20 @@ module.exports = function(grunt) {
             dist: {
                 files: [{
                     dest: '<%= dirs.tmp %>/',
-                    src: ['index.html', 'bootstrap.css', 'main.js'],
+                    src: ['index.html', 'main.js'],
                     filter: 'isFile',
                     expand: true,
                     cwd: '<%= dirs.src %>'
                 }]
+            }
+        },
+
+        concat: {
+            css: {
+                src: ['<%= dirs.src %>/bootstrap.css',
+                      '<%= dirs.src %>/main.css'
+                ],
+                dest: '<%= dirs.tmp %>/main.css'
             }
         },
 
@@ -29,11 +38,11 @@ module.exports = function(grunt) {
                     /\.has-error/
                 ],
                 htmlroot: '<%= dirs.tmp %>',
-                stylesheets: ['/bootstrap.css']
+                stylesheets: ['/main.css']
             },
             dist: {
                 src: '<%= dirs.tmp %>/*.html',
-                dest: '<%= dirs.tmp %>/main.css'
+                dest: '<%= concat.css.dest %>'
             }
         },
 
@@ -126,6 +135,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('build', [
         'copy',
+        'concat',
         'uncss',
         'staticinline',
         'htmlmin'
