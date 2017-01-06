@@ -25,8 +25,9 @@ module.exports = function(grunt) {
 
         concat: {
             css: {
-                src: ['<%= dirs.src %>/bootstrap.css',
-                      '<%= dirs.src %>/main.css'
+                src: [
+                    '<%= dirs.src %>/bootstrap.css',
+                    '<%= dirs.src %>/main.css'
                 ],
                 dest: '<%= dirs.tmp %>/main.css'
             }
@@ -92,6 +93,20 @@ module.exports = function(grunt) {
             }
         },
 
+        eslint: {
+            options: {
+                config: '.eslintrc.json'
+            },
+            gruntfile: {
+                src: 'Gruntfile.js'
+            },
+            src: {
+                src: [
+                    '<%= dirs.src %>/*.js'
+                ]
+            }
+        },
+
         bootlint: {
             options: {
                 relaxerror: ['W005']
@@ -130,7 +145,9 @@ module.exports = function(grunt) {
     });
 
     // Load any grunt plugins found in package.json.
-    require('load-grunt-tasks')(grunt, { scope: 'devDependencies' });
+    require('load-grunt-tasks')(grunt, {
+        scope: 'devDependencies'
+    });
     require('time-grunt')(grunt);
 
     grunt.registerTask('build', [
@@ -142,6 +159,7 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('test', [
+        'eslint',
         'build',
         'bootlint',
         'htmllint'

@@ -11,7 +11,9 @@
 
     function calculateVAT () {
         if (totalCost.hasAttribute('disabled')) {
+            /* eslint-disable no-extra-parens */
             totalCost.value = (Number(totalNetCost.value) + (Number(vatRate.value / 100) * totalNetCost.value)).toFixed(2);
+            /* eslint-enable no-extra-parens */
             totalVat.value = (Number(totalCost.value) - Number(totalNetCost.value)).toFixed(2);
 
             totalVat.removeAttribute('disabled');
