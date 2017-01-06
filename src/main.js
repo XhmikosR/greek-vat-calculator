@@ -9,6 +9,21 @@
     var resetBtn = document.getElementById('resetBtn');
     var calcForm = document.getElementById('calcForm');
 
+    function addHasErrorClass (el) {
+        return el.parentNode.parentNode.classList.add('has-error');
+    }
+
+    function removeHasErrorClass (el) {
+        return el.parentNode.parentNode.classList.remove('has-error');
+    }
+
+    function setAttribute (el, attr) {
+        return el.setAttribute(attr, '');
+    }
+    function removeAttribute (el, attr) {
+        return el.removeAttribute(attr);
+    }
+
     function calculateVAT () {
         if (totalCost.hasAttribute('disabled')) {
             /* eslint-disable no-extra-parens */
@@ -16,19 +31,19 @@
             /* eslint-enable no-extra-parens */
             totalVat.value = (Number(totalCost.value) - Number(totalNetCost.value)).toFixed(2);
 
-            totalVat.removeAttribute('disabled');
-            totalCost.removeAttribute('disabled');
-            totalCost.setAttribute('readonly', '');
+            removeAttribute(totalVat, 'disabled');
+            removeAttribute(totalCost, 'disabled');
+            setAttribute(totalCost, 'readonly');
         } else {
             totalNetCost.value = (Number(totalCost.value) / (1 + Number(vatRate.value / 100))).toFixed(2);
             totalVat.value = (Number(totalCost.value) - Number(totalNetCost.value)).toFixed(2);
 
-            totalVat.removeAttribute('disabled');
-            totalNetCost.removeAttribute('disabled');
-            totalNetCost.setAttribute('readonly', '');
+            removeAttribute(totalVat, 'disabled');
+            removeAttribute(totalNetCost, 'disabled');
+            setAttribute(totalNetCost, 'readonly');
         }
 
-        calcBtn.setAttribute('disabled', '');
+        setAttribute(calcBtn, 'disabled');
     }
 
     function resetCalculator () {
@@ -36,51 +51,51 @@
         totalNetCost.value = 0;
         totalVat.value = 0;
 
-        totalCost.parentNode.parentNode.classList.remove('has-error');
-        totalNetCost.parentNode.parentNode.classList.remove('has-error');
-        vatRate.parentNode.parentNode.classList.remove('has-error');
+        removeHasErrorClass(totalCost);
+        removeHasErrorClass(totalNetCost);
+        removeHasErrorClass(vatRate);
 
-        totalCost.removeAttribute('readonly');
-        totalNetCost.removeAttribute('readonly');
-        totalCost.removeAttribute('disabled');
-        totalNetCost.removeAttribute('disabled');
+        removeAttribute(totalCost, 'readonly');
+        removeAttribute(totalNetCost, 'readonly');
+        removeAttribute(totalCost, 'disabled');
+        removeAttribute(totalNetCost, 'disabled');
 
-        calcBtn.removeAttribute('disabled');
+        removeAttribute(calcBtn, 'disabled');
     }
 
     totalCost.addEventListener('input', function () {
         if (totalCost.validity.valid) {
-            totalCost.parentNode.parentNode.classList.remove('has-error');
+            removeHasErrorClass(totalCost);
 
-            totalNetCost.setAttribute('disabled', '');
-            totalNetCost.setAttribute('readonly', '');
-            calcBtn.removeAttribute('disabled');
+            setAttribute(totalNetCost, 'disabled');
+            setAttribute(totalNetCost, 'readonly');
+            removeAttribute(calcBtn, 'disabled');
         } else {
-            totalCost.parentNode.parentNode.classList.add('has-error');
-            calcBtn.setAttribute('disabled', '');
+            addHasErrorClass(totalCost);
+            setAttribute(calcBtn, 'disabled');
         }
     });
 
     totalNetCost.addEventListener('input', function () {
         if (totalNetCost.validity.valid) {
-            totalNetCost.parentNode.parentNode.classList.remove('has-error');
+            removeHasErrorClass(totalNetCost);
 
-            totalCost.setAttribute('disabled', '');
-            totalCost.setAttribute('readonly', '');
-            calcBtn.removeAttribute('disabled');
+            setAttribute(totalCost, 'disabled');
+            setAttribute(totalCost, 'readonly');
+            removeAttribute(calcBtn, 'disabled');
         } else {
-            totalNetCost.parentNode.parentNode.classList.add('has-error');
-            calcBtn.setAttribute('disabled', '');
+            addHasErrorClass(totalNetCost);
+            setAttribute(calcBtn, 'disabled');
         }
     });
 
     vatRate.addEventListener('input', function () {
         if (vatRate.validity.valid) {
-            vatRate.parentNode.parentNode.classList.remove('has-error');
-            calcBtn.removeAttribute('disabled');
+            removeHasErrorClass(vatRate);
+            removeAttribute(calcBtn, 'disabled');
         } else {
-            vatRate.parentNode.parentNode.classList.add('has-error');
-            calcBtn.setAttribute('disabled', '');
+            addHasErrorClass(vatRate);
+            setAttribute(calcBtn, 'disabled');
         }
     });
 
