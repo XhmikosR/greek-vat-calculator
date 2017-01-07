@@ -1,13 +1,9 @@
 (function() {
     'use strict';
 
-    var totalCost = document.getElementById('totalCost');
-    var vatRate = document.getElementById('vatRate');
-    var totalVat = document.getElementById('totalVat');
-    var totalNetCost = document.getElementById('totalNetCost');
-    var calcBtn = document.getElementById('calcBtn');
-    var resetBtn = document.getElementById('resetBtn');
-    var calcForm = document.getElementById('calcForm');
+    function getElement (id) {
+        return document.getElementById(id);
+    }
 
     function addHasErrorClass (el) {
         return el.parentNode.parentNode.classList.add('has-error');
@@ -23,6 +19,14 @@
     function removeAttribute (el, attr) {
         return el.removeAttribute(attr);
     }
+
+    var totalCost = getElement('totalCost');
+    var vatRate = getElement('vatRate');
+    var totalVat = getElement('totalVat');
+    var totalNetCost = getElement('totalNetCost');
+    var calcBtn = getElement('calcBtn');
+    var resetBtn = getElement('resetBtn');
+    var calcForm = getElement('calcForm');
 
     function calculateVAT () {
         if (totalCost.hasAttribute('disabled')) {
