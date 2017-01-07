@@ -33,6 +33,22 @@ module.exports = function(grunt) {
             }
         },
 
+        autoprefixer: {
+            options: {
+                browsers: [
+                    'last 2 version',
+                    '> 1%',
+                    'Edge >= 12',
+                    'Explorer >= 11',
+                    'Firefox ESR'
+                ]
+            },
+            pack: {
+                src: '<%= concat.css.dest %>',
+                dest: '<%= concat.css.dest %>'
+            }
+        },
+
         uncss: {
             options: {
                 ignore: [
@@ -153,6 +169,7 @@ module.exports = function(grunt) {
     grunt.registerTask('build', [
         'copy',
         'concat',
+        'autoprefixer',
         'uncss',
         'staticinline',
         'htmlmin'
