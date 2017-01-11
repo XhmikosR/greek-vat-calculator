@@ -30,6 +30,13 @@ module.exports = function(grunt) {
                     '<%= dirs.src %>/main.css'
                 ],
                 dest: '<%= dirs.tmp %>/main.css'
+            },
+            js: {
+                src: [
+                    '<%= dirs.src %>/main.js',
+                    '<%= dirs.src %>/google-analytics.js'
+                ],
+                dest: '<%= dirs.tmp %>/main.js'
             }
         },
 
