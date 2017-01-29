@@ -5,7 +5,6 @@
   "description": "A simple online Greek VAT calculator.",
   "author": "XhmikosR",
   "license": "MIT",
-  "homepage": "https://xhmikosr.github.io/greek-vat-calculator/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/XhmikosR/greek-vat-calculator.git"
@@ -13,31 +12,26 @@
   "bugs": {
     "url": "https://github.com/XhmikosR/greek-vat-calculator/issues"
   },
+  "homepage": "https://github.com/XhmikosR/greek-vat-calculator#readme",
   "scripts": {
-    "uncss": "mkdirp .tmp && uncss ./src/index.html --uncssrc ./.uncssrc>./.tmp/main.css",
-    "autoprefixer": "postcss -c ./.autoprefixer.json",
-    "uglify": "uglifyjs src/main.js src/google-analytics.js --compress --mangle -o ./.tmp/main.js",
-    "inline": "html-inline -b ./.tmp/ ./src/index.html -o ./.tmp/index.html --ignore-links",
-    "minify": "html-minifier -c html-minifier.conf ./.tmp/index.html -o ./index.html",
-    "build": "npm-run-all uncss autoprefixer uglify inline minify",
-    "bootlint": "bootlint -d \"W005\" ./src/index.html",
-    "eslint": "eslint **/*.js",
-    "htmllint": "java -jar ./node_modules/vnu-jar/build/dist/vnu.jar --errors-only ./src/index.html",
-    "lint": "npm-run-all -p eslint bootlint htmllint",
-    "test": "npm-run-all lint build"
+    "test": "grunt test"
   },
   "devDependencies": {
-    "autoprefixer": "^6.6.1",
-    "bootlint": "^0.14.2",
-    "eslint": "^3.13.1",
-    "html-inline": "^1.2.0",
-    "html-minifier": "^3.2.3",
-    "mkdirp": "^0.5.1",
-    "npm-run-all": "^4.0.1",
-    "postcss-cli": "^2.6.0",
-    "uglify-js": "^2.7.5",
-    "uncss": "^0.14.1",
-    "vnu-jar": "^17.1.0"
+    "grunt": "^1.0.1",
+    "grunt-autoprefixer": "^3.0.4",
+    "grunt-bootlint": "^0.10.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-htmlmin": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-eslint": "^19.0.0",
+    "grunt-html": "^8.0.2",
+    "grunt-static-inline": "^0.1.9",
+    "grunt-uncss": "^0.6.1",
+    "load-grunt-tasks": "^3.5.2",
+    "time-grunt": "^1.4.0"
   },
   "engines": {
     "node": ">=6"
