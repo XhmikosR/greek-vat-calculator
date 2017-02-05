@@ -234,7 +234,7 @@
         ],
         "quote-props": [
             "error",
-            "consistent"
+            "as-needed"
         ],
         "quotes": [
             "error",

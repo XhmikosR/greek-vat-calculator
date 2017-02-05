@@ -5,20 +5,34 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         dirs: {
-            dest: '.',
+            dest: '_site',
             src: 'src',
             tmp: '.tmp'
         },
 
-        // Copy files that don't need compilation to tmp/
+        // Copy files that don't need compilation to _site/
         copy: {
-            dist: {
+            index: {
                 files: [{
                     dest: '<%= dirs.tmp %>/',
-                    src: ['index.html', 'main.js'],
+                    src: [
+                        'index.html'
+                    ],
                     filter: 'isFile',
                     expand: true,
-                    cwd: '<%= dirs.src %>'
+                    cwd: '<%= dirs.src %>/'
+                }]
+            },
+            googleVerification: {
+                src: '<%= dirs.src %>/googleb7d9bd0c5429cca2.html',
+                dest: '<%= dirs.dest %>/googleb7d9bd0c5429cca2.html'
+            },
+            img: {
+                files: [{
+                    dest: '<%= dirs.dest %>/',
+                    src: 'img/**',
+                    expand: true,
+                    cwd: '<%= dirs.src %>/'
                 }]
             }
         },
@@ -26,17 +40,17 @@ module.exports = function(grunt) {
         concat: {
             css: {
                 src: [
-                    '<%= dirs.src %>/bootstrap.css',
-                    '<%= dirs.src %>/main.css'
+                    '<%= dirs.src %>/css/bootstrap.css',
+                    '<%= dirs.src %>/css/main.css'
                 ],
-                dest: '<%= dirs.tmp %>/main.css'
+                dest: '<%= dirs.tmp %>/css/main.css'
             },
             js: {
                 src: [
-                    '<%= dirs.src %>/main.js',
-                    '<%= dirs.src %>/google-analytics.js'
+                    '<%= dirs.src %>/js/main.js',
+                    '<%= dirs.src %>/js/google-analytics.js'
                 ],
-                dest: '<%= dirs.tmp %>/main.js'
+                dest: '<%= dirs.tmp %>/js/main.js'
             }
         },
 
@@ -62,7 +76,7 @@ module.exports = function(grunt) {
                     /\.has-error/
                 ],
                 htmlroot: '<%= dirs.tmp %>',
-                stylesheets: ['/main.css']
+                stylesheets: ['/css/main.css']
             },
             dist: {
                 src: '<%= dirs.tmp %>/*.html',
@@ -125,7 +139,7 @@ module.exports = function(grunt) {
             },
             src: {
                 src: [
-                    '<%= dirs.src %>/*.js'
+                    '<%= dirs.src %>/js/*.js'
                 ]
             }
         },
@@ -138,7 +152,15 @@ module.exports = function(grunt) {
         },
 
         htmllint: {
-            src: ['<%= dirs.dest %>/*.html', '!<%= dirs.dest %>/google*.html']
+            options: {
+                ignore: [
+                    'Attribute "color" not allowed on element "link" at this point.'
+                ]
+            },
+            src: [
+                '<%= dirs.dest %>/*.html',
+                '!<%= dirs.dest %>/google*.html'
+            ]
         },
 
         connect: {
@@ -160,9 +182,23 @@ module.exports = function(grunt) {
                 livereload: '<%= connect.options.livereload %>'
             },
             build: {
-                files: ['<%= dirs.src %>/*', 'Gruntfile.js'],
+                files: ['<%= dirs.src %>/**', 'Gruntfile.js'],
                 tasks: 'build'
             }
+        },
+
+        clean: {
+            tests: [
+                '<%= dirs.tmp %>/',
+                '<%= dirs.dest %>/'
+            ]
+        },
+
+        'gh-pages': {
+            options: {
+                base: '<%= dirs.dest %>'
+            },
+            src: ['**']
         }
 
     });
@@ -174,6 +210,7 @@ module.exports = function(grunt) {
     require('time-grunt')(grunt);
 
     grunt.registerTask('build', [
+        'clean',
         'copy',
         'concat',
         'autoprefixer',
@@ -183,10 +220,17 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('test', [
+        'build',
         'eslint',
         'build',
         'bootlint',
         'htmllint'
+    ]);
+
+
+    grunt.registerTask('deploy', [
+        'build',
+        'gh-pages'
     ]);
 
     grunt.registerTask('default', [
