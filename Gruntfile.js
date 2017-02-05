@@ -23,6 +23,10 @@ module.exports = function(grunt) {
                     cwd: '<%= dirs.src %>/'
                 }]
             },
+            serviceWorker: {
+                src: '<%= dirs.src %>/js/service-worker.js',
+                dest: '<%= dirs.dest %>/service-worker.js'
+            },
             googleVerification: {
                 src: '<%= dirs.src %>/googleb7d9bd0c5429cca2.html',
                 dest: '<%= dirs.dest %>/googleb7d9bd0c5429cca2.html'
@@ -48,6 +52,7 @@ module.exports = function(grunt) {
             js: {
                 src: [
                     '<%= dirs.src %>/js/main.js',
+                    '<%= dirs.src %>/js/pwa.js',
                     '<%= dirs.src %>/js/google-analytics.js'
                 ],
                 dest: '<%= dirs.tmp %>/js/main.js'
