@@ -27,9 +27,17 @@ module.exports = function(grunt) {
                 src: '<%= dirs.src %>/js/service-worker.js',
                 dest: '<%= dirs.dest %>/service-worker.js'
             },
-            googleVerification: {
-                src: '<%= dirs.src %>/googleb7d9bd0c5429cca2.html',
-                dest: '<%= dirs.dest %>/googleb7d9bd0c5429cca2.html'
+            other: {
+                files: [{
+                    dest: '<%= dirs.dest %>/',
+                    src: [
+                        '*.*',
+                        '!index.html'
+                    ],
+                    filter: 'isFile',
+                    expand: true,
+                    cwd: '<%= dirs.src %>/'
+                }]
             },
             img: {
                 files: [{
@@ -131,7 +139,10 @@ module.exports = function(grunt) {
                 expand: true,
                 cwd: '<%= dirs.tmp %>',
                 dest: '<%= dirs.dest %>',
-                src: ['*.html']
+                src: [
+                    '*.html',
+                    '!404.html'
+                ]
             }
         },
 
@@ -153,7 +164,10 @@ module.exports = function(grunt) {
             options: {
                 relaxerror: ['W005']
             },
-            files: ['<%= dirs.tmp %>/*.html']
+            files: [
+                '<%= dirs.tmp %>/*.html',
+                '!<%= dirs.tmp %>/404.html'
+            ]
         },
 
         htmllint: {
