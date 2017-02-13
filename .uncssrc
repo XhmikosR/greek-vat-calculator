@@ -1,0 +1,9 @@
+{
+    "ignore": [
+        "/.has-error/"
+    ],
+    "stylesheets": [
+        "bootstrap.css",
+        "main.css"
+    ]
+}
