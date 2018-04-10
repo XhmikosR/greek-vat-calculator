@@ -67,19 +67,14 @@ module.exports = function(grunt) {
             }
         },
 
-        autoprefixer: {
+        postcss: {
             options: {
-                browsers: [
-                    'last 2 version',
-                    '> 1%',
-                    'Edge >= 12',
-                    'Explorer >= 11',
-                    'Firefox ESR'
+                processors: [
+                    require('autoprefixer')()   // add vendor prefixes
                 ]
             },
-            pack: {
-                src: '<%= concat.css.dest %>',
-                dest: '<%= concat.css.dest %>'
+            dist: {
+                src: '<%= concat.css.dest %>'
             }
         },
 
@@ -235,7 +230,7 @@ module.exports = function(grunt) {
         'clean',
         'copy',
         'concat',
-        'autoprefixer',
+        'postcss',
         'uncss',
         'staticinline',
         'htmlmin'
