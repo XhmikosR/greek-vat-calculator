@@ -70,6 +70,8 @@ module.exports = function(grunt) {
         postcss: {
             options: {
                 processors: [
+                    require('postcss-combine-duplicated-selectors')(),
+                    require('css-mqpacker')(),  // combine media queries
                     require('autoprefixer')()   // add vendor prefixes
                 ]
             },
