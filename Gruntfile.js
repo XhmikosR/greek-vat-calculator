@@ -80,17 +80,17 @@ module.exports = function(grunt) {
             }
         },
 
-        uncss: {
-            options: {
-                ignore: [
-                    /\.has-error/
-                ],
-                htmlroot: '<%= dirs.tmp %>',
-                stylesheets: ['/css/main.css']
-            },
+        purgecss: {
             dist: {
-                src: '<%= dirs.tmp %>/*.html',
-                dest: '<%= concat.css.dest %>'
+                options: {
+                    content: [
+                        '<%= dirs.tmp %>/**/*.html',
+                        '<%= dirs.tmp %>/js/**/*.js'
+                    ]
+                },
+                files: {
+                    '<%= concat.css.dest %>': ['<%= concat.css.dest %>']
+                }
             }
         },
 
@@ -171,11 +171,6 @@ module.exports = function(grunt) {
         },
 
         htmllint: {
-            options: {
-                ignore: [
-                    'Attribute "color" not allowed on element "link" at this point.'
-                ]
-            },
             src: [
                 '<%= dirs.dest %>/*.html',
                 '!<%= dirs.dest %>/google*.html'
@@ -233,7 +228,7 @@ module.exports = function(grunt) {
         'copy',
         'concat',
         'postcss',
-        'uncss',
+        'purgecss',
         'staticinline',
         'htmlmin'
     ]);
