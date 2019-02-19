@@ -1,4 +1,4 @@
-(function setupSW () {
+(function() {
     'use strict';
 
     if ('serviceWorker' in navigator) {

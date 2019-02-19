@@ -1,8 +1,6 @@
 'use strict';
 
 module.exports = function(grunt) {
-
-    // Project configuration.
     grunt.initConfig({
         dirs: {
             dest: '_site',

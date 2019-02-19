@@ -1,22 +1,22 @@
 (function() {
     'use strict';
 
-    function getElement (id) {
+    function getElement(id) {
         return document.getElementById(id);
     }
 
-    function addHasErrorClass (el) {
+    function addHasErrorClass(el) {
         return el.parentNode.parentNode.classList.add('has-error');
     }
 
-    function removeHasErrorClass (el) {
+    function removeHasErrorClass(el) {
         return el.parentNode.parentNode.classList.remove('has-error');
     }
 
-    function setAttribute (el, attr) {
+    function setAttribute(el, attr) {
         return el.setAttribute(attr, '');
     }
-    function removeAttribute (el, attr) {
+    function removeAttribute(el, attr) {
         return el.removeAttribute(attr);
     }
 
@@ -28,7 +28,7 @@
     var resetBtn = getElement('resetBtn');
     var calcForm = getElement('calcForm');
 
-    function calculateVAT () {
+    function calculateVAT() {
         if (totalCost.hasAttribute('disabled')) {
             /* eslint-disable no-extra-parens */
             totalCost.value = (Number(totalNetCost.value) + (Number(vatRate.value / 100) * totalNetCost.value)).toFixed(2);
@@ -50,7 +50,7 @@
         setAttribute(calcBtn, 'disabled');
     }
 
-    function resetCalculator () {
+    function resetCalculator() {
         totalCost.value = 0;
         totalNetCost.value = 0;
         totalVat.value = 0;
@@ -67,7 +67,7 @@
         removeAttribute(calcBtn, 'disabled');
     }
 
-    totalCost.addEventListener('input', function () {
+    totalCost.addEventListener('input', function() {
         if (totalCost.validity.valid) {
             removeHasErrorClass(totalCost);
 
@@ -80,7 +80,7 @@
         }
     });
 
-    totalNetCost.addEventListener('input', function () {
+    totalNetCost.addEventListener('input', function() {
         if (totalNetCost.validity.valid) {
             removeHasErrorClass(totalNetCost);
 
@@ -93,7 +93,7 @@
         }
     });
 
-    vatRate.addEventListener('input', function () {
+    vatRate.addEventListener('input', function() {
         if (vatRate.validity.valid) {
             removeHasErrorClass(vatRate);
             removeAttribute(calcBtn, 'disabled');
@@ -103,7 +103,7 @@
         }
     });
 
-    calcForm.addEventListener('submit', function (e) {
+    calcForm.addEventListener('submit', function(e) {
         e.preventDefault();
     });
 
