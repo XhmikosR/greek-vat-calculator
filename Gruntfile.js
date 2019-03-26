@@ -1,6 +1,10 @@
 'use strict';
 
 module.exports = function(grunt) {
+    // Load any grunt plugins found in package.json.
+    require('load-grunt-tasks')(grunt);
+    require('time-grunt')(grunt);
+
     grunt.initConfig({
         dirs: {
             dest: '_site',
@@ -29,10 +33,11 @@ module.exports = function(grunt) {
                 files: [{
                     dest: '<%= dirs.dest %>/',
                     src: [
-                        '*.*',
+                        '*',
                         '!index.html'
                     ],
                     filter: 'isFile',
+                    dot: true,
                     expand: true,
                     cwd: '<%= dirs.src %>/'
                 }]
@@ -102,6 +107,17 @@ module.exports = function(grunt) {
                     cwd: '<%= dirs.tmp %>/',
                     src: '*.html',
                     dest: '<%= dirs.tmp %>/'
+                }]
+            },
+            dev: {
+                options: {
+                    basepath: '<%= dirs.tmp %>/'
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%= dirs.tmp %>/',
+                    src: '*.html',
+                    dest: '<%= dirs.dest %>/'
                 }]
             }
         },
@@ -193,6 +209,10 @@ module.exports = function(grunt) {
             options: {
                 livereload: '<%= connect.options.livereload %>'
             },
+            dev: {
+                files: ['<%= dirs.src %>/**', 'Gruntfile.js'],
+                tasks: 'build:dev'
+            },
             build: {
                 files: ['<%= dirs.src %>/**', 'Gruntfile.js'],
                 tasks: 'build'
@@ -212,14 +232,15 @@ module.exports = function(grunt) {
             },
             src: ['**']
         }
-
     });
 
-    // Load any grunt plugins found in package.json.
-    require('load-grunt-tasks')(grunt, {
-        scope: 'devDependencies'
-    });
-    require('time-grunt')(grunt);
+    grunt.registerTask('build:dev', [
+        'clean',
+        'copy',
+        'concat',
+        'postcss',
+        'staticinline:dev'
+    ]);
 
     grunt.registerTask('build', [
         'clean',
@@ -239,16 +260,20 @@ module.exports = function(grunt) {
         'htmllint'
     ]);
 
-
     grunt.registerTask('deploy', [
         'build',
         'gh-pages'
     ]);
 
     grunt.registerTask('default', [
-        'build',
+        'build:dev',
         'connect',
-        'watch'
+        'watch:dev'
     ]);
 
+    grunt.registerTask('server', [
+        'build',
+        'connect',
+        'watch:build'
+    ]);
 };
