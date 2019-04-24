@@ -21,7 +21,6 @@
     "autoprefixer": "^9.1.5",
     "css-mqpacker": "^7.0.0",
     "grunt": "^1.0.3",
-    "grunt-bootlint": "^0.10.2",
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-connect": "^2.0.0",

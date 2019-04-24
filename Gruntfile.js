@@ -174,16 +174,6 @@ module.exports = function(grunt) {
             }
         },
 
-        bootlint: {
-            options: {
-                relaxerror: ['W005']
-            },
-            files: [
-                '<%= dirs.tmp %>/*.html',
-                '!<%= dirs.tmp %>/404.html'
-            ]
-        },
-
         htmllint: {
             src: [
                 '<%= dirs.dest %>/*.html',
@@ -256,7 +246,6 @@ module.exports = function(grunt) {
         'build',
         'eslint',
         'build',
-        'bootlint',
         'htmllint'
     ]);
 

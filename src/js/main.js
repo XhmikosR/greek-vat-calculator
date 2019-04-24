@@ -6,16 +6,17 @@
     }
 
     function addHasErrorClass(el) {
-        return el.parentNode.parentNode.classList.add('has-error');
+        return el.classList.add('is-invalid');
     }
 
     function removeHasErrorClass(el) {
-        return el.parentNode.parentNode.classList.remove('has-error');
+        return el.classList.remove('is-invalid');
     }
 
     function setAttribute(el, attr) {
         return el.setAttribute(attr, '');
     }
+
     function removeAttribute(el, attr) {
         return el.removeAttribute(attr);
     }
@@ -55,6 +56,7 @@
         totalNetCost.value = 0;
         totalVat.value = 0;
 
+        calcForm.classList.remove('was-validated');
         removeHasErrorClass(totalCost);
         removeHasErrorClass(totalNetCost);
         removeHasErrorClass(vatRate);
@@ -68,6 +70,8 @@
     }
 
     totalCost.addEventListener('input', function() {
+        totalCost.classList.add('was-validated');
+
         if (totalCost.validity.valid) {
             removeHasErrorClass(totalCost);
 
@@ -81,6 +85,8 @@
     });
 
     totalNetCost.addEventListener('input', function() {
+        totalNetCost.classList.add('was-validated');
+
         if (totalNetCost.validity.valid) {
             removeHasErrorClass(totalNetCost);
 
@@ -94,6 +100,8 @@
     });
 
     vatRate.addEventListener('input', function() {
+        vatRate.classList.add('was-validated');
+
         if (vatRate.validity.valid) {
             removeHasErrorClass(vatRate);
             removeAttribute(calcBtn, 'disabled');
