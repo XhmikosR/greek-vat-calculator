@@ -111,8 +111,8 @@
         }
     });
 
-    calcForm.addEventListener('submit', function(e) {
-        e.preventDefault();
+    calcForm.addEventListener('submit', function(event) {
+        event.preventDefault();
     });
 
     calcBtn.addEventListener('click', calculateVAT);
