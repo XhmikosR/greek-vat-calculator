@@ -52,9 +52,7 @@
     }
 
     function resetCalculator() {
-        totalCost.value = 0;
-        totalNetCost.value = 0;
-        totalVat.value = 0;
+        calcForm.reset();
 
         calcForm.classList.remove('was-validated');
         removeHasErrorClass(totalCost);
