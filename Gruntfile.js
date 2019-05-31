@@ -69,8 +69,7 @@ module.exports = function(grunt) {
             options: {
                 processors: [
                     require('postcss-combine-duplicated-selectors')(),
-                    require('css-mqpacker')(),  // combine media queries
-                    require('autoprefixer')()   // add vendor prefixes
+                    require('autoprefixer')()
                 ]
             },
             dist: {
@@ -170,6 +169,9 @@ module.exports = function(grunt) {
         },
 
         htmllint: {
+            options: {
+                ignore: 'CSS: “size”: Property “size” doesn\'t exist.'
+            },
             src: [
                 '<%= dirs.dest %>/*.html',
                 '!<%= dirs.dest %>/google*.html'
