@@ -17,6 +17,9 @@
     "deploy": "grunt deploy",
     "test": "grunt test"
   },
+  "dependencies": {
+    "bootstrap": "^4.3.1"
+  },
   "devDependencies": {
     "autoprefixer": "^9.5.1",
     "grunt": "^1.0.4",
@@ -31,8 +34,10 @@
     "grunt-html": "^10.1.0",
     "grunt-postcss": "^0.9.0",
     "grunt-purgecss": "^1.0.0",
+    "grunt-sass": "^3.0.2",
     "grunt-static-inline": "^2.0.0",
     "load-grunt-tasks": "^5.0.0",
+    "node-sass": "^4.12.0",
     "postcss-combine-duplicated-selectors": "^7.0.0",
     "time-grunt": "^2.0.0"
   },

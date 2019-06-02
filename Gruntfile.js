@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = function(grunt) {
+    var nodeSass = require('node-sass');
+
     // Load any grunt plugins found in package.json.
     require('load-grunt-tasks')(grunt);
     require('time-grunt')(grunt);
@@ -48,14 +50,20 @@ module.exports = function(grunt) {
             }
         },
 
-        concat: {
-            css: {
-                src: [
-                    '<%= dirs.src %>/css/bootstrap.css',
-                    '<%= dirs.src %>/css/main.css'
-                ],
-                dest: '<%= dirs.tmp %>/css/main.css'
+        sass: {
+            options: {
+                implementation: nodeSass,
+                includePaths: ['./node_modules'],
+                precision: 6,
+                sourceMap: false
             },
+            dist: {
+                src: '<%= dirs.src %>/css/main.scss',
+                dest: '<%= dirs.tmp %>/css/main.css'
+            }
+        },
+
+        concat: {
             js: {
                 src: [
                     '<%= dirs.src %>/js/main.js',
@@ -73,7 +81,7 @@ module.exports = function(grunt) {
                 ]
             },
             dist: {
-                src: '<%= concat.css.dest %>'
+                src: '<%= sass.dist.dest %>'
             }
         },
 
@@ -86,7 +94,7 @@ module.exports = function(grunt) {
                     ]
                 },
                 files: {
-                    '<%= concat.css.dest %>': ['<%= concat.css.dest %>']
+                    '<%= sass.dist.dest %>': ['<%= sass.dist.dest %>']
                 }
             }
         },
@@ -225,6 +233,7 @@ module.exports = function(grunt) {
         'clean',
         'copy',
         'concat',
+        'sass',
         'postcss',
         'staticinline:dev'
     ]);
@@ -233,6 +242,7 @@ module.exports = function(grunt) {
         'clean',
         'copy',
         'concat',
+        'sass',
         'postcss',
         'purgecss',
         'staticinline',
