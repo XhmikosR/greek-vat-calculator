@@ -252,7 +252,6 @@ module.exports = function(grunt) {
     grunt.registerTask('test', [
         'build',
         'eslint',
-        'build',
         'htmllint'
     ]);
 
