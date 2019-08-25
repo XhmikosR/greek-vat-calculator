@@ -1,4 +1,4 @@
-# greek-vat-calculator [![Build Status](https://img.shields.io/travis/XhmikosR/greek-vat-calculator/master.svg)](https://travis-ci.org/XhmikosR/greek-vat-calculator)
+# greek-vat-calculator [![Build Status](https://github.com/XhmikosR/greek-vat-calculator/workflows/Tests/badge.svg)](https://github.com/XhmikosR/greek-vat-calculator/actions?workflow=Tests)
 
 A simple online Greek VAT calculator.
 
