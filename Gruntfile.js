@@ -1,8 +1,10 @@
 'use strict';
 
-module.exports = function(grunt) {
-    var nodeSass = require('node-sass');
+var sass = require('sass');
+var autoprefixer = require('autoprefixer');
+var combineDuplicateSelectors = require('postcss-combine-duplicated-selectors');
 
+module.exports = function(grunt) {
     // Load any grunt plugins found in package.json.
     require('load-grunt-tasks')(grunt);
     require('time-grunt')(grunt);
@@ -52,9 +54,9 @@ module.exports = function(grunt) {
 
         sass: {
             options: {
-                implementation: nodeSass,
+                implementation: sass,
                 includePaths: ['./node_modules'],
-                precision: 6,
+                outputStyle: 'compressed',
                 sourceMap: false
             },
             dist: {
@@ -76,8 +78,8 @@ module.exports = function(grunt) {
         postcss: {
             options: {
                 processors: [
-                    require('postcss-combine-duplicated-selectors')(),
-                    require('autoprefixer')()
+                    combineDuplicateSelectors(),
+                    autoprefixer()
                 ]
             },
             dist: {
@@ -100,10 +102,10 @@ module.exports = function(grunt) {
         },
 
         staticinline: {
-            dist: {
-                options: {
-                    basepath: '<%= dirs.tmp %>/'
-                },
+            options: {
+                basepath: '<%= dirs.tmp %>/'
+            },
+            prod: {
                 files: [{
                     expand: true,
                     cwd: '<%= dirs.tmp %>/',
@@ -112,9 +114,6 @@ module.exports = function(grunt) {
                 }]
             },
             dev: {
-                options: {
-                    basepath: '<%= dirs.tmp %>/'
-                },
                 files: [{
                     expand: true,
                     cwd: '<%= dirs.tmp %>/',
@@ -134,7 +133,8 @@ module.exports = function(grunt) {
                     minifyCSS: {
                         level: {
                             1: {
-                                specialComments: 0
+                                specialComments: 0,
+                                roundingPrecision: 6
                             }
                         }
                     },
@@ -245,7 +245,7 @@ module.exports = function(grunt) {
         'sass',
         'postcss',
         'purgecss',
-        'staticinline',
+        'staticinline:prod',
         'htmlmin'
     ]);
 
