@@ -21,9 +21,9 @@
     "bootstrap": "^4.4.1"
   },
   "devDependencies": {
-    "@lodder/grunt-postcss": "^2.0.0",
-    "autoprefixer": "^9.7.2",
-    "grunt": "^1.0.4",
+    "@lodder/grunt-postcss": "^2.0.1",
+    "autoprefixer": "^9.7.5",
+    "grunt": "^1.1.0",
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-connect": "^2.1.0",
@@ -32,13 +32,13 @@
     "grunt-contrib-watch": "^1.1.0",
     "grunt-eslint": "^22.0.0",
     "grunt-gh-pages": "^3.1.0",
-    "grunt-html": "^12.0.0",
-    "grunt-purgecss": "^1.0.0",
+    "grunt-html": "^13.0.0",
+    "grunt-purgecss": "^2.1.1",
     "grunt-sass": "^3.1.0",
     "grunt-static-inline": "^2.0.0",
     "load-grunt-tasks": "^5.1.0",
-    "postcss-combine-duplicated-selectors": "^8.0.3",
-    "sass": "^1.23.7",
+    "postcss-combine-duplicated-selectors": "^8.1.0",
+    "sass": "^1.26.3",
     "time-grunt": "^2.0.0"
   },
   "engines": {
