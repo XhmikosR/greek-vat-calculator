@@ -93,7 +93,9 @@ module.exports = function(grunt) {
                     content: [
                         '<%= dirs.tmp %>/**/*.html',
                         '<%= dirs.tmp %>/js/**/*.js'
-                    ]
+                    ],
+                    keyframes: true,
+                    variables: true
                 },
                 files: {
                     '<%= sass.dist.dest %>': ['<%= sass.dist.dest %>']
