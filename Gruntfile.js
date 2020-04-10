@@ -219,13 +219,6 @@ module.exports = function(grunt) {
                 '<%= dirs.tmp %>/',
                 '<%= dirs.dest %>/'
             ]
-        },
-
-        'gh-pages': {
-            options: {
-                base: '<%= dirs.dest %>'
-            },
-            src: ['**']
         }
     });
 
@@ -253,11 +246,6 @@ module.exports = function(grunt) {
         'build',
         'eslint',
         'htmllint'
-    ]);
-
-    grunt.registerTask('deploy', [
-        'build',
-        'gh-pages'
     ]);
 
     grunt.registerTask('default', [
