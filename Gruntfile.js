@@ -137,6 +137,12 @@ module.exports = function(grunt) {
                             1: {
                                 specialComments: 0,
                                 roundingPrecision: 6
+                            },
+                            2: {
+                                all: false,
+                                mergeMedia: true,
+                                removeDuplicateMediaBlocks: true,
+                                removeEmpty: true
                             }
                         }
                     },
@@ -168,11 +174,9 @@ module.exports = function(grunt) {
             options: {
                 config: '.eslintrc.json'
             },
-            gruntfile: {
-                src: 'Gruntfile.js'
-            },
-            src: {
+            dist: {
                 src: [
+                    'Gruntfile.js',
                     '<%= dirs.src %>/js/*.js'
                 ]
             }
