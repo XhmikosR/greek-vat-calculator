@@ -151,7 +151,6 @@ module.exports = function(grunt) {
                     processConditionalComments: true,
                     removeAttributeQuotes: true,
                     removeComments: true,
-                    removeOptionalAttributes: true,
                     removeOptionalTags: true,
                     removeRedundantAttributes: true,
                     removeScriptTypeAttributes: true,
@@ -183,9 +182,6 @@ module.exports = function(grunt) {
         },
 
         htmllint: {
-            options: {
-                ignore: 'CSS: “size”: Property “size” doesn\'t exist.'
-            },
             src: [
                 '<%= dirs.dest %>/*.html',
                 '!<%= dirs.dest %>/google*.html'
