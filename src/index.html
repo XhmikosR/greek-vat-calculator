@@ -15,7 +15,6 @@
     <link rel="manifest" href="img/favicons/manifest.json">
     <link rel="mask-icon" href="img/favicons/safari-pinned-tab.svg" color="#5373f4">
     <link rel="shortcut icon" href="img/favicons/favicon.ico">
-    <meta name="msapplication-config" content="img/favicons/browserconfig.xml">
     <meta name="theme-color" content="#5373f4">
 
     <meta property="og:description" content="Απλή εφαρμογή υπολογισμού Φ.Π.Α.">
@@ -38,41 +37,43 @@
             </h1>
         </div>
 
-        <form id="calcForm" class="text-center text-sm-right mt-5">
-            <div class="form-group row align-items-center">
-                <label for="totalCost" class="col-sm-3 font-weight-bold text-uppercase">Σύνολο (€)</label>
-                <div class="col-sm-9 col-lg-7">
+        <div class="w-25 mx-auto border-bottom border-2 border-light"></div>
+
+        <form id="calcForm" class="text-center text-sm-end mt-5 fw-bold">
+            <div class="row align-items-center justify-content-center mb-3">
+                <label for="totalCost" class="form-label col-sm-5 col-lg-3 col-xxl-2 text-uppercase">Σύνολο (€)</label>
+                <div class="col-sm-7 col-lg-6 col-xxl-5">
                     <input id="totalCost" class="form-control" type="number" min="0.01" step="0.01" autofocus required>
                 </div>
             </div>
-            <div class="form-group row align-items-center">
-                <label for="vatRate" class="col-sm-3 font-weight-bold">Φ.Π.Α. (%)</label>
-                <div class="col-sm-9 col-lg-7">
+            <div class="row align-items-center justify-content-center mb-3">
+                <label for="vatRate" class="form-label col-sm-5 col-lg-3 col-xxl-2">Φ.Π.Α. (%)</label>
+                <div class="col-sm-7 col-lg-6 col-xxl-5">
                     <input id="vatRate" class="form-control" type="number" value="24.00" min="0.10" max="99.99" step="0.01" required>
                 </div>
             </div>
-            <div class="form-group row align-items-center">
-                <label for="totalVat" class="col-sm-3 font-weight-bold">Φ.Π.Α. (€)</label>
-                <div class="col-sm-9 col-lg-7">
+            <div class="row align-items-center justify-content-center mb-3">
+                <label for="totalVat" class="form-label col-sm-5 col-lg-3 col-xxl-2">Φ.Π.Α. (€)</label>
+                <div class="col-sm-7 col-lg-6 col-xxl-5">
                     <input id="totalVat" class="form-control" type="number" readonly disabled>
                 </div>
             </div>
-            <div class="form-group row align-items-center">
-                <label for="totalNetCost" class="col-sm-3 font-weight-bold text-uppercase">Ποσό χωρίς Φ.Π.Α. (€)</label>
-                <div class="col-sm-9 col-lg-7">
+            <div class="row align-items-center justify-content-center mb-3">
+                <label for="totalNetCost" class="form-label col-sm-5 col-lg-3 col-xxl-2 text-uppercase">Ποσό χωρίς Φ.Π.Α. (€)</label>
+                <div class="col-sm-7 col-lg-6 col-xxl-5">
                     <input id="totalNetCost" class="form-control" type="number" min="0.01" step="0.01" required>
                 </div>
             </div>
-            <div class="form-group text-center mt-4">
+            <div class="text-center mt-4">
                 <input id="calcBtn" class="btn btn-primary" type="submit" value="Υπολογισμός" disabled>
                 <input id="resetBtn" class="btn btn-danger" type="reset" value="Επαναφορά">
             </div>
         </form>
     </div>
 
-    <footer class="footer text-center bg-light small font-weight-bold mt-auto py-4">
-        <div class="container">
-            <p>
+    <footer class="footer text-center bg-light mt-auto py-4">
+        <div class="container-md">
+            <p class="small my-auto">
                 Created by <a href="https://xhmikosr.io/" rel="noopener" target="_blank">@XhmikosR</a> &bull; <a href="https://github.com/XhmikosR/greek-vat-calculator" rel="noopener" target="_blank">GitHub Project</a>
             </p>
         </div>
