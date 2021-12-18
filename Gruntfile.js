@@ -7,7 +7,7 @@ var combineDuplicateSelectors = require('postcss-combine-duplicated-selectors');
 module.exports = function(grunt) {
     // Load any grunt plugins found in package.json.
     require('load-grunt-tasks')(grunt);
-    require('time-grunt')(grunt);
+    require('@lodder/time-grunt')(grunt);
 
     grunt.initConfig({
         dirs: {
@@ -135,8 +135,7 @@ module.exports = function(grunt) {
                     minifyCSS: {
                         level: {
                             1: {
-                                specialComments: 0,
-                                roundingPrecision: 6
+                                specialComments: 0
                             },
                             2: {
                                 all: false,
@@ -170,9 +169,6 @@ module.exports = function(grunt) {
         },
 
         eslint: {
-            options: {
-                config: '.eslintrc.json'
-            },
             dist: {
                 src: [
                     'Gruntfile.js',
@@ -217,7 +213,7 @@ module.exports = function(grunt) {
         },
 
         clean: {
-            tests: [
+            dist: [
                 '<%= dirs.tmp %>/',
                 '<%= dirs.dest %>/'
             ]
