@@ -2,11 +2,16 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+      - "!dependabot/**"
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+      - "!dependabot/**"
   schedule:
     - cron: "5 9 * * 1"
+  workflow_dispatch:
 
 jobs:
   analyze:
@@ -17,19 +22,16 @@ jobs:
       contents: read
       security-events: write
 
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [ javascript ]
-
     steps:
-      - name: Checkout
+      - name: Clone repository
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
-          languages: ${{ matrix.language }}
+          languages: "javascript"
           queries: +security-and-quality
 
       - name: Autobuild
@@ -38,4 +40,4 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
         with:
-          category: "/language:${{ matrix.language }}"
+          category: "/language:javascript"
