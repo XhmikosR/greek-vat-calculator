@@ -5,20 +5,20 @@
         return document.getElementById(id);
     }
 
-    function addHasErrorClass(el) {
-        return el.classList.add('is-invalid');
+    function addInvalidClass(element) {
+        return element.classList.add('is-invalid');
     }
 
-    function removeHasErrorClass(el) {
-        return el.classList.remove('is-invalid');
+    function removeErrorClass(element) {
+        return element.classList.remove('is-invalid');
     }
 
-    function setAttribute(el, attr) {
-        return el.setAttribute(attr, '');
+    function setBooleanAttribute(element, attribute) {
+        return element.setAttribute(attribute, '');
     }
 
-    function removeAttribute(el, attr) {
-        return el.removeAttribute(attr);
+    function removeAttribute(element, attribute) {
+        return element.removeAttribute(attribute);
     }
 
     var totalCost = getElement('totalCost');
@@ -36,26 +36,26 @@
 
             removeAttribute(totalVat, 'disabled');
             removeAttribute(totalCost, 'disabled');
-            setAttribute(totalCost, 'readonly');
+            setBooleanAttribute(totalCost, 'readonly');
         } else {
             totalNetCost.value = (Number(totalCost.value) / (1 + Number(vatRate.value / 100))).toFixed(2);
             totalVat.value = (Number(totalCost.value) - Number(totalNetCost.value)).toFixed(2);
 
             removeAttribute(totalVat, 'disabled');
             removeAttribute(totalNetCost, 'disabled');
-            setAttribute(totalNetCost, 'readonly');
+            setBooleanAttribute(totalNetCost, 'readonly');
         }
 
-        setAttribute(calcBtn, 'disabled');
+        setBooleanAttribute(calcBtn, 'disabled');
     }
 
     function resetCalculator() {
         calcForm.reset();
 
         calcForm.classList.remove('was-validated');
-        removeHasErrorClass(totalCost);
-        removeHasErrorClass(totalNetCost);
-        removeHasErrorClass(vatRate);
+        removeErrorClass(totalCost);
+        removeErrorClass(totalNetCost);
+        removeErrorClass(vatRate);
 
         removeAttribute(totalCost, 'readonly');
         removeAttribute(totalNetCost, 'readonly');
@@ -69,14 +69,14 @@
         totalCost.classList.add('was-validated');
 
         if (totalCost.validity.valid) {
-            removeHasErrorClass(totalCost);
+            removeErrorClass(totalCost);
 
-            setAttribute(totalNetCost, 'disabled');
-            setAttribute(totalNetCost, 'readonly');
+            setBooleanAttribute(totalNetCost, 'disabled');
+            setBooleanAttribute(totalNetCost, 'readonly');
             removeAttribute(calcBtn, 'disabled');
         } else {
-            addHasErrorClass(totalCost);
-            setAttribute(calcBtn, 'disabled');
+            addInvalidClass(totalCost);
+            setBooleanAttribute(calcBtn, 'disabled');
         }
     });
 
@@ -84,14 +84,14 @@
         totalNetCost.classList.add('was-validated');
 
         if (totalNetCost.validity.valid) {
-            removeHasErrorClass(totalNetCost);
+            removeErrorClass(totalNetCost);
 
-            setAttribute(totalCost, 'disabled');
-            setAttribute(totalCost, 'readonly');
+            setBooleanAttribute(totalCost, 'disabled');
+            setBooleanAttribute(totalCost, 'readonly');
             removeAttribute(calcBtn, 'disabled');
         } else {
-            addHasErrorClass(totalNetCost);
-            setAttribute(calcBtn, 'disabled');
+            addInvalidClass(totalNetCost);
+            setBooleanAttribute(calcBtn, 'disabled');
         }
     });
 
@@ -99,11 +99,11 @@
         vatRate.classList.add('was-validated');
 
         if (vatRate.validity.valid) {
-            removeHasErrorClass(vatRate);
+            removeErrorClass(vatRate);
             removeAttribute(calcBtn, 'disabled');
         } else {
-            addHasErrorClass(vatRate);
-            setAttribute(calcBtn, 'disabled');
+            addInvalidClass(vatRate);
+            setBooleanAttribute(calcBtn, 'disabled');
         }
     });
 
