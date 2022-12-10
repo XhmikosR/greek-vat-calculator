@@ -18,7 +18,7 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "bootstrap": "^5.2.2"
+    "bootstrap": "^5.2.3"
   },
   "devDependencies": {
     "@lodder/grunt-postcss": "^3.1.1",
@@ -31,14 +31,14 @@
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-htmlmin": "^3.1.0",
     "grunt-contrib-watch": "^1.1.0",
-    "grunt-eslint": "^24.0.0",
+    "grunt-eslint": "^24.0.1",
     "grunt-html": "^16.0.0",
     "grunt-purgecss": "^5.0.0",
     "grunt-sass": "^3.1.0",
     "grunt-static-inline": "^2.0.0",
     "load-grunt-tasks": "^5.1.0",
-    "postcss": "^8.4.18",
+    "postcss": "^8.4.19",
     "postcss-combine-duplicated-selectors": "^10.0.3",
-    "sass": "^1.56.0"
+    "sass": "^1.56.2"
   }
 }
