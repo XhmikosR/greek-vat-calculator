@@ -1,8 +1,8 @@
 (function() {
     'use strict';
 
-    function getElement(id) {
-        return document.getElementById(id);
+    function getElement(selector) {
+        return document.querySelector(selector);
     }
 
     function addInvalidClass(element) {
@@ -21,13 +21,13 @@
         return element.removeAttribute(attribute);
     }
 
-    var totalCost = getElement('totalCost');
-    var vatRate = getElement('vatRate');
-    var totalVat = getElement('totalVat');
-    var totalNetCost = getElement('totalNetCost');
-    var calcBtn = getElement('calcBtn');
-    var resetBtn = getElement('resetBtn');
-    var calcForm = getElement('calcForm');
+    var totalCost = getElement('#totalCost');
+    var vatRate = getElement('#vatRate');
+    var totalVat = getElement('#totalVat');
+    var totalNetCost = getElement('#totalNetCost');
+    var calcBtn = getElement('#calcBtn');
+    var resetBtn = getElement('#resetBtn');
+    var calcForm = getElement('#calcForm');
 
     function calculateVAT() {
         if (totalCost.hasAttribute('disabled')) {
