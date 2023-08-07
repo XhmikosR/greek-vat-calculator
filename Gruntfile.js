@@ -68,8 +68,7 @@ module.exports = function(grunt) {
     concat: {
       js: {
         src: [
-          '<%= dirs.src %>/js/main.js',
-          '<%= dirs.src %>/js/google-analytics.js'
+          '<%= dirs.src %>/js/main.js'
         ],
         dest: '<%= dirs.tmp %>/js/main.js'
       }
