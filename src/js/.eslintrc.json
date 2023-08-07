@@ -1,7 +1,7 @@
 {
-    "extends": "../../.eslintrc.json",
-    "env": {
-        "browser": true,
-        "node": false
-    }
+  "extends": "../../.eslintrc.json",
+  "env": {
+    "browser": true,
+    "node": false
+  }
 }
