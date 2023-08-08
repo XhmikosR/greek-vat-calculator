@@ -61,6 +61,16 @@ module.exports = function(grunt) {
           cwd: 'node_modules/bootstrap/dist/js'
         }]
       },
+      lightSwitch: {
+        files: [{
+          dest: '<%= dirs.dest %>/js/vendor',
+          src: [
+            'switch.js'
+          ],
+          expand: true,
+          cwd: 'node_modules/light-switch-bootstrap/'
+        }]
+      },
     },
 
     sass: {

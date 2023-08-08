@@ -159,40 +159,16 @@
       <p class="small my-auto">
         Created by <a href="https://github.com/XhmikosR" rel="noopener" target="_blank">@XhmikosR</a> &bull; <a href="https://github.com/XhmikosR/greek-vat-calculator" rel="noopener" target="_blank">GitHub Project</a>
 
-        <div class="dropdown">
-          <button class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (light)">
-            <svg class="bi my-1 theme-icon-active"><use href="#sun-fill"></use></svg>
-            <span class="d-lg-none ms-2" id="bd-theme-text">Toggle theme</span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme-text">
-            <li>
-              <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light" aria-pressed="true">
-                <svg class="bi me-2 opacity-50 theme-icon"><use href="#sun-fill"></use></svg>
-                Light
-                <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-                <svg class="bi me-2 opacity-50 theme-icon"><use href="#moon-stars-fill"></use></svg>
-                Dark
-                <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="false">
-                <svg class="bi me-2 opacity-50 theme-icon"><use href="#circle-half"></use></svg>
-                Auto
-                <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
-              </button>
-            </li>
-          </ul>
-        </div>
+        <span class="form-check form-switch">
+          <label class="form-check-label" for="lightSwitch">Dark Mode</label>
+          <input class="form-check-input" type="checkbox" id="lightSwitch">
+        </span>
       </p>
     </div>
   </footer>
 
   <script src="js/main.js" inline="true"></script>
+  <script async src="js/vendor/switch.js"></script>
   <script async src="js/vendor/bootstrap.bundle.min.js"></script>
   </body>
 </html>
