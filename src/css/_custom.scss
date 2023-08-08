@@ -1,7 +1,26 @@
-.footer {
-  color: #69747e;
+$color-mode-type: data;
 
-  a {
-    color: #084f8c;
+@include color-mode(light) {
+  .logo > span {
+    color: var(--bs-secondary);
+  }
+
+  .footer {
+    background-color: var(--bs-light);
+    color: #69747e;
+
+    a {
+      color: #084f8c;
+    }
+  }
+}
+
+@include color-mode(dark) {
+  .logo > span {
+    color: var(--bs-secondary-text-emphasis);
+  }
+
+  .footer {
+    background-color: var(--bs-dark-bg-subtle);
   }
 }

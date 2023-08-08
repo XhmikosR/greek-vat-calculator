@@ -49,7 +49,18 @@ module.exports = function(grunt) {
           expand: true,
           cwd: '<%= dirs.src %>/'
         }]
-      }
+      },
+      bootstrap: {
+        files: [{
+          dest: '<%= dirs.dest %>/js/vendor',
+          src: [
+            'bootstrap.bundle.min.js',
+            'bootstrap.bundle.min.js.map'
+          ],
+          expand: true,
+          cwd: 'node_modules/bootstrap/dist/js'
+        }]
+      },
     },
 
     sass: {
@@ -68,7 +79,8 @@ module.exports = function(grunt) {
     concat: {
       js: {
         src: [
-          '<%= dirs.src %>/js/main.js'
+          '<%= dirs.src %>/js/main.js',
+          '<%= dirs.src %>/js/color-toggle.js'
         ],
         dest: '<%= dirs.tmp %>/js/main.js'
       }
