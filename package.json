@@ -37,7 +37,7 @@
     "grunt-sass": "^3.1.0",
     "grunt-static-inline": "^2.0.0",
     "load-grunt-tasks": "^5.1.0",
-    "postcss": "^8.4.27",
+    "postcss": "^8.4.31",
     "postcss-combine-duplicated-selectors": "^10.0.3",
     "sass": "^1.64.2"
   }
