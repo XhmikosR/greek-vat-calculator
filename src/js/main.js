@@ -62,7 +62,7 @@
     removeAttribute(totalCost, 'disabled');
     removeAttribute(totalNetCost, 'disabled');
 
-    removeAttribute(calcBtn, 'disabled');
+    setBooleanAttribute(calcBtn, 'disabled');
   }
 
   totalCost.addEventListener('input', function() {
