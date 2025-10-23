@@ -1,7 +1,11 @@
 .footer {
-  color: #69747e;
-
   a {
-    color: #084f8c;
+    &:hover {
+      text-decoration: underline !important;
+    }
   }
+}
+
+.card-header {
+  min-height: 5rem;
 }
