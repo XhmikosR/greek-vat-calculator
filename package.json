@@ -14,6 +14,7 @@
     "url": "https://github.com/XhmikosR/greek-vat-calculator/issues"
   },
   "scripts": {
+    "start": "grunt",
     "build": "grunt build",
     "test": "grunt test"
   },
