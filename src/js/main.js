@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 (function() {
   'use strict';
 
@@ -28,25 +30,63 @@
   var calcBtn = getElement('#calcBtn');
   var resetBtn = getElement('#resetBtn');
   var calcForm = getElement('#calcForm');
+  var resultCard = getElement('#resultCard');
+  var resultCardHeader = getElement('#resultCardHeader');
+  var resultLabel = getElement('#resultLabel');
+  var resultBox = getElement('#resultBox');
+  var resultCurrency = getElement('#resultCurrency');
+
+  function updateResultCardState(isValid) {
+    if (!resultCard || !resultCardHeader || !resultLabel || !resultBox || !resultCurrency || !totalVat) {
+      return;
+    }
+
+    resultCard.classList.toggle('border-secondary', !isValid);
+    resultCard.classList.toggle('border-success', isValid);
+    resultCardHeader.classList.toggle('bg-secondary', !isValid);
+    resultCardHeader.classList.toggle('bg-success', isValid);
+
+    resultLabel.classList.toggle('text-secondary', !isValid);
+    resultLabel.classList.toggle('text-success', isValid);
+
+    resultBox.classList.toggle('border-secondary', !isValid);
+    resultBox.classList.toggle('border-success', isValid);
+
+    totalVat.classList.toggle('text-secondary', !isValid);
+    totalVat.classList.toggle('text-success', isValid);
+    resultCurrency.classList.toggle('text-secondary', !isValid);
+    resultCurrency.classList.toggle('text-success', isValid);
+  }
 
   function calculateVAT() {
     if (totalCost.hasAttribute('disabled')) {
-      totalCost.value = (Number(totalNetCost.value) + (Number(vatRate.value / 100) * totalNetCost.value)).toFixed(2);
-      totalVat.value = (Number(totalCost.value) - Number(totalNetCost.value)).toFixed(2);
+      var calculated = Number(totalNetCost.value) + (Number(vatRate.value / 100) * totalNetCost.value);
 
-      removeAttribute(totalVat, 'disabled');
-      removeAttribute(totalCost, 'disabled');
+      totalCost.value = calculated.toLocaleString(undefined, { minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+        useGrouping: false });
+      var vatAmount = Number(totalCost.value) - Number(totalNetCost.value);
+
+      totalVat.textContent = vatAmount.toLocaleString(undefined, { minimumFractionDigits: 0,
+        maximumFractionDigits: 2 });
+
       setBooleanAttribute(totalCost, 'readonly');
     } else {
-      totalNetCost.value = (Number(totalCost.value) / (1 + Number(vatRate.value / 100))).toFixed(2);
-      totalVat.value = (Number(totalCost.value) - Number(totalNetCost.value)).toFixed(2);
+      var calculated = Number(totalCost.value) / (1 + Number(vatRate.value / 100));
 
-      removeAttribute(totalVat, 'disabled');
-      removeAttribute(totalNetCost, 'disabled');
+      totalNetCost.value = calculated.toLocaleString(undefined, { minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+        useGrouping: false });
+      var vatAmount = Number(totalCost.value) - Number(totalNetCost.value);
+
+      totalVat.textContent = vatAmount.toLocaleString(undefined, { minimumFractionDigits: 0,
+        maximumFractionDigits: 2 });
+
       setBooleanAttribute(totalNetCost, 'readonly');
     }
 
     setBooleanAttribute(calcBtn, 'disabled');
+    updateResultCardState(true);
   }
 
   function resetCalculator() {
@@ -63,6 +103,10 @@
     removeAttribute(totalNetCost, 'disabled');
 
     setBooleanAttribute(calcBtn, 'disabled');
+
+    totalVat.textContent = '—';
+
+    updateResultCardState(false);
   }
 
   totalCost.addEventListener('input', function() {
@@ -74,9 +118,11 @@
       setBooleanAttribute(totalNetCost, 'disabled');
       setBooleanAttribute(totalNetCost, 'readonly');
       removeAttribute(calcBtn, 'disabled');
+      updateResultCardState(true);
     } else {
       addInvalidClass(totalCost);
       setBooleanAttribute(calcBtn, 'disabled');
+      updateResultCardState(false);
     }
   });
 
@@ -89,9 +135,11 @@
       setBooleanAttribute(totalCost, 'disabled');
       setBooleanAttribute(totalCost, 'readonly');
       removeAttribute(calcBtn, 'disabled');
+      updateResultCardState(true);
     } else {
       addInvalidClass(totalNetCost);
       setBooleanAttribute(calcBtn, 'disabled');
+      updateResultCardState(false);
     }
   });
 
