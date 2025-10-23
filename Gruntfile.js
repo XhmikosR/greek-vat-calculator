@@ -177,6 +177,9 @@ module.exports = function(grunt) {
     },
 
     htmllint: {
+      options: {
+        ignore: /The “inputmode” attribute is not supported in all browsers./
+      },
       src: [
         '<%= dirs.dest %>/*.html',
         '!<%= dirs.dest %>/google*.html'
