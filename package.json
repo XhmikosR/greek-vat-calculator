@@ -1,7 +1,8 @@
 {
   "name": "greek-vat-calculator",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
+  "type": "module",
   "description": "A simple online Greek VAT calculator.",
   "homepage": "https://xhmikosr.github.io/greek-vat-calculator/",
   "author": "XhmikosR",
@@ -14,32 +15,35 @@
     "url": "https://github.com/XhmikosR/greek-vat-calculator/issues"
   },
   "scripts": {
-    "start": "grunt",
-    "build": "grunt build",
-    "test": "grunt test"
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "npm run build && vite preview",
+    "fix": "xo --fix",
+    "lint:js": "xo",
+    "lint:html": "tsx scripts/vnu-jar.ts",
+    "lint": "npm-run-all2 --parallel lint:js lint:html",
+    "test": "npm-run-all2 build --parallel lint:js lint:html",
+    "clean": "tsx scripts/clean.ts"
   },
   "dependencies": {
     "bootstrap": "^5.3.8"
   },
   "devDependencies": {
-    "@lodder/grunt-postcss": "^3.1.1",
-    "@lodder/time-grunt": "^4.0.0",
+    "@types/node": "^24.10.0",
     "autoprefixer": "^10.4.21",
-    "grunt": "^1.6.1",
-    "grunt-contrib-clean": "^2.0.1",
-    "grunt-contrib-concat": "^2.1.0",
-    "grunt-contrib-connect": "^5.0.1",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-htmlmin": "^3.1.0",
-    "grunt-contrib-watch": "^1.1.0",
-    "grunt-eslint": "^24.3.0",
-    "grunt-html": "^17.1.0",
-    "grunt-purgecss": "^7.0.2",
-    "grunt-sass": "3.1.0",
-    "grunt-static-inline": "^2.0.0",
-    "load-grunt-tasks": "^5.1.0",
+    "globals": "^16.5.0",
+    "npm-run-all2": "^8.0.4",
     "postcss": "^8.5.6",
-    "postcss-combine-duplicated-selectors": "^10.0.3",
-    "sass": "1.77.6"
+    "purgecss": "^6.0.0",
+    "rollup": "^4.52.5",
+    "sass": "1.77.6",
+    "terser": "^5.44.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.12",
+    "vite-plugin-html": "^3.2.2",
+    "vnu-jar": "^25.11.3",
+    "xo": "^1.2.3"
   }
 }
