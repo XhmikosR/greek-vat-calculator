@@ -11,16 +11,23 @@ const resultLabel = document.querySelector<HTMLElement>('#resultLabel')!;
 const resultBox = document.querySelector<HTMLElement>('#resultBox')!;
 const resultCurrency = document.querySelector<HTMLElement>('#resultCurrency')!;
 
-function addInvalidClass(element: HTMLElement): void {
-  element.classList.add('is-invalid');
+let activeInputField: 'totalCost' | 'totalNetCost' | undefined;
+
+function updateResetButtonState(): void {
+  const hasInput = totalCost.value || totalNetCost.value || vatRate.value !== '24';
+  if (hasInput) {
+    removeAttribute(resetBtn, 'disabled');
+  } else {
+    setAttribute(resetBtn, 'disabled');
+  }
 }
 
-function removeErrorClass(element: HTMLElement): void {
-  element.classList.remove('is-invalid');
+function toggleClass(element: HTMLElement, className: string, add: boolean): void {
+  element.classList.toggle(className, add);
 }
 
-function setBooleanAttribute(element: HTMLElement, attribute: string): void {
-  element.setAttribute(attribute, '');
+function setAttribute(element: HTMLElement, attribute: string, value = ''): void {
+  element.setAttribute(attribute, value);
 }
 
 function removeAttribute(element: HTMLElement, attribute: string): void {
@@ -45,109 +52,105 @@ function updateResultCardState(isValid: boolean): void {
   resultCurrency.classList.toggle('text-success', isValid);
 }
 
+const numberFormatOptions: Intl.NumberFormatOptions = {
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 2
+};
+
+const inputFormatOptions: Intl.NumberFormatOptions = {
+  ...numberFormatOptions,
+  useGrouping: false
+};
+
+function formatNumber(value: number, options: Intl.NumberFormatOptions): string {
+  return value.toLocaleString(undefined, options);
+}
+
 function calculateVAT(): void {
-  if (totalCost.hasAttribute('disabled')) {
-    const calculated = Number(totalNetCost.value) + (Number(vatRate.value) / 100 * Number(totalNetCost.value));
+  const vatRateValue = Number(vatRate.value);
+  let totalCostValue: number;
+  let totalNetCostValue: number;
 
-    totalCost.value = calculated.toLocaleString(undefined, {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 2,
-      useGrouping: false
-    });
-    const vatAmount = Number(totalCost.value) - Number(totalNetCost.value);
-
-    totalVat.textContent = vatAmount.toLocaleString(undefined, {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 2
-    });
-
-    setBooleanAttribute(totalCost, 'readonly');
+  if (activeInputField === 'totalNetCost') {
+    totalNetCostValue = Number(totalNetCost.value);
+    totalCostValue = totalNetCostValue * (1 + (vatRateValue / 100));
+    totalCost.value = formatNumber(totalCostValue, inputFormatOptions);
+    setAttribute(totalCost, 'readonly');
   } else {
-    const calculated = Number(totalCost.value) / (1 + (Number(vatRate.value) / 100));
-
-    totalNetCost.value = calculated.toLocaleString(undefined, {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 2,
-      useGrouping: false
-    });
-    const vatAmount = Number(totalCost.value) - Number(totalNetCost.value);
-
-    totalVat.textContent = vatAmount.toLocaleString(undefined, {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 2
-    });
-
-    setBooleanAttribute(totalNetCost, 'readonly');
+    totalCostValue = Number(totalCost.value);
+    totalNetCostValue = totalCostValue / (1 + (vatRateValue / 100));
+    totalNetCost.value = formatNumber(totalNetCostValue, inputFormatOptions);
+    setAttribute(totalNetCost, 'readonly');
   }
 
-  setBooleanAttribute(calcBtn, 'disabled');
+  const vatAmount = totalCostValue - totalNetCostValue;
+  totalVat.textContent = formatNumber(vatAmount, numberFormatOptions);
+
+  setAttribute(calcBtn, 'disabled');
   updateResultCardState(true);
 }
 
 function resetCalculator(): void {
   calcForm.reset();
-
   calcForm.classList.remove('was-validated');
-  removeErrorClass(totalCost);
-  removeErrorClass(totalNetCost);
-  removeErrorClass(vatRate);
 
-  removeAttribute(totalCost, 'readonly');
-  removeAttribute(totalNetCost, 'readonly');
-  removeAttribute(totalCost, 'disabled');
-  removeAttribute(totalNetCost, 'disabled');
+  const inputs = [totalCost, totalNetCost, vatRate];
+  for (const input of inputs) {
+    toggleClass(input, 'is-invalid', false);
+    removeAttribute(input, 'readonly');
+    removeAttribute(input, 'disabled');
+  }
 
-  setBooleanAttribute(calcBtn, 'disabled');
-
+  activeInputField = undefined;
+  setAttribute(calcBtn, 'disabled');
+  setAttribute(resetBtn, 'disabled');
   totalVat.textContent = '—';
-
   updateResultCardState(false);
 }
 
-totalCost.addEventListener('input', () => {
-  totalCost.classList.add('was-validated');
+function handleCostInputChange(
+  activeInput: HTMLInputElement,
+  inactiveInput: HTMLInputElement,
+  inputFieldName: 'totalCost' | 'totalNetCost'
+): void {
+  const isValid = activeInput.validity.valid;
 
-  if (totalCost.validity.valid) {
-    removeErrorClass(totalCost);
+  toggleClass(activeInput, 'is-invalid', !isValid);
 
-    setBooleanAttribute(totalNetCost, 'disabled');
-    setBooleanAttribute(totalNetCost, 'readonly');
+  if (isValid) {
+    activeInputField = inputFieldName;
+    setAttribute(inactiveInput, 'disabled');
+    setAttribute(inactiveInput, 'readonly');
     removeAttribute(calcBtn, 'disabled');
     updateResultCardState(true);
   } else {
-    addInvalidClass(totalCost);
-    setBooleanAttribute(calcBtn, 'disabled');
+    setAttribute(calcBtn, 'disabled');
     updateResultCardState(false);
   }
+
+  updateResetButtonState();
+}
+
+totalCost.addEventListener('input', () => {
+  handleCostInputChange(totalCost, totalNetCost, 'totalCost');
 });
 
 totalNetCost.addEventListener('input', () => {
-  totalNetCost.classList.add('was-validated');
-
-  if (totalNetCost.validity.valid) {
-    removeErrorClass(totalNetCost);
-
-    setBooleanAttribute(totalCost, 'disabled');
-    setBooleanAttribute(totalCost, 'readonly');
-    removeAttribute(calcBtn, 'disabled');
-    updateResultCardState(true);
-  } else {
-    addInvalidClass(totalNetCost);
-    setBooleanAttribute(calcBtn, 'disabled');
-    updateResultCardState(false);
-  }
+  handleCostInputChange(totalNetCost, totalCost, 'totalNetCost');
 });
 
 vatRate.addEventListener('input', () => {
-  vatRate.classList.add('was-validated');
+  const isValid = vatRate.validity.valid;
 
-  if (vatRate.validity.valid) {
-    removeErrorClass(vatRate);
+  toggleClass(vatRate, 'is-invalid', !isValid);
+
+  if (isValid) {
     removeAttribute(calcBtn, 'disabled');
   } else {
-    addInvalidClass(vatRate);
-    setBooleanAttribute(calcBtn, 'disabled');
+    setAttribute(calcBtn, 'disabled');
   }
+
+  updateResetButtonState();
 });
 
 calcForm.addEventListener('submit', event => {
@@ -156,3 +159,6 @@ calcForm.addEventListener('submit', event => {
 
 calcBtn.addEventListener('click', calculateVAT);
 resetBtn.addEventListener('click', resetCalculator);
+
+// Initialize reset button state on page load
+updateResetButtonState();
