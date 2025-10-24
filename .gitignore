@@ -1,5 +1,4 @@
-/.tmp/
 /_site/
+/.netlify/
 /node_modules/
 /npm-debug.log
-/.netlify/
