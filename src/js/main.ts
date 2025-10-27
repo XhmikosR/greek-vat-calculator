@@ -1,158 +1,287 @@
-const totalCost = document.querySelector<HTMLInputElement>('#totalCost')!;
-const vatRate = document.querySelector<HTMLInputElement>('#vatRate')!;
-const totalVat = document.querySelector<HTMLElement>('#totalVat')!;
-const totalNetCost = document.querySelector<HTMLInputElement>('#totalNetCost')!;
-const calcBtn = document.querySelector<HTMLButtonElement>('#calcBtn')!;
-const resetBtn = document.querySelector<HTMLButtonElement>('#resetBtn')!;
-const calcForm = document.querySelector<HTMLFormElement>('#calcForm')!;
-const resultCard = document.querySelector<HTMLElement>('#resultCard')!;
-const resultCardHeader = document.querySelector<HTMLElement>('#resultCardHeader')!;
-const resultLabel = document.querySelector<HTMLElement>('#resultLabel')!;
-const resultBox = document.querySelector<HTMLElement>('#resultBox')!;
-const resultCurrency = document.querySelector<HTMLElement>('#resultCurrency')!;
+// DOM Elements
+const elements = {
+  inputs: {
+    amount: document.querySelector<HTMLInputElement>('#amount')!,
+    vatRate: document.querySelector<HTMLInputElement>('#vatRate')!,
+    modeWithVat: document.querySelector<HTMLInputElement>('#modeWithVat')!,
+    modeWithoutVat: document.querySelector<HTMLInputElement>('#modeWithoutVat')!
+  },
+  outputs: {
+    totalVat: document.querySelector<HTMLElement>('#totalVat')!,
+    netAmount: document.querySelector<HTMLElement>('#netAmount')!,
+    totalAmount: document.querySelector<HTMLElement>('#totalAmount')!
+  },
+  rows: {
+    netAmountRow: document.querySelector<HTMLElement>('#netAmountRow')!,
+    totalAmountRow: document.querySelector<HTMLElement>('#totalAmountRow')!,
+    vatAmountSection: document.querySelector<HTMLElement>('#totalVat')!.closest<HTMLElement>('.mb-3')!
+  },
+  buttons: {
+    calc: document.querySelector<HTMLButtonElement>('#calcBtn')!,
+    reset: document.querySelector<HTMLButtonElement>('#resetBtn')!
+  },
+  form: document.querySelector<HTMLFormElement>('#calcForm')!,
+  resultCard: document.querySelector<HTMLElement>('#resultCard')!,
+  resultCardHeader: document.querySelector<HTMLElement>('#resultCardHeader')!,
+  icons: {
+    invalid: document.querySelector<HTMLElement>('#resultIconInvalid')!,
+    valid: document.querySelector<HTMLElement>('#resultIconValid')!
+  },
+  labels: {
+    withVat: document.querySelector<HTMLSpanElement>('#amountLabelWithVat')!,
+    withoutVat: document.querySelector<HTMLSpanElement>('#amountLabelWithoutVat')!
+  }
+} as const;
 
-function addInvalidClass(element: HTMLElement): void {
-  element.classList.add('is-invalid');
+// Constants
+const DEFAULTS = {
+  VAT_RATE: '24',
+  CALCULATION_MODE: 'withVat' as const,
+  EMPTY_VALUE: '—'
+} as const;
+
+// Number formatters
+const displayFormatter = new Intl.NumberFormat(undefined, {
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 2
+});
+
+const CSS_CLASSES = {
+  HIDDEN: 'd-none',
+  INVALID: 'is-invalid',
+  BORDER_SECONDARY: 'border-secondary',
+  BORDER_SUCCESS: 'border-success',
+  BG_SECONDARY: 'bg-secondary',
+  BG_SUCCESS: 'bg-success',
+  TEXT_SECONDARY: 'text-secondary',
+  TEXT_SUCCESS: 'text-success'
+} as const;
+
+// State
+let calculationMode: 'withVat' | 'withoutVat' = DEFAULTS.CALCULATION_MODE;
+
+// Utility functions
+function toggleClasses(element: HTMLElement, classMap: Record<string, boolean>): void {
+  for (const [className, shouldAdd] of Object.entries(classMap)) {
+    element.classList.toggle(className, shouldAdd);
+  }
 }
 
-function removeErrorClass(element: HTMLElement): void {
-  element.classList.remove('is-invalid');
-}
-
-function setBooleanAttribute(element: HTMLElement, attribute: string): void {
-  element.setAttribute(attribute, '');
-}
-
-function removeAttribute(element: HTMLElement, attribute: string): void {
-  element.removeAttribute(attribute);
-}
-
-function updateResultCardState(isValid: boolean): void {
-  resultCard.classList.toggle('border-secondary', !isValid);
-  resultCard.classList.toggle('border-success', isValid);
-  resultCardHeader.classList.toggle('bg-secondary', !isValid);
-  resultCardHeader.classList.toggle('bg-success', isValid);
-
-  resultLabel.classList.toggle('text-secondary', !isValid);
-  resultLabel.classList.toggle('text-success', isValid);
-
-  resultBox.classList.toggle('border-secondary', !isValid);
-  resultBox.classList.toggle('border-success', isValid);
-
-  totalVat.classList.toggle('text-secondary', !isValid);
-  totalVat.classList.toggle('text-success', isValid);
-  resultCurrency.classList.toggle('text-secondary', !isValid);
-  resultCurrency.classList.toggle('text-success', isValid);
-}
-
-function calculateVAT(): void {
-  if (totalCost.hasAttribute('disabled')) {
-    const calculated = Number(totalNetCost.value) + (Number(vatRate.value) / 100 * Number(totalNetCost.value));
-
-    totalCost.value = calculated.toLocaleString(undefined, {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 2,
-      useGrouping: false
-    });
-    const vatAmount = Number(totalCost.value) - Number(totalNetCost.value);
-
-    totalVat.textContent = vatAmount.toLocaleString(undefined, {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 2
-    });
-
-    setBooleanAttribute(totalCost, 'readonly');
+function setElementState(element: HTMLElement, disabled: boolean): void {
+  if (disabled) {
+    element.setAttribute('disabled', '');
   } else {
-    const calculated = Number(totalCost.value) / (1 + (Number(vatRate.value) / 100));
+    element.removeAttribute('disabled');
+  }
+}
 
-    totalNetCost.value = calculated.toLocaleString(undefined, {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 2,
-      useGrouping: false
-    });
-    const vatAmount = Number(totalCost.value) - Number(totalNetCost.value);
+function formatNumber(value: number): string {
+  return displayFormatter.format(value);
+}
 
-    totalVat.textContent = vatAmount.toLocaleString(undefined, {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 2
-    });
+function resetResultValues(): void {
+  elements.outputs.netAmount.textContent = DEFAULTS.EMPTY_VALUE;
+  elements.outputs.totalVat.textContent = DEFAULTS.EMPTY_VALUE;
+  elements.outputs.totalAmount.textContent = DEFAULTS.EMPTY_VALUE;
+}
 
-    setBooleanAttribute(totalNetCost, 'readonly');
+// Row visibility management
+function updateRowVisibility(): void {
+  const showNet = calculationMode === 'withVat';
+  elements.rows.netAmountRow.classList.toggle(CSS_CLASSES.HIDDEN, !showNet);
+  elements.rows.totalAmountRow.classList.toggle(CSS_CLASSES.HIDDEN, showNet);
+}
+
+// Label management
+function updateAmountLabel(): void {
+  const showWithVat = calculationMode === 'withVat';
+  elements.labels.withVat.classList.toggle(CSS_CLASSES.HIDDEN, !showWithVat);
+  elements.labels.withoutVat.classList.toggle(CSS_CLASSES.HIDDEN, showWithVat);
+}
+
+// Button state management
+function updateResetButtonState(): void {
+  const hasInput =
+    elements.inputs.amount.value !== '' ||
+    elements.inputs.vatRate.value !== DEFAULTS.VAT_RATE ||
+    calculationMode !== DEFAULTS.CALCULATION_MODE;
+
+  setElementState(elements.buttons.reset, !hasInput);
+}
+
+// Result card styling
+function updateResultCardState(isValid: boolean): void {
+  const cardClasses = {
+    [CSS_CLASSES.BORDER_SECONDARY]: !isValid,
+    [CSS_CLASSES.BORDER_SUCCESS]: isValid
+  };
+
+  const headerClasses = {
+    [CSS_CLASSES.BG_SECONDARY]: !isValid,
+    [CSS_CLASSES.BG_SUCCESS]: isValid
+  };
+
+  const textClasses = {
+    [CSS_CLASSES.TEXT_SECONDARY]: !isValid,
+    [CSS_CLASSES.TEXT_SUCCESS]: isValid
+  };
+
+  const iconClasses = {
+    [CSS_CLASSES.HIDDEN]: isValid
+  };
+
+  const validIconClasses = {
+    [CSS_CLASSES.HIDDEN]: !isValid
+  };
+
+  toggleClasses(elements.resultCard, cardClasses);
+  toggleClasses(elements.resultCardHeader, headerClasses);
+  toggleClasses(elements.icons.invalid, iconClasses);
+  toggleClasses(elements.icons.valid, validIconClasses);
+
+  // Update all result sections
+  const sections = [
+    elements.rows.vatAmountSection,
+    elements.rows.netAmountRow,
+    elements.rows.totalAmountRow
+  ];
+
+  for (const section of sections) {
+    toggleClasses(section, textClasses);
+
+    const valueContainer = section.querySelector<HTMLElement>('.border');
+    if (valueContainer) {
+      toggleClasses(valueContainer, cardClasses);
+    }
+  }
+}
+
+// Validation
+function validateInput(input: HTMLInputElement): boolean {
+  const isValid = input.validity.valid && (input === elements.inputs.vatRate || input.value !== '');
+  input.classList.toggle(CSS_CLASSES.INVALID, !isValid);
+  return isValid;
+}
+
+function updateCalcButtonState(): void {
+  const amountValid = validateInput(elements.inputs.amount);
+  const vatValid = validateInput(elements.inputs.vatRate);
+  const canCalculate = amountValid && vatValid;
+
+  setElementState(elements.buttons.calc, !canCalculate);
+
+  if (amountValid) {
+    updateResultCardState(true);
+  } else {
+    updateResultCardState(false);
+  }
+}
+
+// Main calculation logic
+function calculateVAT(): void {
+  const vatRateValue = Number(elements.inputs.vatRate.value);
+  const inputValue = Number(elements.inputs.amount.value);
+
+  const vatMultiplier = 1 + (vatRateValue / 100);
+
+  let totalCostValue: number;
+  let totalNetCostValue: number;
+
+  if (calculationMode === 'withVat') {
+    totalCostValue = inputValue;
+    totalNetCostValue = totalCostValue / vatMultiplier;
+  } else {
+    totalNetCostValue = inputValue;
+    totalCostValue = totalNetCostValue * vatMultiplier;
   }
 
-  setBooleanAttribute(calcBtn, 'disabled');
+  const vatAmount = totalCostValue - totalNetCostValue;
+
+  // Update all result fields
+  elements.outputs.netAmount.textContent = formatNumber(totalNetCostValue);
+  elements.outputs.totalVat.textContent = formatNumber(vatAmount);
+  elements.outputs.totalAmount.textContent = formatNumber(totalCostValue);
+
+  updateRowVisibility();
+  setElementState(elements.buttons.calc, true);
   updateResultCardState(true);
 }
 
 function resetCalculator(): void {
-  calcForm.reset();
+  elements.form.reset();
+  elements.form.classList.remove('was-validated');
 
-  calcForm.classList.remove('was-validated');
-  removeErrorClass(totalCost);
-  removeErrorClass(totalNetCost);
-  removeErrorClass(vatRate);
+  // Reset input states
+  for (const input of [elements.inputs.amount, elements.inputs.vatRate]) {
+    input.removeAttribute('readonly');
+    input.removeAttribute('disabled');
+    input.classList.toggle(CSS_CLASSES.INVALID, false);
+  }
 
-  removeAttribute(totalCost, 'readonly');
-  removeAttribute(totalNetCost, 'readonly');
-  removeAttribute(totalCost, 'disabled');
-  removeAttribute(totalNetCost, 'disabled');
+  // Reset mode
+  calculationMode = DEFAULTS.CALCULATION_MODE;
+  elements.inputs.modeWithVat.checked = true;
 
-  setBooleanAttribute(calcBtn, 'disabled');
+  // Update UI
+  updateAmountLabel();
+  resetResultValues();
+  updateRowVisibility();
 
-  totalVat.textContent = '—';
+  // Reset button states
+  setElementState(elements.buttons.calc, true);
+  setElementState(elements.buttons.reset, true);
 
   updateResultCardState(false);
 }
 
-totalCost.addEventListener('input', () => {
-  totalCost.classList.add('was-validated');
+function handleModeChange(): void {
+  calculationMode = elements.inputs.modeWithVat.checked ? 'withVat' : 'withoutVat';
 
-  if (totalCost.validity.valid) {
-    removeErrorClass(totalCost);
+  updateAmountLabel();
+  updateRowVisibility();
 
-    setBooleanAttribute(totalNetCost, 'disabled');
-    setBooleanAttribute(totalNetCost, 'readonly');
-    removeAttribute(calcBtn, 'disabled');
-    updateResultCardState(true);
-  } else {
-    addInvalidClass(totalCost);
-    setBooleanAttribute(calcBtn, 'disabled');
-    updateResultCardState(false);
-  }
-});
+  elements.inputs.amount.value = '';
+  // elements.inputs.amount.focus();
 
-totalNetCost.addEventListener('input', () => {
-  totalNetCost.classList.add('was-validated');
+  resetResultValues();
+  updateResultCardState(false);
 
-  if (totalNetCost.validity.valid) {
-    removeErrorClass(totalNetCost);
+  setElementState(elements.buttons.calc, true);
+  updateResetButtonState();
+}
 
-    setBooleanAttribute(totalCost, 'disabled');
-    setBooleanAttribute(totalCost, 'readonly');
-    removeAttribute(calcBtn, 'disabled');
-    updateResultCardState(true);
-  } else {
-    addInvalidClass(totalNetCost);
-    setBooleanAttribute(calcBtn, 'disabled');
-    updateResultCardState(false);
-  }
-});
+function handleAmountInput(): void {
+  updateCalcButtonState();
+  updateResetButtonState();
+}
 
-vatRate.addEventListener('input', () => {
-  vatRate.classList.add('was-validated');
+function handleVatRateInput(): void {
+  const isValid = validateInput(elements.inputs.vatRate);
+  const canCalculate = isValid && elements.inputs.amount.value !== '';
 
-  if (vatRate.validity.valid) {
-    removeErrorClass(vatRate);
-    removeAttribute(calcBtn, 'disabled');
-  } else {
-    addInvalidClass(vatRate);
-    setBooleanAttribute(calcBtn, 'disabled');
-  }
-});
+  setElementState(elements.buttons.calc, !canCalculate);
+  updateResetButtonState();
+}
 
-calcForm.addEventListener('submit', event => {
-  event.preventDefault();
-});
+// Event listeners
+function initializeEventListeners(): void {
+  elements.form.addEventListener('submit', event => {
+    event.preventDefault();
+  });
 
-calcBtn.addEventListener('click', calculateVAT);
-resetBtn.addEventListener('click', resetCalculator);
+  elements.inputs.modeWithVat.addEventListener('change', handleModeChange);
+  elements.inputs.modeWithoutVat.addEventListener('change', handleModeChange);
+  elements.inputs.amount.addEventListener('input', handleAmountInput);
+  elements.inputs.vatRate.addEventListener('input', handleVatRateInput);
+  elements.buttons.calc.addEventListener('click', calculateVAT);
+  elements.buttons.reset.addEventListener('click', resetCalculator);
+}
+
+// Initialize application
+function initialize(): void {
+  updateAmountLabel();
+  updateResetButtonState();
+  initializeEventListeners();
+}
+
+initialize();
