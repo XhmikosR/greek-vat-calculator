@@ -24,7 +24,8 @@
     "lint:html": "tsx scripts/vnu-jar.ts",
     "lint": "npm-run-all2 --parallel lint:js lint:html",
     "test": "npm-run-all2 build --parallel lint:js lint:html",
-    "clean": "tsx scripts/clean.ts"
+    "clean": "tsx scripts/clean.ts",
+    "netlify": "netlify deploy -d _site --prod"
   },
   "dependencies": {
     "bootstrap": "^5.3.8"
