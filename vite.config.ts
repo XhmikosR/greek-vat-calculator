@@ -1,6 +1,5 @@
 import {defineConfig} from 'vite';
 import {createHtmlPlugin} from 'vite-plugin-html';
-import {vitePurgeCSS} from './vite-plugin-purgecss.ts';
 import {inlineAssets} from './vite-plugin-inline.ts';
 
 export default defineConfig(({mode}) => {
@@ -13,33 +12,9 @@ export default defineConfig(({mode}) => {
     build: {
       outDir: '../_site',
       emptyOutDir: true,
-      assetsInlineLimit: 0, // Don't inline assets by default; we'll handle this
       cssCodeSplit: false,
       rollupOptions: {
-        input: {
-          main: '/index.html',
-          404: '/404.html'
-        },
-        output: {
-          assetFileNames(assetInfo) {
-            // For production, we want to inline CSS and JS
-            if (assetInfo.names?.[0] === 'main.css') {
-              return 'assets/main-[hash].css';
-            }
-
-            if (assetInfo.names?.[0]?.endsWith('.css')) {
-              return 'css/[name]-[hash][extname]';
-            }
-
-            if (assetInfo.names?.[0]?.endsWith('.js')) {
-              return 'js/[name]-[hash][extname]';
-            }
-
-            return 'assets/[name]-[hash][extname]';
-          },
-          entryFileNames: 'js/[name]-[hash].js',
-          chunkFileNames: 'js/[name]-[hash].js'
-        }
+        input: '/index.html'
       },
       minify: 'terser',
       terserOptions: {
@@ -99,8 +74,6 @@ export default defineConfig(({mode}) => {
         }
       }),
 
-      // Remove unused CSS and inline for production builds
-      !isDev && vitePurgeCSS(),
       !isDev && inlineAssets()
     ].filter(Boolean),
 

@@ -1,5 +1,4 @@
 import type {Plugin} from 'vite';
-import type {NormalizedOutputOptions, OutputBundle} from 'rollup';
 
 type AssetInfo = {
   fileName: string;
@@ -14,7 +13,7 @@ export function inlineAssets(): Plugin {
     name: 'vite-plugin-inline-assets',
     enforce: 'post',
 
-    generateBundle(_options: NormalizedOutputOptions, bundle: OutputBundle) {
+    generateBundle(_options, bundle) {
       // Collect all CSS and JS content first
       const cssAssets: AssetInfo[] = [];
       const jsAssets: AssetInfo[] = [];
