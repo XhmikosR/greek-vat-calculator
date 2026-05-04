@@ -1,3 +1,6 @@
+// eslint-disable-next-line import-x/no-unassigned-import
+import 'bootstrap/js/dist/collapse';
+
 // DOM Elements
 const elements = {
   inputs: {

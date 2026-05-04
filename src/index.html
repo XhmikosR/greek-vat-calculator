@@ -269,51 +269,60 @@
     <section class="mt-5 pt-4 border-top" aria-labelledby="vat-info-heading">
       <div class="row justify-content-center">
         <div class="col-md-10 col-lg-8">
-          <h2 id="vat-info-heading" class="h3 text-primary mb-4 text-center">
-            <svg width="24" height="24" fill="currentColor" class="bi bi-info-circle me-2" aria-hidden="true"><use href="#icon-info-circle"/></svg>
-            Τι είναι ο Φ.Π.Α.;
-          </h2>
+          <div class="accordion" id="vatInfoAccordion">
+            <div class="accordion-item border-0 bg-transparent">
+              <h2 class="accordion-header text-center mb-4" id="vat-info-heading">
+                <button class="accordion-button vat-info-toggle h3 text-primary bg-transparent shadow-none w-auto mx-auto fs-3" type="button" data-bs-toggle="collapse" data-bs-target="#vatInfoCollapse" aria-expanded="true" aria-controls="vatInfoCollapse">
+                  <svg width="24" height="24" fill="currentColor" class="bi bi-info-circle me-2" aria-hidden="true"><use href="#icon-info-circle"/></svg>
+                  Τι είναι ο Φ.Π.Α.;
+                </button>
+              </h2>
+              <div id="vatInfoCollapse" class="accordion-collapse collapse show" data-bs-parent="#vatInfoAccordion">
+                <div class="accordion-body px-0 pt-3 pb-0">
+                  <div class="card shadow-sm mb-4">
+                    <div class="card-body p-3 p-md-4">
+                      <p class="lead mb-3">Ο <strong>Φόρος Προστιθέμενης Αξίας (Φ.Π.Α.)</strong> είναι έμμεσος φόρος που επιβάλλεται στην κατανάλωση αγαθών και υπηρεσιών στην Ελλάδα.</p>
 
-          <div class="card shadow-sm mb-4">
-            <div class="card-body p-3 p-md-4">
-              <p class="lead mb-3">Ο <strong>Φόρος Προστιθέμενης Αξίας (Φ.Π.Α.)</strong> είναι έμμεσος φόρος που επιβάλλεται στην κατανάλωση αγαθών και υπηρεσιών στην Ελλάδα.</p>
+                      <h3 class="h5 text-primary mt-4 mb-3">Συντελεστές Φ.Π.Α. στην Ελλάδα</h3>
+                      <div class="row g-3">
+                        <div class="col-md-4">
+                          <div class="card bg-primary bg-opacity-10 border-primary h-100">
+                            <div class="card-body text-center">
+                              <div class="display-4 fw-bold text-primary mb-2">24%</div>
+                              <h4 class="h6 fw-semibold mb-2">Κανονικός Συντελεστής</h4>
+                              <p class="small mb-0 text-muted">Εφαρμόζεται στα περισσότερα προϊόντα και υπηρεσίες</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="card bg-info bg-opacity-10 border-info h-100">
+                            <div class="card-body text-center">
+                              <div class="display-4 fw-bold text-info mb-2">13%</div>
+                              <h4 class="h6 fw-semibold mb-2">Μειωμένος Συντελεστής</h4>
+                              <p class="small mb-0 text-muted">Τρόφιμα, ποτά, ενέργεια, φάρμακα, βιβλία</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="card bg-success bg-opacity-10 border-success h-100">
+                            <div class="card-body text-center">
+                              <div class="display-4 fw-bold text-success mb-2">6%</div>
+                              <h4 class="h6 fw-semibold mb-2">Υπερμειωμένος Συντελεστής</h4>
+                              <p class="small mb-0 text-muted">Φάρμακα, βιβλία, εφημερίδες, θεατρικές παραστάσεις</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
-              <h3 class="h5 text-primary mt-4 mb-3">Συντελεστές Φ.Π.Α. στην Ελλάδα</h3>
-              <div class="row g-3">
-                <div class="col-md-4">
-                  <div class="card bg-primary bg-opacity-10 border-primary h-100">
-                    <div class="card-body text-center">
-                      <div class="display-4 fw-bold text-primary mb-2">24%</div>
-                      <h4 class="h6 fw-semibold mb-2">Κανονικός Συντελεστής</h4>
-                      <p class="small mb-0 text-muted">Εφαρμόζεται στα περισσότερα προϊόντα και υπηρεσίες</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="card bg-info bg-opacity-10 border-info h-100">
-                    <div class="card-body text-center">
-                      <div class="display-4 fw-bold text-info mb-2">13%</div>
-                      <h4 class="h6 fw-semibold mb-2">Μειωμένος Συντελεστής</h4>
-                      <p class="small mb-0 text-muted">Τρόφιμα, ποτά, ενέργεια, φάρμακα, βιβλία</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="card bg-success bg-opacity-10 border-success h-100">
-                    <div class="card-body text-center">
-                      <div class="display-4 fw-bold text-success mb-2">6%</div>
-                      <h4 class="h6 fw-semibold mb-2">Υπερμειωμένος Συντελεστής</h4>
-                      <p class="small mb-0 text-muted">Φάρμακα, βιβλία, εφημερίδες, θεατρικές παραστάσεις</p>
+                      <h3 class="h5 text-primary mt-4 mb-3">Πώς λειτουργεί ο υπολογιστής;</h3>
+                      <ul class="mb-3">
+                        <li class="mb-2"><strong>Έχω το ποσό με Φ.Π.Α.:</strong> Εάν γνωρίζετε το τελικό ποσό που περιλαμβάνει τον φόρο, ο υπολογιστής θα υπολογίσει το καθαρό ποσό και το ύψος του Φ.Π.Α.</li>
+                        <li class="mb-2"><strong>Έχω το ποσό χωρίς Φ.Π.Α.:</strong> Εάν γνωρίζετε το καθαρό ποσό χωρίς φόρο, ο υπολογιστής θα υπολογίσει το ύψος του Φ.Π.Α. και το συνολικό ποσό.</li>
+                      </ul>
                     </div>
                   </div>
                 </div>
               </div>
-
-              <h3 class="h5 text-primary mt-4 mb-3">Πώς λειτουργεί ο υπολογιστής;</h3>
-              <ul class="mb-3">
-                <li class="mb-2"><strong>Έχω το ποσό με Φ.Π.Α.:</strong> Εάν γνωρίζετε το τελικό ποσό που περιλαμβάνει τον φόρο, ο υπολογιστής θα υπολογίσει το καθαρό ποσό και το ύψος του Φ.Π.Α.</li>
-                <li class="mb-2"><strong>Έχω το ποσό χωρίς Φ.Π.Α.:</strong> Εάν γνωρίζετε το καθαρό ποσό χωρίς φόρο, ο υπολογιστής θα υπολογίσει το ύψος του Φ.Π.Α. και το συνολικό ποσό.</li>
-              </ul>
             </div>
           </div>
         </div>
