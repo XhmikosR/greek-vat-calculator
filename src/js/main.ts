@@ -165,7 +165,15 @@ function updateResultCardState(isValid: boolean): void {
 
 // Validation
 function validateInput(input: HTMLInputElement): boolean {
-  const isValid = input.validity.valid && (input === elements.inputs.vatRate || input.value !== '');
+  let isValid = false;
+
+  if (input === elements.inputs.vatRate) {
+    const n = Number(input.value);
+    isValid = input.value !== '' && Number.isFinite(n) && n >= 0.1 && n <= 99.9;
+  } else {
+    isValid = input.validity.valid && input.value !== '';
+  }
+
   input.classList.toggle(CSS_CLASSES.INVALID, !isValid);
   return isValid;
 }
