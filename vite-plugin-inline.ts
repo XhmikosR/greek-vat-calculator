@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import type {Plugin} from 'vite';
 
 type AssetInfo = {
@@ -71,6 +73,26 @@ export function inlineAssets(): Plugin {
       for (const asset of [...cssAssets, ...jsAssets]) {
         // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
         delete bundle[asset.fileName];
+      }
+    }
+  };
+}
+
+/**
+ * Vite plugin to inject a version string into the service worker file during build
+ */
+export function injectSwVersion(): Plugin {
+  return {
+    name: 'vite-plugin-inject-sw-version',
+    enforce: 'post',
+    apply: 'build',
+    writeBundle(options) {
+      const outDir = options.dir ?? '../_site';
+      const swPath = path.resolve(outDir, 'sw.js');
+      if (fs.existsSync(swPath)) {
+        const version = Date.now().toString();
+        const content = fs.readFileSync(swPath, 'utf8');
+        fs.writeFileSync(swPath, content.replaceAll('__SW_VERSION__', version));
       }
     }
   };
