@@ -116,7 +116,7 @@
 
   <main class="container">
 
-    <header class="text-center py-2 py-md-4">
+    <header class="text-center py-2 py-lg-4">
       <svg xmlns="http://www.w3.org/2000/svg" class="d-block mx-auto mb-2 mb-md-3" width="40" height="60.39" viewBox="0 0 169.572 256" focusable="false" role="img" aria-label="Calculator icon">
         <path fill="#fff" d="M9.786 10.75h148.25v234H9.786z"/>
         <path fill="#5373f4" d="M162.635 0H7.78C3.502 0 0 3.71 0 8.143v239.723C0 252.3 3.503 256 7.78 256h154.854c4.274 0 6.938-3.7 6.938-8.134V8.143c0-4.434-2.662-8.143-6.937-8.143M51.418 232.436c0 1.476-.773 2.778-2.25 2.778h-25.29c-1.476 0-3.092-1.304-3.092-2.778v-25.29c0-1.477 1.616-2.563 3.09-2.563H49.17c1.476 0 2.25 1.088 2.25 2.564v25.29zm0-45.842a2.67 2.67 0 0 1-2.67 2.672H23.456a2.67 2.67 0 0 1-2.67-2.672v-25.29a2.67 2.67 0 0 1 2.67-2.67h25.292a2.67 2.67 0 0 1 2.67 2.67zm0-47.042a2.67 2.67 0 0 1-2.67 2.67H23.456a2.67 2.67 0 0 1-2.67-2.67v-25.29a2.67 2.67 0 0 1 2.67-2.67h25.292a2.67 2.67 0 0 1 2.67 2.67zm49.232 92.884c0 1.476-.776 2.778-2.25 2.778H73.107c-1.475 0-3.09-1.304-3.09-2.778v-25.29c0-1.477 1.615-2.563 3.09-2.563H98.4c1.476 0 2.25 1.088 2.25 2.564zm0-92.884a2.67 2.67 0 0 1-2.672 2.67h-25.29a2.67 2.67 0 0 1-2.67-2.67v-25.29a2.67 2.67 0 0 1 2.67-2.67h25.29a2.67 2.67 0 0 1 2.67 2.67v25.29zm-27.963 19.082h25.29a2.67 2.67 0 0 1 2.67 2.67v25.29h.002c0 1.477-1.2 2.672-2.68 2.672H72.68a2.67 2.67 0 0 1-2.67-2.672v-25.29a2.67 2.67 0 0 1 2.67-2.67zm76.1 73.802c0 1.476-.775 2.778-2.25 2.778h-25.294c-1.474 0-3.09-1.304-3.09-2.778v-25.29c0-1.477 1.616-2.563 3.09-2.563h25.293c1.476 0 2.25 1.088 2.25 2.564v25.29zm0-45.842a2.67 2.67 0 0 1-2.672 2.672h-25.29a2.67 2.67 0 0 1-2.67-2.672v-25.29a2.67 2.67 0 0 1 2.67-2.67h25.29a2.67 2.67 0 0 1 2.67 2.67v25.29zm0-47.042a2.67 2.67 0 0 1-2.672 2.67h-25.29a2.67 2.67 0 0 1-2.67-2.67v-25.29a2.67 2.67 0 0 1 2.67-2.67h25.29a2.667 2.667 0 0 1 2.67 2.67v25.29zm4.375-49.843H18.598V19.69H153.16v70.02z"/>
@@ -126,10 +126,10 @@
       <p class="lead text-muted fst-italic mb-0">Φόρος Προστιθέμενης Αξίας</p>
     </header>
 
-    <form id="calcForm" class="mt-2 mt-md-3" aria-labelledby="form-heading" novalidate>
+    <form id="calcForm" class="mt-2 mt-lg-3" aria-labelledby="form-heading" novalidate>
       <h2 id="form-heading" class="visually-hidden">Φόρμα Υπολογισμού Φ.Π.Α.</h2>
-      <div class="row justify-content-center g-2 g-md-4">
-        <div class="col-md-10 col-lg-7 col-xl-5">
+      <div class="row justify-content-center g-2 g-lg-4">
+        <div class="col-md-10 col-lg-5">
           <div class="card shadow h-100 border-primary border-opacity-50">
             <div class="card-header bg-primary bg-gradient text-white py-3">
               <h2 class="h5 mb-0">
@@ -138,16 +138,16 @@
               </h2>
             </div>
 
-            <div class="card-body p-3 p-md-4">
+            <div class="card-body p-3 p-lg-4">
               <p class="text-muted mb-3">Επιλέξτε αν το ποσό σας περιλαμβάνει ή όχι Φ.Π.Α. και έπειτα εισάγετέ το παρακάτω.</p>
 
               <!-- Calculation Mode Selection -->
               <div class="mb-3">
-                <label class="form-label fw-semibold text-primary mb-2 mb-md-3">
+                <label class="form-label fw-semibold text-primary mb-2 mb-lg-3">
                   <svg width="16" height="16" fill="currentColor" class="bi bi-ui-radios me-1" aria-hidden="true"><use href="#icon-ui-radios"/></svg>
                   Τρόπος Υπολογισμού
                 </label>
-                <div class="d-flex flex-column gap-1 gap-md-2 text-primary">
+                <div class="d-flex flex-column gap-1 gap-lg-2 text-primary">
                   <div class="form-check form-check-inline py-1 m-0">
                     <input class="form-check-input" type="radio" name="calculationMode" id="modeWithVat" value="withVat" checked autocomplete="off">
                     <label class="form-check-label fw-semibold" for="modeWithVat">
@@ -200,7 +200,7 @@
           </div>
         </div>
 
-        <div class="col-md-10 col-lg-5 col-xl-4">
+        <div class="col-md-10 col-lg-5">
           <div id="resultCard" class="card shadow h-100 border-secondary border-opacity-50">
             <div id="resultCardHeader" class="card-header bg-secondary text-white py-3">
               <h2 class="h5 mb-0">
@@ -209,7 +209,7 @@
                 Αποτέλεσμα Υπολογισμού
               </h2>
             </div>
-            <div class="card-body p-3 p-md-4">
+            <div class="card-body p-3 p-lg-4">
               <!-- VAT Amount -->
               <div class="mb-3 text-secondary">
                 <div class="fw-semibold d-block mb-2">
@@ -269,7 +269,7 @@
     <!-- Information Section -->
     <section class="mt-4 pt-4 border-top" aria-labelledby="vat-info-heading">
       <div class="row justify-content-center">
-        <div class="col-md-10 col-lg-8">
+        <div class="col-md-10">
           <div class="accordion" id="vatInfoAccordion">
             <div class="accordion-item border-0 bg-transparent">
               <h2 class="accordion-header text-center mb-4" id="vat-info-heading">
