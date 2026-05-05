@@ -1,0 +1,32 @@
+{
+  "id": "./",
+  "name": "Greek VAT Calculator",
+  "short_name": "GR VAT Calc",
+  "description": "Δωρεάν online εργαλείο για τον υπολογισμό Φ.Π.Α. στην Ελλάδα. Υπολογίστε εύκολα το Φόρο Προστιθέμενης Αξίας με συντελεστές 24%, 13% και 6%.",
+  "lang": "el",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "img/favicons/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "img/favicons/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "start_url": "./",
+  "scope": "./",
+  "orientation": "any",
+  "theme_color": "#f8fafc",
+  "background_color": "#5373f4",
+  "display": "standalone",
+  "categories": [
+    "finance",
+    "utilities"
+  ]
+}

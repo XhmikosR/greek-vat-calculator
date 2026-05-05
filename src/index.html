@@ -3,84 +3,356 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Υπολογισμός Φ.Π.Α.</title>
-  <meta name="description" content="Απλή εφαρμογή υπολογισμού Φ.Π.Α.">
+  <title>Υπολογισμός Φ.Π.Α. | Δωρεάν online εργαλείο για τον υπολογισμό Φόρου Προστιθέμενης Αξίας</title>
+  <meta name="description" content="Δωρεάν online εργαλείο για τον υπολογισμό Φ.Π.Α. στην Ελλάδα. Υπολογίστε εύκολα το Φόρο Προστιθέμενης Αξίας με συντελεστές 24%, 13% και 6%. Κατάλληλο για επιχειρήσεις, freelancers και επαγγελματίες.">
   <meta name="author" content="XhmikosR">
-  <link rel="stylesheet" href="css/main.css" inline="true">
+  <meta name="keywords" content="ΦΠΑ, Φ.Π.Α., υπολογιστής ΦΠΑ, φόρος προστιθέμενης αξίας, calculator, Ελλάδα, 24%, 13%, 6%, online calculator">
+  <link rel="stylesheet" href="/css/main.scss">
 
   <link rel="canonical" href="https://xhmikosr.github.io/greek-vat-calculator/">
-  <link rel="apple-touch-icon" href="img/favicons/apple-touch-icon.png" sizes="180x180">
-  <link rel="icon" href="img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-  <link rel="icon" href="img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-  <link rel="manifest" href="manifest.json">
-  <link rel="mask-icon" href="img/favicons/safari-pinned-tab.svg" color="#5373f4">
+  <!-- <link rel="sitemap" type="application/xml" href="/sitemap.xml"> -->
+
+  <link rel="icon" href="img/favicons/favicon-96x96.png" type="image/png" sizes="96x96">
+  <link rel="icon" href="img/favicons/favicon.svg" type="image/svg+xml">
   <link rel="shortcut icon" href="img/favicons/favicon.ico">
+  <link rel="apple-touch-icon" href="img/favicons/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#5373f4">
 
-  <meta property="og:description" content="Απλή εφαρμογή υπολογισμού Φ.Π.Α.">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="Δωρεάν online εργαλείο για τον υπολογισμό Φ.Π.Α. στην Ελλάδα. Υπολογίστε εύκολα το Φόρο Προστιθέμενης Αξίας με συντελεστές 24%, 13% και 6%.">
   <meta property="og:locale" content="el_GR">
   <meta property="og:site_name" content="Υπολογισμός Φ.Π.Α.">
-  <meta property="og:title" content="Υπολογισμός Φ.Π.Α.">
+  <meta property="og:title" content="Υπολογισμός Φ.Π.Α. | Δωρεάν online εργαλείο για τον υπολογισμό Φόρου Προστιθέμενης Αξίας">
   <meta property="og:url" content="https://xhmikosr.github.io/greek-vat-calculator/">
+  <meta property="og:image" content="https://xhmikosr.github.io/greek-vat-calculator/img/favicons/web-app-manifest-512x512.png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:image:alt" content="Greek VAT Calculator - Υπολογισμός Φ.Π.Α.">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Υπολογισμός Φ.Π.Α. | Δωρεάν online εργαλείο για τον υπολογισμό Φόρου Προστιθέμενης Αξίας">
+  <meta name="twitter:description" content="Δωρεάν online εργαλείο για τον υπολογισμό Φ.Π.Α. στην Ελλάδα. Υπολογίστε εύκολα το Φόρο Προστιθέμενης Αξίας με συντελεστές 24%, 13% και 6%.">
+  <meta name="twitter:image" content="https://xhmikosr.github.io/greek-vat-calculator/img/favicons/web-app-manifest-512x512.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Υπολογισμός Φ.Π.Α.",
+    "alternateName": "Greek VAT Calculator",
+    "description": "Δωρεάν online εργαλείο για τον υπολογισμό του Φόρου Προστιθέμενης Αξίας (Φ.Π.Α.) στην Ελλάδα. Υπολογίστε εύκολα το Φ.Π.Α. με συντελεστές 24%, 13% και 6%.",
+    "url": "https://xhmikosr.github.io/greek-vat-calculator/",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript. Requires HTML5.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    },
+    "inLanguage": "el",
+    "countryOfOrigin": {
+      "@type": "Country",
+      "name": "Greece"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "XhmikosR",
+      "url": "https://github.com/XhmikosR"
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "XhmikosR",
+      "url": "https://github.com/XhmikosR"
+    }
+  }
+  </script>
 </head>
-<body class="d-flex flex-column h-100">
-  <div class="container">
+<body class="d-flex flex-column h-100 bg-light">
 
-    <div class="text-center mt-3 mx-auto">
-      <h1 class="h2 logo">
-        <svg xmlns="http://www.w3.org/2000/svg" class="d-block mx-auto mb-2" width="32" height="48" viewBox="0 0 169.572 256" focusable="false">
-          <path fill="#fff" d="M9.786 10.75h148.25v234H9.786z"/>
-          <path d="M162.635 0H7.78C3.502 0 0 3.71 0 8.143v239.723C0 252.3 3.503 256 7.78 256h154.854c4.274 0 6.938-3.7 6.938-8.134V8.143c0-4.434-2.662-8.143-6.937-8.143M51.418 232.436c0 1.476-.773 2.778-2.25 2.778h-25.29c-1.476 0-3.092-1.304-3.092-2.778v-25.29c0-1.477 1.616-2.563 3.09-2.563H49.17c1.476 0 2.25 1.088 2.25 2.564v25.29zm0-45.842a2.67 2.67 0 0 1-2.67 2.672H23.456a2.67 2.67 0 0 1-2.67-2.672v-25.29a2.67 2.67 0 0 1 2.67-2.67h25.292a2.67 2.67 0 0 1 2.67 2.67zm0-47.042a2.67 2.67 0 0 1-2.67 2.67H23.456a2.67 2.67 0 0 1-2.67-2.67v-25.29a2.67 2.67 0 0 1 2.67-2.67h25.292a2.67 2.67 0 0 1 2.67 2.67zm49.232 92.884c0 1.476-.776 2.778-2.25 2.778H73.107c-1.475 0-3.09-1.304-3.09-2.778v-25.29c0-1.477 1.615-2.563 3.09-2.563H98.4c1.476 0 2.25 1.088 2.25 2.564zm0-92.884a2.67 2.67 0 0 1-2.672 2.67h-25.29a2.67 2.67 0 0 1-2.67-2.67v-25.29a2.67 2.67 0 0 1 2.67-2.67h25.29a2.67 2.67 0 0 1 2.67 2.67v25.29zm-27.963 19.082h25.29a2.67 2.67 0 0 1 2.67 2.67v25.29h.002c0 1.477-1.2 2.672-2.68 2.672H72.68a2.67 2.67 0 0 1-2.67-2.672v-25.29a2.67 2.67 0 0 1 2.67-2.67zm76.1 73.802c0 1.476-.775 2.778-2.25 2.778h-25.294c-1.474 0-3.09-1.304-3.09-2.778v-25.29c0-1.477 1.616-2.563 3.09-2.563h25.293c1.476 0 2.25 1.088 2.25 2.564v25.29zm0-45.842a2.67 2.67 0 0 1-2.672 2.672h-25.29a2.67 2.67 0 0 1-2.67-2.672v-25.29a2.67 2.67 0 0 1 2.67-2.67h25.29a2.67 2.67 0 0 1 2.67 2.67v25.29zm0-47.042a2.67 2.67 0 0 1-2.672 2.67h-25.29a2.67 2.67 0 0 1-2.67-2.67v-25.29a2.67 2.67 0 0 1 2.67-2.67h25.29a2.667 2.667 0 0 1 2.67 2.67v25.29zm4.375-49.843H18.598V19.69H153.16v70.02z"/>
-          <path d="m125.192 36.066-26.735 44-7.29-4.432L117.9 31.636l7.29 4.43zM94.36 27.038q-5.729 0-8.834 3.16-3.105 3.159-3.104 7.965v2.845q-.002 4.77 3.122 7.91 3.121 3.142 8.89 3.142 5.728 0 8.83-3.123 3.105-3.123 3.105-7.93v-2.844c0-3.203-1.04-5.858-3.11-7.965s-5.04-3.16-8.91-3.16zm3.99 13.96q0 1.835-1.02 3.068-1.012 1.23-2.898 1.23-1.96 0-2.993-1.23c-.69-.82-1.04-1.844-1.04-3.067v-2.83c0-1.23.34-2.26 1.03-3.11q1.034-1.268 2.92-1.268 1.921-.001 2.957 1.265 1.032 1.27 1.033 3.104V41zm34.51 19.487q-3.086-3.14-8.89-3.14-5.725 0-8.868 3.16-3.142 3.161-3.143 7.927v2.846c0 3.203 1.05 5.853 3.16 7.948 2.1 2.093 5.08 3.14 8.92 3.14 3.82 0 6.753-1.04 8.81-3.122q3.088-3.124 3.086-7.965v-2.85q.001-4.815-3.086-7.95zm-4.895 10.783q.001 2.058-.814 3.194c-.54.76-1.57 1.14-3.1 1.14q-1.695 0-2.88-1.285c-.79-.856-1.18-1.872-1.18-3.05V68.44c0-1.195.347-2.22 1.036-3.065q1.036-1.266 2.955-1.266c1.26 0 2.237.42 2.94 1.26.703.843 1.055 1.87 1.055 3.064v2.83zm-60.82 7.85H47.42v-8.533h19.723v8.533zm-4.677-36.36h11.19v9.485H62.47v12.832H52.13V52.243H40.907v-9.486H52.13v-12.47h10.338z"/>
-        </svg>
-        Υπολογισμός Φ.Π.Α.
-        <span class="d-block mt-1 mt-sm-2 fs-5 fw-normal fst-italic text-secondary">(Φόρος Προστιθέμενης Αξίας)</span>
-      </h1>
-    </div>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none" aria-hidden="true">
+    <symbol id="icon-calculator" viewBox="0 0 16 16">
+      <path d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+      <path d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
+    </symbol>
+    <symbol id="icon-calculator-fill" viewBox="0 0 16 16">
+      <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm2 .5v2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0-.5.5m0 4v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5M4.5 9a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM4 12.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5M7.5 6a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM7 9.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5m.5 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM10 6.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5m.5 2.5a.5.5 0 0 0-.5.5v4a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-.5-.5z"/>
+    </symbol>
+    <symbol id="icon-check-circle" viewBox="0 0 16 16">
+      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+      <path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/>
+    </symbol>
+    <symbol id="icon-cash-stack" viewBox="0 0 16 16">
+      <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
+      <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2z"/>
+    </symbol>
+    <symbol id="icon-receipt" viewBox="0 0 16 16">
+      <path d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27m.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0z"/>
+      <path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5"/>
+    </symbol>
+    <symbol id="icon-percent" viewBox="0 0 16 16">
+      <path d="M13.442 2.558a.625.625 0 0 1 0 .884l-10 10a.625.625 0 1 1-.884-.884l10-10a.625.625 0 0 1 .884 0M4.5 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5m7 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+    </symbol>
+    <symbol id="icon-ui-radios" viewBox="0 0 16 16">
+      <path d="M7 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zM0 12a3 3 0 1 1 6 0 3 3 0 0 1-6 0m7-1.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zm0-5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5M3 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6m0 4.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+    </symbol>
+    <symbol id="icon-info-circle" viewBox="0 0 16 16">
+      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+      <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533z"/>
+      <circle cx="8" cy="4.5" r="1"/>
+    </symbol>
+    <symbol id="icon-arrow-counterclockwise" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/>
+      <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466"/>
+    </symbol>
+    <symbol id="icon-code-slash" viewBox="0 0 16 16">
+      <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0m6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0"/>
+    </symbol>
+    <symbol id="icon-github" viewBox="0 0 16 16">
+      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+    </symbol>
+  </svg>
 
-    <div class="w-25 mx-auto border-bottom border-1"></div>
+  <main class="container">
 
-    <form id="calcForm" class="text-center mt-4 mt-md-5 fw-bold">
-      <div class="row align-items-center justify-content-center mb-3">
-        <label for="totalCost" class="form-label col-sm-5 col-lg-3 col-xxl-2 text-uppercase">Σύνολο (€)</label>
-        <div class="col-sm-7 col-lg-6 col-xxl-5">
-          <input id="totalCost" class="form-control" type="number" min="0.01" step="0.01" inputmode="decimal" autocomplete="off" autofocus required>
+    <header class="text-center py-2 py-lg-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="d-block mx-auto mb-2 mb-md-3" width="40" height="60.39" viewBox="0 0 169.572 256" focusable="false" role="img" aria-label="Calculator icon">
+        <path fill="#fff" d="M9.786 10.75h148.25v234H9.786z"/>
+        <path fill="#5373f4" d="M162.635 0H7.78C3.502 0 0 3.71 0 8.143v239.723C0 252.3 3.503 256 7.78 256h154.854c4.274 0 6.938-3.7 6.938-8.134V8.143c0-4.434-2.662-8.143-6.937-8.143M51.418 232.436c0 1.476-.773 2.778-2.25 2.778h-25.29c-1.476 0-3.092-1.304-3.092-2.778v-25.29c0-1.477 1.616-2.563 3.09-2.563H49.17c1.476 0 2.25 1.088 2.25 2.564v25.29zm0-45.842a2.67 2.67 0 0 1-2.67 2.672H23.456a2.67 2.67 0 0 1-2.67-2.672v-25.29a2.67 2.67 0 0 1 2.67-2.67h25.292a2.67 2.67 0 0 1 2.67 2.67zm0-47.042a2.67 2.67 0 0 1-2.67 2.67H23.456a2.67 2.67 0 0 1-2.67-2.67v-25.29a2.67 2.67 0 0 1 2.67-2.67h25.292a2.67 2.67 0 0 1 2.67 2.67zm49.232 92.884c0 1.476-.776 2.778-2.25 2.778H73.107c-1.475 0-3.09-1.304-3.09-2.778v-25.29c0-1.477 1.615-2.563 3.09-2.563H98.4c1.476 0 2.25 1.088 2.25 2.564zm0-92.884a2.67 2.67 0 0 1-2.672 2.67h-25.29a2.67 2.67 0 0 1-2.67-2.67v-25.29a2.67 2.67 0 0 1 2.67-2.67h25.29a2.67 2.67 0 0 1 2.67 2.67v25.29zm-27.963 19.082h25.29a2.67 2.67 0 0 1 2.67 2.67v25.29h.002c0 1.477-1.2 2.672-2.68 2.672H72.68a2.67 2.67 0 0 1-2.67-2.672v-25.29a2.67 2.67 0 0 1 2.67-2.67zm76.1 73.802c0 1.476-.775 2.778-2.25 2.778h-25.294c-1.474 0-3.09-1.304-3.09-2.778v-25.29c0-1.477 1.616-2.563 3.09-2.563h25.293c1.476 0 2.25 1.088 2.25 2.564v25.29zm0-45.842a2.67 2.67 0 0 1-2.672 2.672h-25.29a2.67 2.67 0 0 1-2.67-2.672v-25.29a2.67 2.67 0 0 1 2.67-2.67h25.29a2.67 2.67 0 0 1 2.67 2.67v25.29zm0-47.042a2.67 2.67 0 0 1-2.672 2.67h-25.29a2.67 2.67 0 0 1-2.67-2.67v-25.29a2.67 2.67 0 0 1 2.67-2.67h25.29a2.667 2.667 0 0 1 2.67 2.67v25.29zm4.375-49.843H18.598V19.69H153.16v70.02z"/>
+        <path fill="#5373f4" d="m125.192 36.066-26.735 44-7.29-4.432L117.9 31.636l7.29 4.43zM94.36 27.038q-5.729 0-8.834 3.16-3.105 3.159-3.104 7.965v2.845q-.002 4.77 3.122 7.91 3.121 3.142 8.89 3.142 5.728 0 8.83-3.123 3.105-3.123 3.105-7.93v-2.844c0-3.203-1.04-5.858-3.11-7.965s-5.04-3.16-8.91-3.16zm3.99 13.96q0 1.835-1.02 3.068-1.012 1.23-2.898 1.23-1.96 0-2.993-1.23c-.69-.82-1.04-1.844-1.04-3.067v-2.83c0-1.23.34-2.26 1.03-3.11q1.034-1.268 2.92-1.268 1.921-.001 2.957 1.265 1.032 1.27 1.033 3.104V41zm34.51 19.487q-3.086-3.14-8.89-3.14-5.725 0-8.868 3.16-3.142 3.161-3.143 7.927v2.846c0 3.203 1.05 5.853 3.16 7.948 2.1 2.093 5.08 3.14 8.92 3.14 3.82 0 6.753-1.04 8.81-3.122q3.088-3.124 3.086-7.965v-2.85q.001-4.815-3.086-7.95zm-4.895 10.783q.001 2.058-.814 3.194c-.54.76-1.57 1.14-3.1 1.14q-1.695 0-2.88-1.285c-.79-.856-1.18-1.872-1.18-3.05V68.44c0-1.195.347-2.22 1.036-3.065q1.036-1.266 2.955-1.266c1.26 0 2.237.42 2.94 1.26.703.843 1.055 1.87 1.055 3.064v2.83zm-60.82 7.85H47.42v-8.533h19.723v8.533zm-4.677-36.36h11.19v9.485H62.47v12.832H52.13V52.243H40.907v-9.486H52.13v-12.47h10.338z"/>
+      </svg>
+      <h1 class="display-6 fw-bold text-primary mb-1">Υπολογισμός Φ.Π.Α.</h1>
+      <p class="lead text-muted fst-italic mb-0">Φόρος Προστιθέμενης Αξίας</p>
+    </header>
+
+    <form id="calcForm" class="mt-2 mt-lg-3" aria-labelledby="form-heading" novalidate>
+      <h2 id="form-heading" class="visually-hidden">Φόρμα Υπολογισμού Φ.Π.Α.</h2>
+      <div class="row justify-content-center g-2 g-lg-4">
+        <div class="col-md-10 col-lg-5 col-xl-4">
+          <div class="card shadow h-100 border-primary border-opacity-50">
+            <div class="card-header bg-primary bg-gradient text-white py-3">
+              <h2 class="h5 mb-0">
+                <svg width="20" height="20" fill="currentColor" class="bi bi-calculator me-2 align-text-bottom" aria-hidden="true"><use href="#icon-calculator"/></svg>
+                Εισαγωγή Δεδομένων
+              </h2>
+            </div>
+
+            <div class="card-body p-3 p-lg-4">
+              <p class="text-muted mb-3">Επιλέξτε αν το ποσό σας περιλαμβάνει ή όχι Φ.Π.Α. και έπειτα εισάγετέ το παρακάτω.</p>
+
+              <!-- Calculation Mode Selection -->
+              <div class="mb-3">
+                <label class="form-label fw-semibold text-primary mb-2 mb-lg-3">
+                  <svg width="16" height="16" fill="currentColor" class="bi bi-ui-radios me-1" aria-hidden="true"><use href="#icon-ui-radios"/></svg>
+                  Τρόπος Υπολογισμού
+                </label>
+                <div class="d-flex flex-column gap-1 gap-lg-2 text-primary">
+                  <div class="form-check form-check-inline py-1 m-0">
+                    <input class="form-check-input" type="radio" name="calculationMode" id="modeWithVat" value="withVat" checked autocomplete="off">
+                    <label class="form-check-label fw-semibold" for="modeWithVat">
+                      <svg width="16" height="16" fill="currentColor" class="bi bi-cash-stack me-1" aria-hidden="true"><use href="#icon-cash-stack"/></svg>
+                      Έχω το ποσό με Φ.Π.Α.
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline py-1 m-0">
+                    <input class="form-check-input" type="radio" name="calculationMode" id="modeWithoutVat" value="withoutVat" autocomplete="off">
+                    <label class="form-check-label fw-semibold" for="modeWithoutVat">
+                      <svg width="16" height="16" fill="currentColor" class="bi bi-receipt me-1" aria-hidden="true"><use href="#icon-receipt"/></svg>
+                      Έχω το ποσό χωρίς Φ.Π.Α.
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Amount Input -->
+              <div class="mb-3">
+                <label for="amount" class="form-label fw-semibold text-primary">
+                  <span id="amountLabelWithVat">
+                    <svg width="16" height="16" fill="currentColor" class="bi bi-cash-stack me-1" aria-hidden="true"><use href="#icon-cash-stack"/></svg>
+                    Ποσό με Φ.Π.Α.
+                  </span>
+                  <span id="amountLabelWithoutVat" class="d-none">
+                    <svg width="16" height="16" fill="currentColor" class="bi bi-receipt me-1" aria-hidden="true"><use href="#icon-receipt"/></svg>
+                    Ποσό χωρίς Φ.Π.Α.
+                  </span>
+                </label>
+                <div class="input-group input-group-lg result-output">
+                  <input id="amount" class="form-control border-primary" type="number" min="0.01" step="0.01" inputmode="decimal" autocomplete="off" autofocus required aria-describedby="amount-help">
+                  <span class="input-group-text bg-primary text-white border-primary">€</span>
+                </div>
+                <div id="amount-help" class="visually-hidden">Εισάγετε το ποσό σε ευρώ</div>
+              </div>
+
+              <!-- VAT Rate -->
+              <div>
+                <label for="vatRate" class="form-label fw-semibold text-primary mb-2">
+                  <svg width="16" height="16" fill="currentColor" class="bi bi-percent me-1" aria-hidden="true"><use href="#icon-percent"/></svg>
+                  Συντελεστής Φ.Π.Α.
+                </label>
+                <div class="input-group">
+                  <input id="vatRate" class="form-control form-control-lg border-primary" type="text" value="24" inputmode="decimal" autocomplete="off" required aria-describedby="vat-rate-help" list="vatRatePresets">
+                  <span class="input-group-text bg-primary text-white border-primary">%</span>
+                </div>
+                <datalist id="vatRatePresets">
+                  <option value="6">Υπερμειωμένος (6%)</option>
+                  <option value="13">Μειωμένος (13%)</option>
+                  <option value="24">Κανονικός (24%)</option>
+                </datalist>
+                <div id="vat-rate-help" class="visually-hidden">Εισάγετε τον συντελεστή Φ.Π.Α. (συνήθως 6, 13 ή 24)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-10 col-lg-5 col-xl-4">
+          <div id="resultCard" class="card shadow h-100 border-secondary border-opacity-50">
+            <div id="resultCardHeader" class="card-header bg-secondary text-white py-3">
+              <h2 class="h5 mb-0">
+                <svg id="resultIconInvalid" width="20" height="20" fill="currentColor" class="bi bi-calculator me-2 align-text-bottom" aria-hidden="true"><use href="#icon-calculator"/></svg>
+                <svg id="resultIconValid" width="20" height="20" fill="currentColor" class="bi bi-check-circle me-2 align-text-bottom d-none" aria-hidden="true"><use href="#icon-check-circle"/></svg>
+                Αποτέλεσμα Υπολογισμού
+              </h2>
+            </div>
+            <div class="card-body p-3 p-lg-4">
+              <!-- VAT Amount -->
+              <div class="mb-3 text-secondary">
+                <div class="fw-semibold d-block mb-2">
+                  <svg width="16" height="16" fill="currentColor" class="bi bi-calculator-fill me-1" aria-hidden="true"><use href="#icon-calculator-fill"/></svg>
+                  Φ.Π.Α.
+                </div>
+                <div class="input-group input-group-lg result-output">
+                  <div id="totalVat" class="form-control fw-bold border-secondary text-reset">—</div>
+                  <span class="input-group-text border-secondary text-reset">€</span>
+                </div>
+              </div>
+
+              <!-- Net Amount (without VAT) -->
+              <div id="netAmountRow" class="pt-2 text-secondary">
+                <div class="fw-semibold d-block mb-2">
+                  <svg width="16" height="16" fill="currentColor" class="bi bi-receipt me-1" aria-hidden="true"><use href="#icon-receipt"/></svg>
+                  Ποσό χωρίς Φ.Π.Α.
+                </div>
+                <div class="input-group input-group-lg result-output">
+                  <div id="netAmount" class="form-control fw-bold border-secondary text-reset">—</div>
+                  <span class="input-group-text border-secondary text-reset">€</span>
+                </div>
+              </div>
+
+              <!-- Total Amount (with VAT) -->
+              <div id="totalAmountRow" class="pt-2 d-none text-secondary">
+                <div class="fw-semibold d-block mb-2">
+                  <svg width="16" height="16" fill="currentColor" class="bi bi-cash-stack me-1" aria-hidden="true"><use href="#icon-cash-stack"/></svg>
+                  Ποσό με Φ.Π.Α.
+                </div>
+                <div class="input-group input-group-lg result-output">
+                  <div id="totalAmount" class="form-control fw-bold border-secondary text-reset">—</div>
+                  <span class="input-group-text border-secondary text-reset">€</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row align-items-center justify-content-center mb-3">
-        <label for="vatRate" class="form-label col-sm-5 col-lg-3 col-xxl-2">Φ.Π.Α. (%)</label>
-        <div class="col-sm-7 col-lg-6 col-xxl-5">
-          <input id="vatRate" class="form-control" type="number" value="24.00" min="0.1" max="99.99" step="0.1" inputmode="decimal" autocomplete="off" required>
+
+      <div class="row justify-content-center mt-4 mt-xl-5">
+        <div class="col-md-10">
+          <div class="d-grid gap-3 d-sm-flex justify-content-sm-center mb-5">
+            <button id="calcBtn" class="btn btn-primary btn-lg px-5 shadow-sm" type="submit" disabled aria-label="Υπολογισμός Φ.Π.Α.">
+              <svg width="20" height="20" fill="currentColor" class="bi bi-calculator me-2 align-text-bottom" aria-hidden="true"><use href="#icon-calculator"/></svg>
+              Υπολογισμός
+            </button>
+            <button id="resetBtn" class="btn btn-outline-secondary btn-lg px-4 shadow-sm" type="reset" aria-label="Επαναφορά φόρμας">
+              <svg width="20" height="20" fill="currentColor" class="bi bi-arrow-counterclockwise me-2 align-text-bottom" aria-hidden="true"><use href="#icon-arrow-counterclockwise"/></svg>
+              Επαναφορά
+            </button>
+          </div>
         </div>
-      </div>
-      <div class="row align-items-center justify-content-center mb-3">
-        <label for="totalVat" class="form-label col-sm-5 col-lg-3 col-xxl-2">Φ.Π.Α. (€)</label>
-        <div class="col-sm-7 col-lg-6 col-xxl-5">
-          <input id="totalVat" class="form-control" type="number" inputmode="decimal" autocomplete="off" readonly disabled>
-        </div>
-      </div>
-      <div class="row align-items-center justify-content-center mb-3">
-        <label for="totalNetCost" class="form-label col-sm-5 col-lg-3 col-xxl-2 text-uppercase">Ποσό χωρίς Φ.Π.Α. (€)</label>
-        <div class="col-sm-7 col-lg-6 col-xxl-5">
-          <input id="totalNetCost" class="form-control" type="number" min="0.01" step="0.01" inputmode="decimal" autocomplete="off" required>
-        </div>
-      </div>
-      <div class="text-center mt-4 mb-5">
-        <input id="resetBtn" class="btn btn-danger me-4" type="reset" value="Επαναφορά">
-        <input id="calcBtn" class="btn btn-primary" type="submit" value="Υπολογισμός" disabled>
       </div>
     </form>
-  </div>
 
-  <footer class="footer text-center bg-light border-top mt-auto py-4">
+    <!-- Information Section -->
+    <section class="mt-4 pt-4 border-top" aria-labelledby="vat-info-heading">
+      <div class="row justify-content-center">
+        <div class="col-md-10 col-xl-8">
+          <div class="accordion" id="vatInfoAccordion">
+            <div class="accordion-item border-0 bg-transparent">
+              <h2 class="accordion-header text-center mb-4" id="vat-info-heading">
+                <button class="accordion-button vat-info-toggle h3 text-primary bg-transparent shadow-none w-auto mx-auto fs-3" type="button" data-bs-toggle="collapse" data-bs-target="#vatInfoCollapse" aria-expanded="true" aria-controls="vatInfoCollapse">
+                  <svg width="24" height="24" fill="currentColor" class="bi bi-info-circle me-2" aria-hidden="true"><use href="#icon-info-circle"/></svg>
+                  Τι είναι ο Φ.Π.Α.;
+                </button>
+              </h2>
+              <div id="vatInfoCollapse" class="accordion-collapse collapse show" data-bs-parent="#vatInfoAccordion">
+                <div class="accordion-body px-0 pt-3 pb-0">
+                  <div class="card shadow-sm mb-4">
+                    <div class="card-body p-3 p-md-4">
+                      <p class="lead mb-3">Ο <strong>Φόρος Προστιθέμενης Αξίας (Φ.Π.Α.)</strong> είναι έμμεσος φόρος που χρεώνεται στην αγορά αγαθών και υπηρεσιών. Στην Ελλάδα ισχύουν τρεις συντελεστές, ανάλογα με την κατηγορία του προϊόντος ή της υπηρεσίας.</p>
+
+                      <h3 class="h5 text-primary mt-4 mb-3">Συντελεστές στην Ελλάδα</h3>
+                      <div class="row g-3">
+                        <div class="col-md-4">
+                          <div class="card bg-primary bg-opacity-10 border-primary h-100">
+                            <div class="card-body text-center">
+                              <div class="display-4 fw-bold text-primary mb-2">24%</div>
+                              <h4 class="h6 fw-semibold mb-2">Κανονικός</h4>
+                              <p class="small mb-0 text-muted">Ισχύει για τα περισσότερα προϊόντα και υπηρεσίες</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="card bg-info bg-opacity-10 border-info h-100">
+                            <div class="card-body text-center">
+                              <div class="display-4 fw-bold text-info mb-2">13%</div>
+                              <h4 class="h6 fw-semibold mb-2">Μειωμένος</h4>
+                              <p class="small mb-0 text-muted">Τρόφιμα, ποτά, ενέργεια, φάρμακα, βιβλία</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="card bg-success bg-opacity-10 border-success h-100">
+                            <div class="card-body text-center">
+                              <div class="display-4 fw-bold text-success mb-2">6%</div>
+                              <h4 class="h6 fw-semibold mb-2">Υπερμειωμένος</h4>
+                              <p class="small mb-0 text-muted">Φάρμακα, βιβλία, εφημερίδες, θεατρικές παραστάσεις</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <h3 class="h5 text-primary mt-4 mb-3">Πώς λειτουργεί;</h3>
+                      <ul class="mb-3">
+                        <li class="mb-2"><strong>Έχω το ποσό με Φ.Π.Α.:</strong> Βάζετε το τελικό ποσό και η εφαρμογή σας δείχνει πόσο είναι το καθαρό και πόσο ο φόρος.</li>
+                        <li class="mb-2"><strong>Έχω το ποσό χωρίς Φ.Π.Α.:</strong> Βάζετε το καθαρό ποσό και η εφαρμογή υπολογίζει τον Φ.Π.Α. και το συνολικό ποσό που θα πληρώσετε.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer text-center mt-auto py-4 bg-white border-top">
     <div class="container">
-      <p class="small my-auto">
-        Created by <a href="https://github.com/XhmikosR" rel="noopener" target="_blank">@XhmikosR</a> &bull; <a href="https://github.com/XhmikosR/greek-vat-calculator" rel="noopener" target="_blank">GitHub Project</a>
+      <p class="text-muted small mb-0">
+        <svg width="14" height="14" fill="currentColor" class="bi bi-code-slash me-1 align-middle" aria-hidden="true"><use href="#icon-code-slash"/></svg>
+        Created by <a href="https://github.com/XhmikosR" class="fw-medium" rel="noopener" target="_blank">@XhmikosR</a>
+
+        <span class="mx-2 text-black-50">&bull;</span>
+
+        <svg width="14" height="14" fill="currentColor" class="bi bi-github me-1 align-middle" aria-hidden="true"><use href="#icon-github"/></svg>
+        <a href="https://github.com/XhmikosR/greek-vat-calculator" class="fw-medium" rel="noopener" target="_blank">
+          GitHub Project
+        </a>
       </p>
     </div>
   </footer>
 
-  <script src="js/main.js" inline="true"></script>
+  <script type="module" src="/js/main.ts"></script>
 
   </body>
 </html>
