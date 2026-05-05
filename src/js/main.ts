@@ -300,3 +300,7 @@ function initialize(): void {
 }
 
 initialize();
+
+if (__PROD__ && 'serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(() => {/* non-fatal */});
+}

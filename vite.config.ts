@@ -1,6 +1,6 @@
 import {defineConfig} from 'vite';
 import {createHtmlPlugin} from 'vite-plugin-html';
-import {inlineAssets} from './vite-plugin-inline.ts';
+import {inlineAssets, injectSwVersion} from './vite-plugin-inline.ts';
 
 const src = 'src';
 const publicDir = '../public';
@@ -12,6 +12,10 @@ export default defineConfig(({mode}) => {
   return {
     root: src,
     publicDir,
+
+    define: {
+      __PROD__: !isDev
+    },
 
     build: {
       outDir,
@@ -77,7 +81,8 @@ export default defineConfig(({mode}) => {
           sortClassName: true
         }
       }),
-      !isDev && inlineAssets()
+      !isDev && inlineAssets(),
+      !isDev && injectSwVersion()
     ].filter(Boolean),
 
     resolve: {
