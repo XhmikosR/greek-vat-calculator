@@ -6,7 +6,7 @@ const removeErrorClass = element => element.classList.remove('is-invalid');
 
 const setBooleanAttribute = (element, attribute) => element.setAttribute(attribute, '');
 
-const removeAttr = (element, attribute) => element.removeAttribute(attribute);
+const removeAttribute = (element, attribute) => element.removeAttribute(attribute);
 
 const totalCost = getElement('#totalCost');
 const vatRate = getElement('#vatRate');
@@ -21,15 +21,15 @@ function calculateVAT() {
     totalCost.value = (Number(totalNetCost.value) + (Number(vatRate.value / 100) * totalNetCost.value)).toFixed(2);
     totalVat.value = (Number(totalCost.value) - Number(totalNetCost.value)).toFixed(2);
 
-    removeAttr(totalVat, 'disabled');
-    removeAttr(totalCost, 'disabled');
+    removeAttribute(totalVat, 'disabled');
+    removeAttribute(totalCost, 'disabled');
     setBooleanAttribute(totalCost, 'readonly');
   } else {
     totalNetCost.value = (Number(totalCost.value) / (1 + Number(vatRate.value / 100))).toFixed(2);
     totalVat.value = (Number(totalCost.value) - Number(totalNetCost.value)).toFixed(2);
 
-    removeAttr(totalVat, 'disabled');
-    removeAttr(totalNetCost, 'disabled');
+    removeAttribute(totalVat, 'disabled');
+    removeAttribute(totalNetCost, 'disabled');
     setBooleanAttribute(totalNetCost, 'readonly');
   }
 
@@ -44,10 +44,10 @@ function resetCalculator() {
   removeErrorClass(totalNetCost);
   removeErrorClass(vatRate);
 
-  removeAttr(totalCost, 'readonly');
-  removeAttr(totalNetCost, 'readonly');
-  removeAttr(totalCost, 'disabled');
-  removeAttr(totalNetCost, 'disabled');
+  removeAttribute(totalCost, 'readonly');
+  removeAttribute(totalNetCost, 'readonly');
+  removeAttribute(totalCost, 'disabled');
+  removeAttribute(totalNetCost, 'disabled');
 
   setBooleanAttribute(calcBtn, 'disabled');
 }
@@ -60,7 +60,7 @@ totalCost.addEventListener('input', () => {
 
     setBooleanAttribute(totalNetCost, 'disabled');
     setBooleanAttribute(totalNetCost, 'readonly');
-    removeAttr(calcBtn, 'disabled');
+    removeAttribute(calcBtn, 'disabled');
   } else {
     addInvalidClass(totalCost);
     setBooleanAttribute(calcBtn, 'disabled');
@@ -75,7 +75,7 @@ totalNetCost.addEventListener('input', () => {
 
     setBooleanAttribute(totalCost, 'disabled');
     setBooleanAttribute(totalCost, 'readonly');
-    removeAttr(calcBtn, 'disabled');
+    removeAttribute(calcBtn, 'disabled');
   } else {
     addInvalidClass(totalNetCost);
     setBooleanAttribute(calcBtn, 'disabled');
@@ -87,7 +87,7 @@ vatRate.addEventListener('input', () => {
 
   if (vatRate.validity.valid) {
     removeErrorClass(vatRate);
-    removeAttr(calcBtn, 'disabled');
+    removeAttribute(calcBtn, 'disabled');
   } else {
     addInvalidClass(vatRate);
     setBooleanAttribute(calcBtn, 'disabled');
