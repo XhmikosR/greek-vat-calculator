@@ -230,7 +230,7 @@ function resetCalculator(): void {
   for (const input of [elements.inputs.amount, elements.inputs.vatRate]) {
     input.removeAttribute('readonly');
     input.removeAttribute('disabled');
-    input.classList.toggle(CSS_CLASSES.INVALID, false);
+    input.classList.remove(CSS_CLASSES.INVALID);
   }
 
   // Reset mode
@@ -282,6 +282,10 @@ function handleVatRateInput(): void {
 function initializeEventListeners(): void {
   elements.form.addEventListener('submit', event => {
     event.preventDefault();
+
+    if (validateInput(elements.inputs.amount) && validateInput(elements.inputs.vatRate)) {
+      calculateVAT();
+    }
   });
 
   elements.inputs.modeWithVat.addEventListener('change', handleModeChange);

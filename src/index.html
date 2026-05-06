@@ -175,9 +175,10 @@
                     Ποσό χωρίς Φ.Π.Α.
                   </span>
                 </label>
-                <div class="input-group input-group-lg result-output">
+                <div class="input-group input-group-lg result-output has-validation">
                   <input id="amount" class="form-control border-primary" type="number" min="0.01" step="0.01" inputmode="decimal" autocomplete="off" autofocus required aria-describedby="amount-help">
                   <span class="input-group-text bg-primary text-white border-primary">€</span>
+                  <div class="invalid-feedback">Εισάγετε έγκυρο ποσό.</div>
                 </div>
                 <div id="amount-help" class="visually-hidden">Εισάγετε το ποσό σε ευρώ</div>
               </div>
@@ -188,9 +189,10 @@
                   <svg width="16" height="16" fill="currentColor" class="bi bi-percent me-1" aria-hidden="true"><use href="#icon-percent"/></svg>
                   Συντελεστής Φ.Π.Α.
                 </label>
-                <div class="input-group">
+                <div class="input-group has-validation">
                   <input id="vatRate" class="form-control form-control-lg border-primary" type="text" value="24" inputmode="decimal" autocomplete="off" required aria-describedby="vat-rate-help" list="vatRatePresets">
                   <span class="input-group-text bg-primary text-white border-primary">%</span>
+                  <div class="invalid-feedback">Εισάγετε συντελεστή μεταξύ 0.1 και 99.9.</div>
                 </div>
                 <datalist id="vatRatePresets">
                   <option value="6">Υπερμειωμένος (6%)</option>
