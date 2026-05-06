@@ -69,6 +69,7 @@ module.exports = function(env, argv) {
       processConditionalComments: true,
       removeAttributeQuotes: true,
       removeComments: true,
+      // Must be false: html-inline-css-webpack-plugin requires </head> to inject CSS
       removeOptionalTags: false,
       removeRedundantAttributes: true,
       removeScriptTypeAttributes: true,
