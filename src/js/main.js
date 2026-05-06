@@ -1,3 +1,5 @@
+import '../css/main.scss';
+
 const getElement = selector => document.querySelector(selector);
 
 const addInvalidClass = element => element.classList.add('is-invalid');

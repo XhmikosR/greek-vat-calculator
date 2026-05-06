@@ -14,8 +14,8 @@
     "url": "https://github.com/XhmikosR/greek-vat-calculator/issues"
   },
   "scripts": {
-    "start": "webpack serve --mode=development",
-    "build": "webpack --mode=production",
+    "start": "vite",
+    "build": "vite build",
     "fix": "xo --fix",
     "lint:js": "xo",
     "lint:html": "vnu --filterpattern 'The .inputmode. attribute.*' _site/index.html",
@@ -27,22 +27,15 @@
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^8.0.0",
     "autoprefixer": "^10.5.0",
-    "copy-webpack-plugin": "^14.0.0",
-    "css-loader": "^7.1.4",
     "globals": "^17.6.0",
-    "html-inline-css-webpack-plugin": "^1.11.2",
     "html-minifier-terser": "^7.2.0",
-    "html-webpack-plugin": "^5.6.7",
-    "mini-css-extract-plugin": "^2.10.2",
     "postcss": "^8.5.12",
     "postcss-combine-duplicated-selectors": "^10.0.3",
-    "postcss-loader": "^8.2.1",
     "sass": "1.77.8",
-    "sass-loader": "^16.0.7",
+    "vite": "^8.0.10",
+    "vite-plugin-singlefile": "^2.3.3",
+    "vite-plugin-static-copy": "^4.1.0",
     "vnu-jar": "^26.5.6",
-    "webpack": "^5.106.2",
-    "webpack-cli": "^7.0.2",
-    "webpack-dev-server": "^5.2.3",
     "xo": "^2.0.2"
   },
   "type": "module"
