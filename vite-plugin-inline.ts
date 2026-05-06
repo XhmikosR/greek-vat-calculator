@@ -1,10 +1,43 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import type {Plugin} from 'vite';
+import {minify, type Options as HtmlMinifierOptions} from 'html-minifier-terser';
+import type {IndexHtmlTransformResult, Plugin} from 'vite';
 
 type AssetInfo = {
   fileName: string;
   content: string;
+};
+
+const htmLMinifierOptions: HtmlMinifierOptions = {
+  collapseBooleanAttributes: true,
+  collapseWhitespace: true,
+  conservativeCollapse: false,
+  decodeEntities: true,
+  minifyCSS: {
+    level: {
+      1: {
+        specialComments: 0
+      },
+      2: {
+        all: false,
+        mergeMedia: true,
+        removeDuplicateMediaBlocks: true,
+        removeEmpty: true
+      }
+    }
+  },
+  minifyJS: true,
+  minifyURLs: false,
+  processConditionalComments: true,
+  removeAttributeQuotes: true,
+  removeComments: true,
+  removeOptionalTags: true,
+  removeRedundantAttributes: true,
+  removeScriptTypeAttributes: true,
+  removeStyleLinkTypeAttributes: true,
+  removeTagWhitespace: false,
+  sortAttributes: true,
+  sortClassName: true
 };
 
 function isEnoent(error: unknown): boolean {
@@ -132,6 +165,19 @@ export function injectSwVersion(): Plugin {
       } catch(error) {
         if (!isEnoent(error)) throw error;
       }
+    }
+  };
+}
+
+/**
+ * Vite plugin to minify HTML output using html-minifier-terser
+ */
+export function minifyHtml(): Plugin {
+  return {
+    name: 'vite-plugin-minify-html',
+    apply: 'build',
+    async transformIndexHtml(html): Promise<IndexHtmlTransformResult> {
+      return minify(html, htmLMinifierOptions);
     }
   };
 }

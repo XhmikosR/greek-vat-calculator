@@ -1,7 +1,11 @@
 import process from 'node:process';
 import {defineConfig} from 'vite';
-import {createHtmlPlugin} from 'vite-plugin-html';
-import {inlineAssets, injectSwVersion, generateMeta} from './vite-plugin-inline.ts';
+import {
+  inlineAssets,
+  injectSwVersion,
+  generateMeta,
+  minifyHtml
+} from './vite-plugin-inline.ts';
 
 const src = 'src';
 const publicDir = '../public';
@@ -49,39 +53,7 @@ export default defineConfig(({mode}) => {
     },
 
     plugins: [
-      createHtmlPlugin({
-        minify: !isDev && {
-          collapseBooleanAttributes: true,
-          collapseWhitespace: true,
-          conservativeCollapse: false,
-          decodeEntities: true,
-          minifyCSS: {
-            level: {
-              1: {
-                specialComments: 0
-              },
-              2: {
-                all: false,
-                mergeMedia: true,
-                removeDuplicateMediaBlocks: true,
-                removeEmpty: true
-              }
-            }
-          },
-          minifyJS: true,
-          minifyURLs: false,
-          processConditionalComments: true,
-          removeAttributeQuotes: true,
-          removeComments: true,
-          removeOptionalTags: true,
-          removeRedundantAttributes: true,
-          removeScriptTypeAttributes: true,
-          removeStyleLinkTypeAttributes: true,
-          removeTagWhitespace: false,
-          sortAttributes: true,
-          sortClassName: true
-        }
-      }),
+      !isDev && minifyHtml(),
       !isDev && inlineAssets(),
       !isDev && injectSwVersion(),
       !isDev && generateMeta({
