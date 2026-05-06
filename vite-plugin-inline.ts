@@ -83,6 +83,36 @@ export function inlineAssets(): Plugin {
 }
 
 /**
+ * Vite plugin to render %%TOKEN%% placeholders in sitemap.xml and robots.txt
+ */
+export function generateMeta(tokens: Record<string, string>): Plugin {
+  return {
+    name: 'vite-plugin-generate-meta',
+    apply: 'build',
+    writeBundle(options) {
+      const outDir = options.dir ?? '../_site';
+
+      for (const file of ['sitemap.xml', 'robots.txt']) {
+        const src = path.resolve('public', file);
+        let rendered: string;
+        try {
+          rendered = fs.readFileSync(src, 'utf8');
+        } catch(error) {
+          if (!isEnoent(error)) throw error;
+          continue;
+        }
+
+        for (const [key, value] of Object.entries(tokens)) {
+          rendered = rendered.replaceAll(`%%${key}%%`, value);
+        }
+
+        fs.writeFileSync(path.resolve(outDir, file), rendered);
+      }
+    }
+  };
+}
+
+/**
  * Vite plugin to inject a version string into the service worker file during build
  */
 export function injectSwVersion(): Plugin {

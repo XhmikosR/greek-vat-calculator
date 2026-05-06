@@ -1,6 +1,7 @@
+import process from 'node:process';
 import {defineConfig} from 'vite';
 import {createHtmlPlugin} from 'vite-plugin-html';
-import {inlineAssets, injectSwVersion} from './vite-plugin-inline.ts';
+import {inlineAssets, injectSwVersion, generateMeta} from './vite-plugin-inline.ts';
 
 const src = 'src';
 const publicDir = '../public';
@@ -82,7 +83,11 @@ export default defineConfig(({mode}) => {
         }
       }),
       !isDev && inlineAssets(),
-      !isDev && injectSwVersion()
+      !isDev && injectSwVersion(),
+      !isDev && generateMeta({
+        LASTMOD: new Date().toISOString().slice(0, 10),
+        DISALLOW: process.env.NETLIFY ? ' /' : ''
+      })
     ].filter(Boolean),
 
     resolve: {
