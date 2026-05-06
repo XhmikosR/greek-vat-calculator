@@ -34,7 +34,6 @@
     "sass": "1.77.8",
     "vite": "^8.0.10",
     "vite-plugin-singlefile": "^2.3.3",
-    "vite-plugin-static-copy": "^4.1.0",
     "vnu-jar": "^26.5.6",
     "xo": "^2.0.2"
   },

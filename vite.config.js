@@ -1,7 +1,6 @@
 import path from 'node:path';
 import { defineConfig } from 'vite';
 import { viteSingleFile } from 'vite-plugin-singlefile';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { minify } from 'html-minifier-terser';
 import autoprefixer from 'autoprefixer';
 import combineDuplicatedSelectors from 'postcss-combine-duplicated-selectors';
@@ -100,15 +99,6 @@ export default defineConfig(({ command }) => {
     },
     plugins: [
       viteSingleFile(),
-      viteStaticCopy({
-        targets: [
-          { src: 'img', dest: '' },
-          { src: 'manifest.json', dest: '' },
-          { src: 'robots.txt', dest: '' },
-          { src: '404.html', dest: '' },
-          { src: 'googleb7d9bd0c5429cca2.html', dest: '' }
-        ]
-      }),
       ...(isProd ?
         [htmlMinifierPlugin()] :
         [])
