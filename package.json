@@ -16,6 +16,7 @@
   "scripts": {
     "start": "webpack serve --mode=development",
     "build": "webpack --mode=production",
+    "fix": "xo --fix",
     "lint:js": "xo",
     "lint:html": "vnu --filterpattern 'The .inputmode. attribute.*' _site/index.html",
     "test": "npm run build && npm run lint:js && npm run lint:html"
