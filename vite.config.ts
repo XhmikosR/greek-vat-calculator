@@ -1,7 +1,7 @@
 import process from 'node:process';
 import {defineConfig} from 'vite';
+import {viteSingleFile} from 'vite-plugin-singlefile';
 import {
-  inlineAssets,
   injectSwVersion,
   generateMeta,
   minifyHtml
@@ -25,7 +25,6 @@ export default defineConfig(({mode}) => {
     build: {
       outDir,
       emptyOutDir: true,
-      cssCodeSplit: false,
       rollupOptions: {
         input: '/index.html'
       },
@@ -53,13 +52,13 @@ export default defineConfig(({mode}) => {
     },
 
     plugins: [
-      !isDev && minifyHtml(),
-      !isDev && inlineAssets(),
+      !isDev && viteSingleFile(),
       !isDev && injectSwVersion(),
       !isDev && generateMeta({
         LASTMOD: new Date().toISOString().slice(0, 10),
         DISALLOW: process.env.NETLIFY ? ' /' : ''
-      })
+      }),
+      !isDev && minifyHtml()
     ].filter(Boolean),
 
     resolve: {
