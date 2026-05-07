@@ -21,7 +21,7 @@ const htmLMinifierOptions: HtmlMinifierOptions = {
       }
     }
   },
-  minifyJS: true,
+  minifyJS: false,
   minifyURLs: false,
   processConditionalComments: true,
   removeAttributeQuotes: true,
