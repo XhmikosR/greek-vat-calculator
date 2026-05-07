@@ -295,6 +295,9 @@ function initializeEventListeners(): void {
 
   elements.inputs.modeWithVat.addEventListener('change', handleModeChange);
   elements.inputs.modeWithoutVat.addEventListener('change', handleModeChange);
+  elements.inputs.amount.addEventListener('wheel', () => {
+    elements.inputs.amount.blur();
+  }, {passive: true});
   elements.inputs.amount.addEventListener('input', handleAmountInput);
   elements.inputs.vatRate.addEventListener('input', handleVatRateInput);
   elements.buttons.calc.addEventListener('click', calculateVAT);
