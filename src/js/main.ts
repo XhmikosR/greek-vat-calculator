@@ -82,6 +82,10 @@ function formatNumber(value: number): string {
   return displayFormatter.format(value);
 }
 
+function parseLocaleNumber(value: string): number {
+  return Number(value.replace(',', '.'));
+}
+
 function resetResultValues(): void {
   elements.outputs.netAmount.textContent = DEFAULTS.EMPTY_VALUE;
   elements.outputs.totalVat.textContent = DEFAULTS.EMPTY_VALUE;
@@ -168,10 +172,11 @@ function validateInput(input: HTMLInputElement): boolean {
   let isValid = false;
 
   if (input === elements.inputs.vatRate) {
-    const n = Number(input.value);
+    const n = parseLocaleNumber(input.value);
     isValid = input.value !== '' && Number.isFinite(n) && n >= 0.1 && n <= 99.9;
   } else {
-    isValid = input.validity.valid && input.value !== '';
+    const n = parseLocaleNumber(input.value);
+    isValid = input.value !== '' && (input.validity.valid || (Number.isFinite(n) && n >= 0.01));
   }
 
   input.classList.toggle(CSS_CLASSES.INVALID, !isValid);
@@ -194,8 +199,8 @@ function updateCalcButtonState(): void {
 
 // Main calculation logic
 function calculateVAT(): void {
-  const vatRateValue = Number(elements.inputs.vatRate.value);
-  const inputValue = Number(elements.inputs.amount.value);
+  const vatRateValue = parseLocaleNumber(elements.inputs.vatRate.value);
+  const inputValue = parseLocaleNumber(elements.inputs.amount.value);
 
   const vatMultiplier = 1 + (vatRateValue / 100);
 
