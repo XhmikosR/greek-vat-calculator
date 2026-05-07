@@ -172,11 +172,11 @@ function validateInput(input: HTMLInputElement): boolean {
   let isValid = false;
 
   if (input === elements.inputs.vatRate) {
-    const n = parseLocaleNumber(input.value);
-    isValid = input.value !== '' && Number.isFinite(n) && n >= 0.1 && n <= 99.9;
+    const rate = parseLocaleNumber(input.value);
+    isValid = input.value !== '' && Number.isFinite(rate) && rate >= 0.1 && rate <= 99.9;
   } else {
-    const n = parseLocaleNumber(input.value);
-    isValid = input.value !== '' && (input.validity.valid || (Number.isFinite(n) && n >= 0.01));
+    const amount = parseLocaleNumber(input.value);
+    isValid = input.value !== '' && (input.validity.valid || (Number.isFinite(amount) && amount >= 0.01));
   }
 
   input.classList.toggle(CSS_CLASSES.INVALID, !isValid);
@@ -189,12 +189,7 @@ function updateCalcButtonState(): void {
   const canCalculate = amountValid && vatValid;
 
   setElementState(elements.buttons.calc, !canCalculate);
-
-  if (amountValid) {
-    updateResultCardState(true);
-  } else {
-    updateResultCardState(false);
-  }
+  updateResultCardState(amountValid);
 }
 
 // Main calculation logic
@@ -261,7 +256,6 @@ function handleModeChange(): void {
   updateRowVisibility();
 
   elements.inputs.amount.value = '';
-  // elements.inputs.amount.focus();
 
   resetResultValues();
   updateResultCardState(false);
