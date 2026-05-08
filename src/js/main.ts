@@ -153,11 +153,11 @@ function updateResultCardState(isValid: boolean): void {
     toggleClasses(section, textClasses);
 
     const valueContainer = section.querySelector<HTMLElement>('.result-output');
-    if (valueContainer) {
-      for (const child of valueContainer.children) {
-        if (child instanceof HTMLElement) {
-          toggleClasses(child, cardClasses);
-        }
+    if (!valueContainer) continue;
+
+    for (const child of valueContainer.children) {
+      if (child instanceof HTMLElement) {
+        toggleClasses(child, cardClasses);
       }
     }
   }
