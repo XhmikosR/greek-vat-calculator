@@ -220,18 +220,13 @@ function calculateVAT(): void {
 
 function resetCalculator(): void {
   elements.form.reset();
-  elements.form.classList.remove('was-validated');
-
   // Reset input states
   for (const input of [elements.inputs.amount, elements.inputs.vatRate]) {
-    input.removeAttribute('readonly');
-    input.removeAttribute('disabled');
     input.classList.remove(CSS_CLASSES.INVALID);
   }
 
   // Reset mode
   calculationMode = DEFAULTS.CALCULATION_MODE;
-  elements.inputs.modeWithVat.checked = true;
 
   // Update UI
   updateAmountLabel();
