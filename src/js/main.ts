@@ -273,6 +273,10 @@ function handleSubmit(event: SubmitEvent): void {
 
   if (validateInput(elements.inputs.amount) && validateInput(elements.inputs.vatRate)) {
     calculateVAT();
+
+    if (globalThis.matchMedia('(pointer: coarse)').matches && document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
   }
 }
 
