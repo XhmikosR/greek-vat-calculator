@@ -70,12 +70,8 @@ function toggleClasses(element: HTMLElement, classMap: Record<string, boolean>):
   }
 }
 
-function setElementState(element: HTMLElement, disabled: boolean): void {
-  if (disabled) {
-    element.setAttribute('disabled', '');
-  } else {
-    element.removeAttribute('disabled');
-  }
+function setButtonState(buttonElement: HTMLButtonElement, disabled: boolean): void {
+  buttonElement.disabled = disabled;
 }
 
 function formatNumber(value: number): string {
@@ -113,7 +109,7 @@ function updateResetButtonState(): void {
     elements.inputs.vatRate.value !== DEFAULTS.VAT_RATE ||
     calculationMode !== DEFAULTS.CALCULATION_MODE;
 
-  setElementState(elements.buttons.reset, !hasInput);
+  setButtonState(elements.buttons.reset, !hasInput);
 }
 
 // Result card styling
@@ -188,7 +184,7 @@ function updateCalcButtonState(): void {
   const vatValid = validateInput(elements.inputs.vatRate);
   const canCalculate = amountValid && vatValid;
 
-  setElementState(elements.buttons.calc, !canCalculate);
+  setButtonState(elements.buttons.calc, !canCalculate);
   updateResultCardState(amountValid);
 }
 
@@ -218,7 +214,7 @@ function calculateVAT(): void {
   elements.outputs.totalAmount.textContent = formatNumber(totalCostValue);
 
   updateRowVisibility();
-  setElementState(elements.buttons.calc, true);
+  setButtonState(elements.buttons.calc, true);
   updateResultCardState(true);
 }
 
@@ -243,8 +239,8 @@ function resetCalculator(): void {
   updateRowVisibility();
 
   // Reset button states
-  setElementState(elements.buttons.calc, true);
-  setElementState(elements.buttons.reset, true);
+  setButtonState(elements.buttons.calc, true);
+  setButtonState(elements.buttons.reset, true);
 
   updateResultCardState(false);
 }
@@ -260,7 +256,7 @@ function handleModeChange(): void {
   resetResultValues();
   updateResultCardState(false);
 
-  setElementState(elements.buttons.calc, true);
+  setButtonState(elements.buttons.calc, true);
   updateResetButtonState();
 }
 
@@ -273,7 +269,7 @@ function handleVatRateInput(): void {
   const isValid = validateInput(elements.inputs.vatRate);
   const canCalculate = isValid && elements.inputs.amount.value !== '';
 
-  setElementState(elements.buttons.calc, !canCalculate);
+  setButtonState(elements.buttons.calc, !canCalculate);
   updateResetButtonState();
 }
 
