@@ -294,7 +294,6 @@ function initializeEventListeners(): void {
   }, {passive: true});
   elements.inputs.amount.addEventListener('input', handleAmountInput);
   elements.inputs.vatRate.addEventListener('input', handleVatRateInput);
-  elements.buttons.calc.addEventListener('click', calculateVAT);
   elements.buttons.reset.addEventListener('click', resetCalculator);
 }
 
