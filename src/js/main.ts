@@ -17,7 +17,7 @@ const elements = {
   rows: {
     netAmountRow: document.querySelector<HTMLElement>('#netAmountRow')!,
     totalAmountRow: document.querySelector<HTMLElement>('#totalAmountRow')!,
-    vatAmountSection: document.querySelector<HTMLElement>('#totalVat')!.closest<HTMLElement>('.mb-3')!
+    vatAmountSection: document.querySelector<HTMLElement>('#vatAmountSection')!
   },
   buttons: {
     calc: document.querySelector<HTMLButtonElement>('#calcBtn')!,
