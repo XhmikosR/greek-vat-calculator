@@ -217,36 +217,36 @@
             <div class="card-body p-3 p-lg-4">
               <!-- VAT Amount -->
               <div id="vatAmountSection" class="mb-3 text-secondary">
-                <div class="fw-semibold d-block mb-2">
+                <div id="label-totalVat" class="fw-semibold d-block mb-2">
                   <svg width="16" height="16" fill="currentColor" class="bi bi-calculator-fill me-1" aria-hidden="true"><use href="#icon-calculator-fill"/></svg>
                   Φ.Π.Α.
                 </div>
                 <div class="input-group input-group-lg result-output">
-                  <output id="totalVat" for="amount vatRate" class="form-control fw-bold border-secondary text-reset">—</output>
+                  <output id="totalVat" for="amount vatRate" aria-labelledby="label-totalVat" class="form-control fw-bold border-secondary text-reset">—</output>
                   <span class="input-group-text border-secondary text-reset">€</span>
                 </div>
               </div>
 
               <!-- Net Amount (without VAT) -->
               <div id="netAmountRow" class="pt-2 text-secondary">
-                <div class="fw-semibold d-block mb-2">
+                <div id="label-netAmount" class="fw-semibold d-block mb-2">
                   <svg width="16" height="16" fill="currentColor" class="bi bi-receipt me-1" aria-hidden="true"><use href="#icon-receipt"/></svg>
                   Ποσό χωρίς Φ.Π.Α.
                 </div>
                 <div class="input-group input-group-lg result-output">
-                  <output id="netAmount" for="amount vatRate" class="form-control fw-bold border-secondary text-reset">—</output>
+                  <output id="netAmount" for="amount vatRate" aria-labelledby="label-netAmount" class="form-control fw-bold border-secondary text-reset">—</output>
                   <span class="input-group-text border-secondary text-reset">€</span>
                 </div>
               </div>
 
               <!-- Total Amount (with VAT) -->
               <div id="totalAmountRow" class="pt-2 d-none text-secondary">
-                <div class="fw-semibold d-block mb-2">
+                <div id="label-totalAmount" class="fw-semibold d-block mb-2">
                   <svg width="16" height="16" fill="currentColor" class="bi bi-cash-stack me-1" aria-hidden="true"><use href="#icon-cash-stack"/></svg>
                   Ποσό με Φ.Π.Α.
                 </div>
                 <div class="input-group input-group-lg result-output">
-                  <output id="totalAmount" for="amount vatRate" class="form-control fw-bold border-secondary text-reset">—</output>
+                  <output id="totalAmount" for="amount vatRate" aria-labelledby="label-totalAmount" class="form-control fw-bold border-secondary text-reset">—</output>
                   <span class="input-group-text border-secondary text-reset">€</span>
                 </div>
               </div>
