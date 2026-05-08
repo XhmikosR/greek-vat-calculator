@@ -10,9 +10,9 @@ const elements = {
     modeWithoutVat: document.querySelector<HTMLInputElement>('#modeWithoutVat')!
   },
   outputs: {
-    totalVat: document.querySelector<HTMLElement>('#totalVat')!,
-    netAmount: document.querySelector<HTMLElement>('#netAmount')!,
-    totalAmount: document.querySelector<HTMLElement>('#totalAmount')!
+    totalVat: document.querySelector<HTMLOutputElement>('#totalVat')!,
+    netAmount: document.querySelector<HTMLOutputElement>('#netAmount')!,
+    totalAmount: document.querySelector<HTMLOutputElement>('#totalAmount')!
   },
   rows: {
     netAmountRow: document.querySelector<HTMLElement>('#netAmountRow')!,
