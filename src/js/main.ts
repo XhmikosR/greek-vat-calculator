@@ -268,15 +268,17 @@ function handleVatRateInput(): void {
   updateResetButtonState();
 }
 
+function handleSubmit(event: SubmitEvent): void {
+  event.preventDefault();
+
+  if (validateInput(elements.inputs.amount) && validateInput(elements.inputs.vatRate)) {
+    calculateVAT();
+  }
+}
+
 // Event listeners
 function initializeEventListeners(): void {
-  elements.form.addEventListener('submit', event => {
-    event.preventDefault();
-
-    if (validateInput(elements.inputs.amount) && validateInput(elements.inputs.vatRate)) {
-      calculateVAT();
-    }
-  });
+  elements.form.addEventListener('submit', handleSubmit);
 
   elements.inputs.modeWithVat.addEventListener('change', handleModeChange);
   elements.inputs.modeWithoutVat.addEventListener('change', handleModeChange);
