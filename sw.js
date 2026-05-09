@@ -2,7 +2,7 @@
 const SW_ENABLED = true;
 
 // The version token in CACHE_NAME is replaced with a build timestamp by the injectSwVersion Vite plugin.
-const CACHE_NAME = 'greek-vat-calculator-v1778308477145';
+const CACHE_NAME = 'greek-vat-calculator-v1778329504985';
 
 const PRECACHE_URLS = [
   './',
