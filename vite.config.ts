@@ -1,7 +1,7 @@
 import process from 'node:process';
 import {defineConfig} from 'vite';
-import {viteSingleFile} from 'vite-plugin-singlefile';
 import {
+  inlineAssets,
   injectSwVersion,
   generateMeta,
   minifyHtml,
@@ -34,7 +34,7 @@ export default defineConfig(({mode}) => {
       minify: 'terser', // terser is slower than oxc but produces smaller output
       terserOptions,
       cssCodeSplit: false, // single-file output: keep all CSS in one bundle
-      cssMinify: 'lightningcss',
+      cssMinify: false,
       reportCompressedSize: true
     },
 
@@ -50,12 +50,12 @@ export default defineConfig(({mode}) => {
     },
 
     plugins: [
-      !isDev && viteSingleFile(),
       !isDev && injectSwVersion(),
       !isDev && generateMeta({
         LASTMOD: new Date().toISOString().slice(0, 10),
         DISALLOW: process.env.NETLIFY ? ' /' : ''
       }),
+      !isDev && inlineAssets(),
       !isDev && minifyHtml()
     ].filter(Boolean),
 

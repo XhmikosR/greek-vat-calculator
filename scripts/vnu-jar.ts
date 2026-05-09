@@ -26,8 +26,7 @@ execFile('java', ['-version'], (error, _stdout, stderr) => {
   // Also note that the ignores are string regular expressions.
   const ignores = [
     'The “inputmode” attribute is not supported in all browsers.*',
-    'Attribute “autocomplete” is only allowed when the input type is.*',
-    'Attribute “crossorigin” not allowed on element “style” at this point.*'
+    'Attribute “autocomplete” is only allowed when the input type is.*'
   ].join('|');
 
   // Get all HTML files except those starting with 'google'
