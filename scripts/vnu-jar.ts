@@ -34,8 +34,7 @@ execFile('java', ['-version'], (error, _stdout, stderr) => {
   // vnu-jar accepts multiple ignores joined with a `|`.
   // Also note that the ignores are string regular expressions.
   const ignores = [
-    'Attribute “autocomplete” is only allowed when the input type is.*',
-    'Attribute “crossorigin” not allowed on element “style” at this point.*'
+    'Attribute “autocomplete” is only allowed when the input type is.*'
   ].join('|');
 
   const args = [
