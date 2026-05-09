@@ -1,7 +1,17 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {minify, type Options as HtmlMinifierOptions} from 'html-minifier-terser';
+import {minify as terserMinify, type MinifyOptions} from 'terser';
 import type {Plugin} from 'vite';
+
+export const terserOptions: MinifyOptions = {
+  compress: {
+    passes: 2
+  },
+  format: {
+    comments: false
+  }
+};
 
 const htmLMinifierOptions: HtmlMinifierOptions = {
   collapseBooleanAttributes: true,
@@ -77,15 +87,18 @@ export function injectSwVersion(): Plugin {
     name: 'vite-plugin-inject-sw-version',
     enforce: 'post',
     apply: 'build',
-    writeBundle(options) {
+    async writeBundle(options) {
       const outDir = options.dir ?? '../_site';
       const swPath = path.resolve(outDir, 'sw.js');
 
       try {
         const version = Date.now().toString();
         const content = fs.readFileSync(swPath, 'utf8');
+        const replaced = content.replaceAll('__SW_VERSION__', version);
 
-        fs.writeFileSync(swPath, content.replaceAll('__SW_VERSION__', version));
+        const result = await terserMinify(replaced, terserOptions);
+
+        fs.writeFileSync(swPath, result.code ?? replaced);
       } catch(error) {
         if (!isEnoent(error)) throw error;
       }

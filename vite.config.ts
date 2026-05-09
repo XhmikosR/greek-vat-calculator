@@ -4,7 +4,8 @@ import {viteSingleFile} from 'vite-plugin-singlefile';
 import {
   injectSwVersion,
   generateMeta,
-  minifyHtml
+  minifyHtml,
+  terserOptions
 } from './vite-plugin-inline.ts';
 
 const src = 'src';
@@ -29,14 +30,7 @@ export default defineConfig(({mode}) => {
         input: '/index.html'
       },
       minify: 'terser',
-      terserOptions: {
-        compress: {
-          passes: 2
-        },
-        format: {
-          comments: false
-        }
-      },
+      terserOptions,
       cssMinify: true
     },
 
