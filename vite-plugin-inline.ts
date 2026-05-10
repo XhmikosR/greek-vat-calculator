@@ -31,7 +31,7 @@ const htmLMinifierOptions: HtmlMinifierOptions = {
       }
     }
   },
-  minifyJS: false,
+  minifyJS: false, // JavaScript is already minified by vite
   minifyURLs: false,
   processConditionalComments: true,
   removeAttributeQuotes: true,
