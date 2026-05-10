@@ -29,9 +29,13 @@ export default defineConfig(({mode}) => {
       rollupOptions: {
         input: '/index.html'
       },
-      minify: 'terser',
+      // target: 'es2017', // floor of .browserslistrc targets
+      modulePreload: false, // single-file output has no chunks to preload
+      minify: 'terser', // terser is slower than oxc but produces smaller output
       terserOptions,
-      cssMinify: true
+      cssCodeSplit: false, // single-file output: keep all CSS in one bundle
+      cssMinify: 'lightningcss',
+      reportCompressedSize: true
     },
 
     css: {
