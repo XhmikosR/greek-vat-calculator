@@ -6,7 +6,7 @@ A simple online Greek VAT calculator.
 
 ## Development
 
-Built with [Vite](https://vite.dev/) for fast development and optimized production builds.
+Built with [Vite](https://vite.dev/).
 
 ### Prerequisites
 
