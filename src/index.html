@@ -190,15 +190,18 @@
                   Συντελεστής Φ.Π.Α.
                 </label>
                 <div class="input-group has-validation">
-                  <input id="vatRate" class="form-control form-control-lg border-primary" type="text" value="24" inputmode="decimal" autocomplete="off" required aria-describedby="vat-rate-help" list="vatRatePresets">
+                  <input id="vatRate" class="form-control form-control-lg border-primary" type="text" value="24" inputmode="decimal" autocomplete="off" required aria-describedby="vat-rate-help">
+                  <button id="vatRateToggle" class="btn btn-outline-primary border-primary dropdown-toggle dropdown-toggle-split" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                    <span class="visually-hidden">Επιλογή προεπιλεγμένου συντελεστή Φ.Π.Α.</span>
+                  </button>
+                  <ul id="vatRateMenu" class="dropdown-menu dropdown-menu-end">
+                    <li><button class="dropdown-item" type="button" data-vat-preset="24">Κανονικός (24%)</button></li>
+                    <li><button class="dropdown-item" type="button" data-vat-preset="13">Μειωμένος (13%)</button></li>
+                    <li><button class="dropdown-item" type="button" data-vat-preset="6">Υπερμειωμένος (6%)</button></li>
+                  </ul>
                   <span class="input-group-text bg-primary text-white border-primary">%</span>
                   <div class="invalid-feedback">Εισάγετε συντελεστή μεταξύ 0.1 και 99.9.</div>
                 </div>
-                <datalist id="vatRatePresets">
-                  <option value="6">Υπερμειωμένος (6%)</option>
-                  <option value="13">Μειωμένος (13%)</option>
-                  <option value="24">Κανονικός (24%)</option>
-                </datalist>
                 <div id="vat-rate-help" class="visually-hidden">Εισάγετε τον συντελεστή Φ.Π.Α. (συνήθως 6, 13 ή 24)</div>
               </div>
             </div>

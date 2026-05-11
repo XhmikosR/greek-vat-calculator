@@ -6,6 +6,7 @@ const CACHE_NAME = 'greek-vat-calculator-v__SW_VERSION__';
 
 const PRECACHE_URLS = [
   './',
+  '__JS_ASSETS__',
   './manifest.json',
   './404.html',
   './img/favicons/favicon-96x96.png',
