@@ -92,9 +92,16 @@ export function injectSwVersion(): Plugin {
       const swPath = path.resolve(outDir, 'sw.js');
 
       try {
+        const jsAssets = fs.readdirSync(outDir)
+          .filter(f => f.endsWith('.js') && f !== 'sw.js')
+          .map(f => `'./${f}'`)
+          .join(', ');
+
         const version = Date.now().toString();
         const content = fs.readFileSync(swPath, 'utf8');
-        const replaced = content.replaceAll('__SW_VERSION__', version);
+        const replaced = content
+          .replaceAll('__SW_VERSION__', version)
+          .replace('\'__JS_ASSETS__\'', jsAssets);
 
         const result = await terserMinify(replaced, terserOptions);
 

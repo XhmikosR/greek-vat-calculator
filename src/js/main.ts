@@ -1,5 +1,6 @@
 // eslint-disable-next-line import-x/no-unassigned-import
 import 'bootstrap/js/dist/collapse';
+import Dropdown from 'bootstrap/js/dist/dropdown';
 
 // DOM Elements
 const elements = {
@@ -21,8 +22,10 @@ const elements = {
   },
   buttons: {
     calc: document.querySelector<HTMLButtonElement>('#calcBtn')!,
-    reset: document.querySelector<HTMLButtonElement>('#resetBtn')!
+    reset: document.querySelector<HTMLButtonElement>('#resetBtn')!,
+    vatRateToggle: document.querySelector<HTMLButtonElement>('#vatRateToggle')!
   },
+  vatRateMenu: document.querySelector<HTMLElement>('#vatRateMenu')!,
   form: document.querySelector<HTMLFormElement>('#calcForm')!,
   resultCard: document.querySelector<HTMLElement>('#resultCard')!,
   resultCardHeader: document.querySelector<HTMLElement>('#resultCardHeader')!,
@@ -292,6 +295,15 @@ function initializeEventListeners(): void {
   elements.inputs.amount.addEventListener('input', handleAmountInput);
   elements.inputs.vatRate.addEventListener('input', handleVatRateInput);
   elements.buttons.reset.addEventListener('click', resetCalculator);
+
+  elements.vatRateMenu.addEventListener('click', event => {
+    if (!(event.target instanceof HTMLElement)) return;
+    const item = event.target.closest<HTMLButtonElement>('[data-vat-preset]');
+    if (!item) return;
+    elements.inputs.vatRate.value = item.dataset.vatPreset!;
+    elements.inputs.vatRate.dispatchEvent(new Event('input'));
+    Dropdown.getInstance(elements.buttons.vatRateToggle)?.hide();
+  });
 }
 
 // Initialize application

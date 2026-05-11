@@ -50,7 +50,7 @@ export default defineConfig(({mode}) => {
     },
 
     plugins: [
-      !isDev && viteSingleFile(),
+      !isDev && viteSingleFile({inlinePattern: ['**/*.css']}),
       !isDev && injectSwVersion(),
       !isDev && generateMeta({
         LASTMOD: new Date().toISOString().slice(0, 10),

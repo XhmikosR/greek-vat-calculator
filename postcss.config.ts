@@ -14,7 +14,8 @@ export default {
         content: [
           './src/**/*.html',
           './src/**/*.ts',
-          './node_modules/bootstrap/js/dist/collapse.js'
+          './node_modules/bootstrap/js/dist/collapse.js',
+          './node_modules/bootstrap/js/dist/dropdown.js'
         ],
         keyframes: true,
         variables: true

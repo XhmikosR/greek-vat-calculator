@@ -28,10 +28,12 @@
     "netlify": "cross-env NETLIFY=true netlify deploy -d _site --prod"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.8"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^8.0.0",
+    "@types/bootstrap": "^5.2.10",
     "@types/html-minifier-terser": "^7.0.2",
     "@types/node": "^24.12.2",
     "@types/vnu-jar": "^17.11.2",
