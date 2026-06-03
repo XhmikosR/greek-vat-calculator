@@ -1,5 +1,7 @@
 import {rmSync} from 'node:fs';
 
-rmSync('_site', {recursive: true, force: true});
+const dist = '_site';
 
-console.log('Cleaned _site directory');
+rmSync(dist, {recursive: true, force: true});
+
+console.log(`Cleaned ${dist} directory`);
