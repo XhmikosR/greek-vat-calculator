@@ -21,10 +21,10 @@
     "preview": "npm run build && vite preview",
     "fix": "xo --fix",
     "lint:js": "xo",
-    "lint:html": "tsx scripts/vnu-jar.ts",
+    "lint:html": "node scripts/vnu-jar.ts",
     "lint": "npm-run-all2 --parallel lint:js lint:html",
     "test": "npm-run-all2 build --parallel lint:js lint:html",
-    "clean": "tsx scripts/clean.ts",
+    "clean": "node scripts/clean.ts",
     "netlify": "cross-env NETLIFY=true netlify deploy -d _site --prod"
   },
   "dependencies": {
@@ -45,7 +45,6 @@
     "purgecss": "^8.0.0",
     "sass": "1.77.8",
     "terser": "^5.48.0",
-    "tsx": "^4.22.4",
     "typescript": "^5.9.3",
     "vite": "^8.0.16",
     "vite-plugin-singlefile": "^2.3.3",
