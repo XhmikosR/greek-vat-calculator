@@ -54,7 +54,7 @@ export default defineConfig(({mode}) => {
       !isDev && injectSwVersion(),
       !isDev && generateMeta({
         LASTMOD: new Date().toISOString().slice(0, 10),
-        DISALLOW: process.env.NETLIFY ? ' /' : ''
+        DISALLOW: process.env.NETLIFY === undefined ? '' : ' /'
       }),
       !isDev && minifyHtml()
     ].filter(Boolean),

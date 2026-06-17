@@ -2,6 +2,11 @@ import globals from 'globals';
 
 export default [
   {
+    ignores: [
+      '**/*.html'
+    ]
+  },
+  {
     space: 2,
     rules: {
       '@stylistic/comma-dangle': [
@@ -40,6 +45,7 @@ export default [
       'import-x/no-anonymous-default-export': 'off',
       'prefer-template': 'error',
       'require-unicode-regexp': 'off',
+      'unicorn/no-unnecessary-global-this': 'off',
       'unicorn/prefer-top-level-await': 'off',
       'unicorn/prevent-abbreviations': 'off'
     }

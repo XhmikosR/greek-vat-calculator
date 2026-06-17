@@ -41,7 +41,7 @@ execFile('java', ['-version'], (error, _stdout, stderr) => {
 
   const args = [
     '-jar',
-    String(vnu),
+    vnu,
     '--asciiquotes',
     '--skip-non-html',
     '--Werror',
@@ -52,7 +52,7 @@ execFile('java', ['-version'], (error, _stdout, stderr) => {
 
   // For the 32-bit Java we need to pass `-Xss512k`
   if (is32bitJava) {
-    args.splice(0, 0, '-Xss512k');
+    args.unshift('-Xss512k');
   }
 
   console.log(`command used: java ${args.join(' ')}`);

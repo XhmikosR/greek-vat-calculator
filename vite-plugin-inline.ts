@@ -50,7 +50,7 @@ function isEnoent(error: unknown): boolean {
 }
 
 /**
- * Vite plugin to render %%TOKEN%% placeholders in sitemap.xml and robots.txt
+ Vite plugin to render %%TOKEN%% placeholders in sitemap.xml and robots.txt
  */
 export function generateMeta(tokens: Record<string, string>): Plugin {
   return {
@@ -70,7 +70,7 @@ export function generateMeta(tokens: Record<string, string>): Plugin {
         }
 
         for (const [key, value] of Object.entries(tokens)) {
-          rendered = rendered.replaceAll(`%%${key}%%`, value);
+          rendered = rendered.replaceAll(`%%${key}%%`, () => value);
         }
 
         fs.writeFileSync(path.resolve(outDir, file), rendered);
@@ -80,7 +80,7 @@ export function generateMeta(tokens: Record<string, string>): Plugin {
 }
 
 /**
- * Vite plugin to inject a version string into the service worker file during build
+ Vite plugin to inject a version string into the service worker file during build
  */
 export function injectSwVersion(): Plugin {
   return {
@@ -94,7 +94,7 @@ export function injectSwVersion(): Plugin {
       try {
         const version = Date.now().toString();
         const content = fs.readFileSync(swPath, 'utf8');
-        const replaced = content.replaceAll('__SW_VERSION__', version);
+        const replaced = content.replaceAll('__SW_VERSION__', () => version);
 
         const result = await terserMinify(replaced, terserOptions);
 
@@ -107,7 +107,7 @@ export function injectSwVersion(): Plugin {
 }
 
 /**
- * Vite plugin to minify HTML output using html-minifier-terser
+ Vite plugin to minify HTML output using html-minifier-terser
  */
 export function minifyHtml(): Plugin {
   return {
