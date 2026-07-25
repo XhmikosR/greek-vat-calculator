@@ -45,6 +45,7 @@ export default [
       'import-x/no-anonymous-default-export': 'off',
       'prefer-template': 'error',
       'require-unicode-regexp': 'off',
+      'unicorn/consistent-boolean-name': 'off',
       'unicorn/no-unnecessary-global-this': 'off',
       'unicorn/prefer-top-level-await': 'off',
       'unicorn/prevent-abbreviations': 'off'
