@@ -53,6 +53,17 @@ export default [
   },
   {
     files: [
+      'package.json'
+    ],
+    rules: {
+      'package-json/dependency-version-range': 'off',
+      'package-json/no-empty-fields': 'off',
+      'package-json/prefer-shorthand': 'off',
+      'package-json/require-engines': 'off'
+    }
+  },
+  {
+    files: [
       'src/js/**'
     ],
     languageOptions: {
