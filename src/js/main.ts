@@ -10,12 +10,20 @@ const vatLabel = document.querySelector<HTMLElement>('#label-totalVat')!;
 const netAmount = document.querySelector<HTMLOutputElement>('#netAmount')!;
 const totalVat = document.querySelector<HTMLOutputElement>('#totalVat')!;
 const totalAmount = document.querySelector<HTMLOutputElement>('#totalAmount')!;
+const copyButtons = document.querySelectorAll<HTMLButtonElement>('dd button');
 const statusText = document.querySelector<HTMLElement>('#status')!;
 const resetBtn = document.querySelector<HTMLButtonElement>('#resetBtn')!;
 
 const moneyFormat = new Intl.NumberFormat('el-GR', {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2
+});
+
+// Copied without thousands dots, so it can be pasted back into the amount
+const plainFormat = new Intl.NumberFormat('el-GR', {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+  useGrouping: false
 });
 
 const rateFormat = new Intl.NumberFormat('el-GR', {
@@ -79,6 +87,8 @@ function showValue(output: HTMLOutputElement, cents: number, isComputed: boolean
   if (!row) return;
 
   output.value = `${moneyFormat.format(cents / 100)} €`;
+  const button = row.querySelector('button');
+  if (button) button.value = plainFormat.format(cents / 100);
   row.classList.toggle('fw-semibold', isComputed);
   row.classList.toggle('text-body-secondary', !isComputed);
 }
@@ -105,6 +115,10 @@ function render(): void {
   showValue(totalVat, vat, hasResult);
   showValue(totalAmount, net + vat, hasResult && !includesVat);
 
+  for (const button of copyButtons) {
+    button.classList.toggle('invisible', !hasResult);
+  }
+
   for (const preset of vatPresets) {
     preset.checked = Number(preset.value) * 100 === rate;
   }
@@ -120,6 +134,30 @@ function announce(): void {
   if (statusText.textContent !== message) {
     statusText.textContent = message;
   }
+}
+
+function showCopied(button: HTMLButtonElement): void {
+  const icon = button.querySelector('use');
+  if (!icon) return;
+
+  icon.setAttribute('href', '#icon-check');
+  clearTimeout(Number(button.dataset.timer));
+  button.dataset.timer = String(setTimeout(() => {
+    icon.setAttribute('href', '#icon-copy');
+  }, 1500));
+}
+
+function copyValue(button: HTMLButtonElement): void {
+  navigator.clipboard.writeText(button.value)
+    .then(() => {
+      showCopied(button);
+      statusText.textContent = `Αντιγράφηκε: ${button.value}`;
+    })
+    .catch(() => {
+      // Select the figure so it can still be copied by hand
+      document.getSelection()!.selectAllChildren(button.previousElementSibling!);
+      statusText.textContent = 'Η αντιγραφή απέτυχε';
+    });
 }
 
 calcForm.addEventListener('input', event => {
@@ -182,6 +220,15 @@ resetBtn.addEventListener('click', () => {
     amount.focus();
   }
 });
+
+if ('clipboard' in navigator && 'writeText' in navigator.clipboard) {
+  for (const button of copyButtons) {
+    button.hidden = false;
+    button.addEventListener('click', () => {
+      copyValue(button);
+    });
+  }
+}
 
 render();
 
