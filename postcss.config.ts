@@ -13,8 +13,7 @@ export default {
       [purgecss({
         content: [
           './src/**/*.html',
-          './src/**/*.ts',
-          './node_modules/bootstrap/js/dist/collapse.js'
+          './src/**/*.ts'
         ],
         keyframes: true,
         variables: true
