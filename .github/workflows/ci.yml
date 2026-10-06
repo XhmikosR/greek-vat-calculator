@@ -7,7 +7,8 @@ on:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  # don't cancel a Pages deployment halfway through
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 permissions:
   contents: read
@@ -40,34 +41,24 @@ jobs:
       - name: Run tests
         run: npm test
 
+      - name: Upload Pages artifact
+        if: github.repository == 'XhmikosR/greek-vat-calculator' && github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: ./_site/
+
   deploy:
     runs-on: ubuntu-latest
     needs: [test]
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    if: github.repository == 'XhmikosR/greek-vat-calculator' && github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     permissions:
-      contents: write
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Clone repository
-        uses: actions/checkout@v7
-        with:
-          persist-credentials: false
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v7
-        with:
-          node-version: "${{ env.NODE }}"
-          cache: npm
-
-      - name: Install npm dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: ./_site/
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
