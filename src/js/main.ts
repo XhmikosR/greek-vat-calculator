@@ -1,306 +1,189 @@
-// DOM Elements
-const elements = {
-  inputs: {
-    amount: document.querySelector<HTMLInputElement>('#amount')!,
-    vatRate: document.querySelector<HTMLInputElement>('#vatRate')!,
-    modeWithVat: document.querySelector<HTMLInputElement>('#modeWithVat')!,
-    modeWithoutVat: document.querySelector<HTMLInputElement>('#modeWithoutVat')!
-  },
-  outputs: {
-    totalVat: document.querySelector<HTMLOutputElement>('#totalVat')!,
-    netAmount: document.querySelector<HTMLOutputElement>('#netAmount')!,
-    totalAmount: document.querySelector<HTMLOutputElement>('#totalAmount')!
-  },
-  rows: {
-    netAmountRow: document.querySelector<HTMLElement>('#netAmountRow')!,
-    totalAmountRow: document.querySelector<HTMLElement>('#totalAmountRow')!,
-    vatAmountSection: document.querySelector<HTMLElement>('#vatAmountSection')!
-  },
-  buttons: {
-    calc: document.querySelector<HTMLButtonElement>('#calcBtn')!,
-    reset: document.querySelector<HTMLButtonElement>('#resetBtn')!
-  },
-  form: document.querySelector<HTMLFormElement>('#calcForm')!,
-  resultCard: document.querySelector<HTMLElement>('#resultCard')!,
-  resultCardHeader: document.querySelector<HTMLElement>('#resultCardHeader')!,
-  icons: {
-    invalid: document.querySelector<HTMLElement>('#resultIconInvalid')!,
-    valid: document.querySelector<HTMLElement>('#resultIconValid')!
-  },
-  labels: {
-    withVat: document.querySelector<HTMLSpanElement>('#amountLabelWithVat')!,
-    withoutVat: document.querySelector<HTMLSpanElement>('#amountLabelWithoutVat')!
-  }
-} as const;
+const calcForm = document.querySelector<HTMLFormElement>('#calcForm')!;
+const amount = document.querySelector<HTMLInputElement>('#amount')!;
+const amountLabel = document.querySelector<HTMLLabelElement>('#amountLabel')!;
+const amountError = document.querySelector<HTMLElement>('#amountError')!;
+const modeWithVat = document.querySelector<HTMLInputElement>('#modeWithVat')!;
+const vatRate = document.querySelector<HTMLInputElement>('#vatRate')!;
+const vatRateError = document.querySelector<HTMLElement>('#vatRateError')!;
+const vatPresets = document.querySelectorAll<HTMLInputElement>('[name="vatPreset"]');
+const vatLabel = document.querySelector<HTMLElement>('#label-totalVat')!;
+const netAmount = document.querySelector<HTMLOutputElement>('#netAmount')!;
+const totalVat = document.querySelector<HTMLOutputElement>('#totalVat')!;
+const totalAmount = document.querySelector<HTMLOutputElement>('#totalAmount')!;
+const statusText = document.querySelector<HTMLElement>('#status')!;
+const resetBtn = document.querySelector<HTMLButtonElement>('#resetBtn')!;
 
-// Constants
-const DEFAULTS = {
-  VAT_RATE: '24',
-  CALCULATION_MODE: 'withVat' as const,
-  EMPTY_VALUE: '—'
-} as const;
-
-// Number formatters
-const displayFormatter = new Intl.NumberFormat(undefined, {
-  minimumFractionDigits: 0,
+const moneyFormat = new Intl.NumberFormat('el-GR', {
+  minimumFractionDigits: 2,
   maximumFractionDigits: 2
 });
 
-const CSS_CLASSES = {
-  HIDDEN: 'd-none',
-  INVALID: 'is-invalid',
-  BORDER_SECONDARY: 'border-secondary',
-  BORDER_SUCCESS: 'border-success',
-  BG_SECONDARY: 'bg-secondary',
-  BG_SUCCESS: 'bg-success',
-  TEXT_SECONDARY: 'text-secondary',
-  TEXT_SUCCESS: 'text-success'
-} as const;
+const rateFormat = new Intl.NumberFormat('el-GR', {
+  maximumFractionDigits: 2
+});
 
-// State
-let calculationMode: 'withVat' | 'withoutVat' = DEFAULTS.CALCULATION_MODE;
+const amountHint = 'Εισάγετε ποσό από 0,01 έως 999.999.999,99 €.';
+const rateHint = 'Εισάγετε συντελεστή από 0,1 έως 99,9%.';
 
-// Utility functions
-function toggleClasses(element: HTMLElement, classMap: Record<string, boolean>): void {
-  for (const [className, shouldAdd] of Object.entries(classMap)) {
-    element.classList.toggle(className, shouldAdd);
+// Returns hundredths (cents, or hundredths of a percent), or NaN.
+// Dots group thousands in 1.500 and 1.234,50; in 12.50 the dot is the decimal mark.
+function parse(text: string): number {
+  let value = text.replace(/[\s€]/g, '');
+
+  if (/^[1-9]\d{0,2}(?:\.\d{3})+(?:,\d*)?$/.test(value)) {
+    value = value.replace(/\./g, '');
   }
+
+  value = value.replace(',', '.');
+
+  const isNumber = /\d/.test(value) && /^\d{0,9}(?:\.\d{0,2})?$/.test(value);
+  return isNumber ? Math.round(Number(value) * 100) : NaN;
 }
 
-function setButtonState(buttonElement: HTMLButtonElement, disabled: boolean): void {
-  buttonElement.disabled = disabled;
+function isValidAmount(cents: number): boolean {
+  return cents >= 1;
 }
 
-function formatNumber(value: number): string {
-  return displayFormatter.format(value);
+function isValidRate(rate: number): boolean {
+  return rate >= 10 && rate <= 9990;
 }
 
-function parseLocaleNumber(value: string): number {
-  return Number(value.replace(',', '.'));
-}
-
-function resetResultValues(): void {
-  elements.outputs.netAmount.textContent = DEFAULTS.EMPTY_VALUE;
-  elements.outputs.totalVat.textContent = DEFAULTS.EMPTY_VALUE;
-  elements.outputs.totalAmount.textContent = DEFAULTS.EMPTY_VALUE;
-}
-
-// Row visibility management
-function updateRowVisibility(): void {
-  const showNet = calculationMode === 'withVat';
-  elements.rows.netAmountRow.classList.toggle(CSS_CLASSES.HIDDEN, !showNet);
-  elements.rows.totalAmountRow.classList.toggle(CSS_CLASSES.HIDDEN, showNet);
-}
-
-// Label management
-function updateAmountLabel(): void {
-  const showWithVat = calculationMode === 'withVat';
-  elements.labels.withVat.classList.toggle(CSS_CLASSES.HIDDEN, !showWithVat);
-  elements.labels.withoutVat.classList.toggle(CSS_CLASSES.HIDDEN, showWithVat);
-}
-
-// Button state management
-function updateResetButtonState(): void {
-  const hasInput =
-    elements.inputs.amount.value !== '' ||
-    elements.inputs.vatRate.value !== DEFAULTS.VAT_RATE ||
-    calculationMode !== DEFAULTS.CALCULATION_MODE;
-
-  setButtonState(elements.buttons.reset, !hasInput);
-}
-
-// Result card styling
-function updateResultCardState(isValid: boolean): void {
-  const cardClasses = {
-    [CSS_CLASSES.BORDER_SECONDARY]: !isValid,
-    [CSS_CLASSES.BORDER_SUCCESS]: isValid
-  };
-
-  const headerClasses = {
-    [CSS_CLASSES.BG_SECONDARY]: !isValid,
-    [CSS_CLASSES.BG_SUCCESS]: isValid
-  };
-
-  const textClasses = {
-    [CSS_CLASSES.TEXT_SECONDARY]: !isValid,
-    [CSS_CLASSES.TEXT_SUCCESS]: isValid
-  };
-
-  const iconClasses = {
-    [CSS_CLASSES.HIDDEN]: isValid
-  };
-
-  const validIconClasses = {
-    [CSS_CLASSES.HIDDEN]: !isValid
-  };
-
-  toggleClasses(elements.resultCard, cardClasses);
-  toggleClasses(elements.resultCardHeader, headerClasses);
-  toggleClasses(elements.icons.invalid, iconClasses);
-  toggleClasses(elements.icons.valid, validIconClasses);
-
-  // Update all result sections
-  const sections = [
-    elements.rows.vatAmountSection,
-    elements.rows.netAmountRow,
-    elements.rows.totalAmountRow
-  ];
-
-  for (const section of sections) {
-    toggleClasses(section, textClasses);
-
-    const valueContainer = section.querySelector<HTMLElement>('.result-output');
-    if (!valueContainer) continue;
-
-    for (const child of valueContainer.children) {
-      if (child instanceof HTMLElement) {
-        toggleClasses(child, cardClasses);
-      }
-    }
+function amountMessage(allowEmpty: boolean): string {
+  if (allowEmpty && amount.value.trim() === '') {
+    return '';
   }
+
+  return isValidAmount(parse(amount.value)) ? '' : amountHint;
 }
 
-// Validation
-function validateInput(input: HTMLInputElement): boolean {
-  let isValid = false;
+function rateMessage(): string {
+  return isValidRate(parse(vatRate.value)) ? '' : rateHint;
+}
 
-  if (input === elements.inputs.vatRate) {
-    const rate = parseLocaleNumber(input.value);
-    isValid = input.value !== '' && Number.isFinite(rate) && rate >= 0.1 && rate <= 99.9;
+function setError(input: HTMLInputElement, feedback: HTMLElement, message: string): void {
+  feedback.textContent = message;
+  input.classList.toggle('is-invalid', message !== '');
+
+  // A hidden message referenced by aria-describedby is still read, so only point to it when shown
+  if (message === '') {
+    input.removeAttribute('aria-invalid');
+    input.removeAttribute('aria-describedby');
   } else {
-    const amount = parseLocaleNumber(input.value);
-    isValid = input.value !== '' && (input.validity.valid || (Number.isFinite(amount) && amount >= 0.01));
+    input.setAttribute('aria-invalid', 'true');
+    input.setAttribute('aria-describedby', feedback.id);
+  }
+}
+
+function showValue(output: HTMLOutputElement, cents: number, isComputed: boolean): void {
+  const row = output.closest('div');
+  if (!row) return;
+
+  output.value = `${moneyFormat.format(cents / 100)} €`;
+  row.classList.toggle('fw-semibold', isComputed);
+  row.classList.toggle('text-body-secondary', !isComputed);
+}
+
+function render(): void {
+  const includesVat = modeWithVat.checked;
+  const cents = parse(amount.value);
+  const rate = parse(vatRate.value);
+  const hasRate = isValidRate(rate);
+  const hasResult = hasRate && isValidAmount(cents);
+  let vat = 0;
+  let net = 0;
+
+  // Round the VAT once and derive the net from it, so the parts always add up to the total
+  if (hasResult) {
+    vat = Math.round(cents * rate / (includesVat ? 10_000 + rate : 10_000));
+    net = includesVat ? cents - vat : cents;
   }
 
-  input.classList.toggle(CSS_CLASSES.INVALID, !isValid);
-  return isValid;
+  amountLabel.textContent = includesVat ? 'Ποσό με Φ.Π.Α.' : 'Ποσό χωρίς Φ.Π.Α.';
+  vatLabel.textContent = hasRate ? `Φ.Π.Α. ${rateFormat.format(rate / 100)}%` : 'Φ.Π.Α.';
+
+  showValue(netAmount, net, hasResult && includesVat);
+  showValue(totalVat, vat, hasResult);
+  showValue(totalAmount, net + vat, hasResult && !includesVat);
+
+  for (const preset of vatPresets) {
+    preset.checked = Number(preset.value) * 100 === rate;
+  }
 }
 
-function updateCalcButtonState(): void {
-  const amountValid = validateInput(elements.inputs.amount);
-  const vatValid = validateInput(elements.inputs.vatRate);
-  const canCalculate = amountValid && vatValid;
+function announce(): void {
+  const hasResult = isValidAmount(parse(amount.value)) && isValidRate(parse(vatRate.value));
+  const message = hasResult ?
+    `Ποσό χωρίς Φ.Π.Α. ${netAmount.value}, ${vatLabel.textContent} ${totalVat.value}, ποσό με Φ.Π.Α. ${totalAmount.value}.` :
+    `${amountError.textContent} ${vatRateError.textContent}`.trim();
 
-  setButtonState(elements.buttons.calc, !canCalculate);
-  updateResultCardState(amountValid);
+  // Enter and the change on the next blur bring the same text
+  if (statusText.textContent !== message) {
+    statusText.textContent = message;
+  }
 }
 
-// Main calculation logic
-function calculateVAT(): void {
-  const vatRateValue = parseLocaleNumber(elements.inputs.vatRate.value);
-  const inputValue = parseLocaleNumber(elements.inputs.amount.value);
+calcForm.addEventListener('input', event => {
+  const {target} = event;
 
-  const vatMultiplier = 1 + (vatRateValue / 100);
-
-  let totalCostValue: number;
-  let totalNetCostValue: number;
-
-  if (calculationMode === 'withVat') {
-    totalCostValue = inputValue;
-    totalNetCostValue = totalCostValue / vatMultiplier;
-  } else {
-    totalNetCostValue = inputValue;
-    totalCostValue = totalNetCostValue * vatMultiplier;
+  if (target instanceof HTMLInputElement && target.name === 'vatPreset') {
+    vatRate.value = target.value;
   }
 
-  const vatAmount = totalCostValue - totalNetCostValue;
-
-  // Update all result fields
-  elements.outputs.netAmount.textContent = formatNumber(totalNetCostValue);
-  elements.outputs.totalVat.textContent = formatNumber(vatAmount);
-  elements.outputs.totalAmount.textContent = formatNumber(totalCostValue);
-
-  updateRowVisibility();
-  setButtonState(elements.buttons.calc, true);
-  updateResultCardState(true);
-}
-
-function resetCalculator(): void {
-  elements.form.reset();
-  // Reset input states
-  for (const input of [elements.inputs.amount, elements.inputs.vatRate]) {
-    input.classList.remove(CSS_CLASSES.INVALID);
+  if (amountMessage(true) === '') {
+    setError(amount, amountError, '');
   }
 
-  // Reset mode
-  calculationMode = DEFAULTS.CALCULATION_MODE;
+  if (rateMessage() === '') {
+    setError(vatRate, vatRateError, '');
+  }
 
-  // Update UI
-  updateAmountLabel();
-  resetResultValues();
-  updateRowVisibility();
+  statusText.textContent = '';
+  render();
+});
 
-  // Reset button states
-  setButtonState(elements.buttons.calc, true);
-  setButtonState(elements.buttons.reset, true);
+calcForm.addEventListener('change', event => {
+  if (event.target === amount) {
+    setError(amount, amountError, amountMessage(true));
+  } else if (event.target === vatRate) {
+    setError(vatRate, vatRateError, rateMessage());
+  }
 
-  updateResultCardState(false);
-}
+  announce();
+});
 
-function handleModeChange(): void {
-  calculationMode = elements.inputs.modeWithVat.checked ? 'withVat' : 'withoutVat';
+calcForm.addEventListener('keydown', event => {
+  const {target} = event;
 
-  updateAmountLabel();
-  updateRowVisibility();
-
-  elements.inputs.amount.value = '';
-
-  resetResultValues();
-  updateResultCardState(false);
-
-  setButtonState(elements.buttons.calc, true);
-  updateResetButtonState();
-}
-
-function handleAmountInput(): void {
-  updateCalcButtonState();
-  updateResetButtonState();
-}
-
-function handleVatRateInput(): void {
-  const isValid = validateInput(elements.inputs.vatRate);
-  const canCalculate = isValid && elements.inputs.amount.value !== '';
-
-  setButtonState(elements.buttons.calc, !canCalculate);
-  updateResetButtonState();
-}
-
-function handleSubmit(event: SubmitEvent): void {
-  event.preventDefault();
-
-  if (!(validateInput(elements.inputs.amount) && validateInput(elements.inputs.vatRate))) {
+  if (event.key !== 'Enter' || !(target instanceof HTMLInputElement) || target.type !== 'text') {
     return;
   }
 
-  calculateVAT();
+  // Enter also fires change; skip that second pass
+  event.preventDefault();
+  setError(amount, amountError, amountMessage(false));
+  setError(vatRate, vatRateError, rateMessage());
+  announce();
 
-  if (globalThis.matchMedia('(pointer: coarse)').matches && document.activeElement instanceof HTMLElement) {
-    document.activeElement.blur();
+  // Closes the on-screen keyboard
+  if (globalThis.matchMedia('(pointer: coarse)').matches) {
+    target.blur();
   }
-}
+});
 
-// Event listeners
-function initializeEventListeners(): void {
-  elements.form.addEventListener('submit', handleSubmit);
+resetBtn.addEventListener('click', () => {
+  calcForm.reset();
+  setError(amount, amountError, '');
+  setError(vatRate, vatRateError, '');
+  statusText.textContent = '';
+  render();
 
-  elements.inputs.modeWithVat.addEventListener('change', handleModeChange);
-  elements.inputs.modeWithoutVat.addEventListener('change', handleModeChange);
-  elements.inputs.amount.addEventListener('wheel', () => {
-    elements.inputs.amount.blur();
-  }, {passive: true});
-  elements.inputs.amount.addEventListener('input', handleAmountInput);
-  elements.inputs.vatRate.addEventListener('input', handleVatRateInput);
-  elements.buttons.reset.addEventListener('click', resetCalculator);
-}
+  // On touch screens this would bring up the keyboard
+  if (!globalThis.matchMedia('(pointer: coarse)').matches) {
+    amount.focus();
+  }
+});
 
-// Initialize application
-function initialize(): void {
-  updateAmountLabel();
-  updateResetButtonState();
-  initializeEventListeners();
-}
-
-initialize();
+render();
 
 if (__PROD__ && 'serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js').catch(() => {/* non-fatal */});

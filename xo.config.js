@@ -68,6 +68,10 @@ export default [
     ],
     languageOptions: {
       globals: globals.browser
+    },
+    rules: {
+      // String#replaceAll() needs Safari 13.1 and .browserslistrc still lists Safari 12
+      'unicorn/prefer-string-replace-all': 'off'
     }
   },
   {

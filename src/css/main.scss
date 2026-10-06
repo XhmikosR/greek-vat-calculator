@@ -1,5 +1,7 @@
 $primary: #3d5afe;
 $primary-text-emphasis: $primary;
+$input-border-color: #6c757d; // $gray-600; Bootstrap's default field border is 1.3:1
+$input-focus-border-color: $primary;
 $success: #047857;
 $info: #0e7490;
 $warning: #f59e0b;

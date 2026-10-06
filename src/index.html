@@ -139,117 +139,82 @@
             </div>
 
             <div class="card-body p-3 p-lg-4">
-              <!-- Calculation Mode Selection -->
+              <div class="mb-3">
+                <label id="amountLabel" for="amount" class="form-label">Ποσό με Φ.Π.Α.</label>
+                <div class="input-group input-group-lg has-validation">
+                  <input id="amount" class="form-control" type="text" inputmode="decimal" enterkeyhint="done" autocomplete="off" spellcheck="false" autofocus required>
+                  <span class="input-group-text">€</span>
+                  <div id="amountError" class="invalid-feedback"></div>
+                </div>
+              </div>
+
               <fieldset class="mb-3">
-                <legend class="form-label fw-semibold fs-6 text-secondary mb-2 mb-md-3">
-                  <svg width="16" height="16" fill="currentColor" class="bi bi-ui-radios me-1" aria-hidden="true"><use href="#icon-ui-radios"/></svg>
-                  Τρόπος Υπολογισμού
-                </legend>
-                <div class="d-flex flex-column gap-1 text-primary">
-                  <div class="form-check form-check-inline py-1 m-0">
-                    <input class="form-check-input" type="radio" name="calculationMode" id="modeWithVat" value="withVat" checked autocomplete="off">
-                    <label class="form-check-label fw-semibold" for="modeWithVat">
-                      <svg width="16" height="16" fill="currentColor" class="bi bi-cash-stack me-1" aria-hidden="true"><use href="#icon-cash-stack"/></svg>
-                      Έχω το ποσό με Φ.Π.Α.
-                    </label>
-                  </div>
-                  <div class="form-check form-check-inline py-1 m-0">
-                    <input class="form-check-input" type="radio" name="calculationMode" id="modeWithoutVat" value="withoutVat" autocomplete="off">
-                    <label class="form-check-label fw-semibold" for="modeWithoutVat">
-                      <svg width="16" height="16" fill="currentColor" class="bi bi-receipt me-1" aria-hidden="true"><use href="#icon-receipt"/></svg>
-                      Έχω το ποσό χωρίς Φ.Π.Α.
-                    </label>
-                  </div>
+                <legend class="visually-hidden">Το ποσό είναι</legend>
+                <div class="btn-group">
+                  <input id="modeWithVat" class="btn-check" type="radio" name="mode" value="incl" autocomplete="off" checked>
+                  <label for="modeWithVat" class="btn btn-outline-primary">με Φ.Π.Α.</label>
+                  <input id="modeWithoutVat" class="btn-check" type="radio" name="mode" value="excl" autocomplete="off">
+                  <label for="modeWithoutVat" class="btn btn-outline-primary">χωρίς Φ.Π.Α.</label>
                 </div>
               </fieldset>
 
-              <!-- Amount Input -->
-              <div class="mb-3">
-                <label for="amount" class="form-label fw-semibold text-primary">
-                  <span id="amountLabelWithVat">
-                    <svg width="16" height="16" fill="currentColor" class="bi bi-cash-stack me-1" aria-hidden="true"><use href="#icon-cash-stack"/></svg>
-                    Ποσό με Φ.Π.Α.
-                  </span>
-                  <span id="amountLabelWithoutVat" class="d-none">
-                    <svg width="16" height="16" fill="currentColor" class="bi bi-receipt me-1" aria-hidden="true"><use href="#icon-receipt"/></svg>
-                    Ποσό χωρίς Φ.Π.Α.
-                  </span>
-                </label>
-                <div class="input-group input-group-lg has-validation">
-                  <input id="amount" class="form-control border-primary" type="number" min="0.01" step="0.01" inputmode="decimal" autocomplete="off" autofocus required aria-describedby="amount-help">
-                  <span class="input-group-text bg-primary text-white border-primary">€</span>
-                  <div class="invalid-feedback">Εισάγετε έγκυρο ποσό.</div>
+              <fieldset>
+                <legend class="fs-6">Συντελεστής Φ.Π.Α.</legend>
+                <div class="row gx-2">
+                  <div class="col-auto">
+                    <div class="btn-group">
+                      <input id="vatPreset24" class="btn-check" type="radio" name="vatPreset" value="24" autocomplete="off" checked>
+                      <label for="vatPreset24" class="btn btn-outline-primary">24%</label>
+                      <input id="vatPreset13" class="btn-check" type="radio" name="vatPreset" value="13" autocomplete="off">
+                      <label for="vatPreset13" class="btn btn-outline-primary">13%</label>
+                      <input id="vatPreset6" class="btn-check" type="radio" name="vatPreset" value="6" autocomplete="off">
+                      <label for="vatPreset6" class="btn btn-outline-primary">6%</label>
+                    </div>
+                  </div>
+                  <div class="col rate-col">
+                    <label for="vatRate" class="visually-hidden">Συντελεστής (%)</label>
+                    <div class="input-group">
+                      <input id="vatRate" class="form-control" type="text" inputmode="decimal" enterkeyhint="done" autocomplete="off" value="24">
+                      <span class="input-group-text">%</span>
+                    </div>
+                  </div>
                 </div>
-                <div id="amount-help" class="visually-hidden">Εισάγετε το ποσό σε ευρώ</div>
-              </div>
-
-              <!-- VAT Rate -->
-              <div>
-                <label for="vatRate" class="form-label fw-semibold text-primary mb-2">
-                  <svg width="16" height="16" fill="currentColor" class="bi bi-percent me-1" aria-hidden="true"><use href="#icon-percent"/></svg>
-                  Συντελεστής Φ.Π.Α.
-                </label>
-                <div class="input-group has-validation">
-                  <input id="vatRate" class="form-control form-control-lg border-primary" type="text" value="24" inputmode="decimal" autocomplete="off" required aria-describedby="vat-rate-help" list="vatRatePresets">
-                  <span class="input-group-text bg-primary text-white border-primary">%</span>
-                  <div class="invalid-feedback">Εισάγετε συντελεστή μεταξύ 0.1 και 99.9.</div>
-                </div>
-                <datalist id="vatRatePresets">
-                  <option value="6">Υπερμειωμένος (6%)</option>
-                  <option value="13">Μειωμένος (13%)</option>
-                  <option value="24">Κανονικός (24%)</option>
-                </datalist>
-                <div id="vat-rate-help" class="visually-hidden">Εισάγετε τον συντελεστή Φ.Π.Α. (συνήθως 6, 13 ή 24)</div>
-              </div>
+                <div id="vatRateError" class="invalid-feedback"></div>
+              </fieldset>
             </div>
           </div>
         </div>
 
         <div class="col-md-10 col-lg-5 col-xl-4">
-          <div id="resultCard" class="card shadow h-100 border-secondary border-opacity-50">
-            <div id="resultCardHeader" class="card-header bg-secondary text-white py-3">
+          <div class="card shadow h-100 border-secondary border-opacity-50">
+            <div class="card-header bg-secondary text-white py-3">
               <h3 class="h5 mb-0 d-flex justify-content-center align-items-center">
-                <svg id="resultIconInvalid" width="20" height="20" fill="currentColor" class="bi bi-calculator me-2 align-text-bottom" aria-hidden="true"><use href="#icon-calculator"/></svg>
-                <svg id="resultIconValid" width="20" height="20" fill="currentColor" class="bi bi-check-circle me-2 align-text-bottom d-none" aria-hidden="true"><use href="#icon-check-circle"/></svg>
+                <svg width="20" height="20" fill="currentColor" class="bi bi-calculator me-2 align-text-bottom" aria-hidden="true"><use href="#icon-calculator"/></svg>
                 Αποτέλεσμα Υπολογισμού
               </h3>
             </div>
             <div class="card-body p-3 p-lg-4">
-              <!-- VAT Amount -->
-              <div id="vatAmountSection" class="mb-3 text-secondary">
-                <div id="label-totalVat" class="fw-semibold d-block mb-2">
-                  <svg width="16" height="16" fill="currentColor" class="bi bi-calculator-fill me-1" aria-hidden="true"><use href="#icon-calculator-fill"/></svg>
-                  Φ.Π.Α.
+              <dl class="mb-0">
+                <div class="d-flex flex-wrap align-items-center text-body-secondary py-1">
+                  <dt id="label-netAmount" class="fw-normal">Ποσό χωρίς Φ.Π.Α.</dt>
+                  <dd class="d-flex align-items-center text-nowrap ms-auto mb-0">
+                    <output id="netAmount" for="amount vatRate" aria-labelledby="label-netAmount" aria-live="off">0,00 €</output>
+                  </dd>
                 </div>
-                <div class="input-group input-group-lg result-output">
-                  <output id="totalVat" for="amount vatRate" aria-labelledby="label-totalVat" class="form-control fw-bold border-secondary text-reset">—</output>
-                  <span class="input-group-text border-secondary text-reset">€</span>
+                <div class="d-flex flex-wrap align-items-center text-body-secondary py-1">
+                  <dt id="label-totalVat" class="fw-normal">Φ.Π.Α. 24%</dt>
+                  <dd class="d-flex align-items-center text-nowrap ms-auto mb-0">
+                    <output id="totalVat" for="amount vatRate" aria-labelledby="label-totalVat" aria-live="off">0,00 €</output>
+                  </dd>
                 </div>
-              </div>
-
-              <!-- Net Amount (without VAT) -->
-              <div id="netAmountRow" class="pt-2 text-secondary">
-                <div id="label-netAmount" class="fw-semibold d-block mb-2">
-                  <svg width="16" height="16" fill="currentColor" class="bi bi-receipt me-1" aria-hidden="true"><use href="#icon-receipt"/></svg>
-                  Ποσό χωρίς Φ.Π.Α.
+                <div class="d-flex flex-wrap align-items-center text-body-secondary border-top mt-1 pt-2 pb-1">
+                  <dt id="label-totalAmount" class="fw-normal">Ποσό με Φ.Π.Α.</dt>
+                  <dd class="d-flex align-items-center text-nowrap ms-auto mb-0">
+                    <output id="totalAmount" for="amount vatRate" aria-labelledby="label-totalAmount" aria-live="off">0,00 €</output>
+                  </dd>
                 </div>
-                <div class="input-group input-group-lg result-output">
-                  <output id="netAmount" for="amount vatRate" aria-labelledby="label-netAmount" class="form-control fw-bold border-secondary text-reset">—</output>
-                  <span class="input-group-text border-secondary text-reset">€</span>
-                </div>
-              </div>
-
-              <!-- Total Amount (with VAT) -->
-              <div id="totalAmountRow" class="pt-2 d-none text-secondary">
-                <div id="label-totalAmount" class="fw-semibold d-block mb-2">
-                  <svg width="16" height="16" fill="currentColor" class="bi bi-cash-stack me-1" aria-hidden="true"><use href="#icon-cash-stack"/></svg>
-                  Ποσό με Φ.Π.Α.
-                </div>
-                <div class="input-group input-group-lg result-output">
-                  <output id="totalAmount" for="amount vatRate" aria-labelledby="label-totalAmount" class="form-control fw-bold border-secondary text-reset">—</output>
-                  <span class="input-group-text border-secondary text-reset">€</span>
-                </div>
-              </div>
+              </dl>
+              <p id="status" class="visually-hidden" role="status"></p>
             </div>
           </div>
         </div>
@@ -258,11 +223,7 @@
       <div class="row justify-content-center mt-4 mt-xl-5">
         <div class="col-md-10">
           <div class="d-grid gap-3 d-sm-flex justify-content-sm-center mb-5">
-            <button id="calcBtn" class="btn btn-primary btn-lg px-5 shadow-sm" type="submit" disabled aria-label="Υπολογισμός Φ.Π.Α.">
-              <svg width="20" height="20" fill="currentColor" class="bi bi-calculator me-2 align-text-bottom" aria-hidden="true"><use href="#icon-calculator"/></svg>
-              Υπολογισμός
-            </button>
-            <button id="resetBtn" class="btn btn-outline-secondary btn-lg px-4 shadow-sm" type="reset" aria-label="Επαναφορά φόρμας">
+            <button id="resetBtn" class="btn btn-outline-secondary btn-lg px-4 shadow-sm" type="button">
               <svg width="20" height="20" fill="currentColor" class="bi bi-arrow-counterclockwise me-2 align-text-bottom" aria-hidden="true"><use href="#icon-arrow-counterclockwise"/></svg>
               Επαναφορά
             </button>
@@ -319,8 +280,8 @@
 
                 <h3 class="h5 text-primary mt-4 mb-3">Πώς λειτουργεί;</h3>
                 <ul class="mb-3">
-                  <li class="mb-2"><strong>Έχω το ποσό με Φ.Π.Α.:</strong> Βάζετε το τελικό ποσό και η εφαρμογή σας δείχνει πόσο είναι το καθαρό και πόσο ο φόρος.</li>
-                  <li class="mb-2"><strong>Έχω το ποσό χωρίς Φ.Π.Α.:</strong> Βάζετε το καθαρό ποσό και η εφαρμογή υπολογίζει τον Φ.Π.Α. και το συνολικό ποσό που θα πληρώσετε.</li>
+                  <li class="mb-2"><strong>Με Φ.Π.Α.:</strong> Βάζετε το τελικό ποσό και η εφαρμογή σας δείχνει πόσο είναι το καθαρό και πόσο ο φόρος.</li>
+                  <li class="mb-2"><strong>Χωρίς Φ.Π.Α.:</strong> Βάζετε το καθαρό ποσό και η εφαρμογή υπολογίζει τον Φ.Π.Α. και το συνολικό ποσό που θα πληρώσετε.</li>
                 </ul>
               </div>
             </div>

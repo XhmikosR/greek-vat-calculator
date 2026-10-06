@@ -1,8 +1,43 @@
+// Safari < 15.4 has no :focus-visible and drops every rule that uses it, Bootstrap's
+// chip ring included, so the chips get a :focus outline first
+.btn-check:focus + .btn {
+  outline: 2px solid var(--bs-primary-text-emphasis);
+  outline-offset: 2px;
+}
+
+.btn-check:focus:not(:focus-visible) + .btn {
+  outline: 0;
+}
+
 // Bootstrap's focus rings are box-shadows: too faint here, and gone in forced colors mode
 .btn:focus-visible,
+.btn-check:focus-visible + .btn,
 .form-control:focus,
-.form-check-input:focus-visible,
 summary:focus-visible {
   outline: 2px solid var(--bs-primary-text-emphasis);
   outline-offset: 2px;
+}
+
+// Checked chips only differ by their background, which forced colors mode overrides
+@media (forced-colors: active) {
+  .btn-check:checked + .btn {
+    forced-color-adjust: none;
+    color: HighlightText;
+    background-color: Highlight;
+    border-color: Highlight;
+  }
+}
+
+// Wrap under the chips before the rate field gets too narrow to show its value
+.rate-col {
+  min-width: 7rem;
+}
+
+// The rate error sits outside its input group, so show any feedback that has text
+.invalid-feedback:not(:empty) {
+  display: block;
+}
+
+output {
+  font-variant-numeric: tabular-nums;
 }
