@@ -1,0 +1,8 @@
+// Bootstrap's focus rings are box-shadows: too faint here, and gone in forced colors mode
+.btn:focus-visible,
+.form-control:focus,
+.form-check-input:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--bs-primary-text-emphasis);
+  outline-offset: 2px;
+}
