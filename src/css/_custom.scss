@@ -28,6 +28,16 @@ summary:focus-visible {
   }
 }
 
+// Outline buttons take their text color from Sass, which is too dark on the dark background
+.btn-outline-primary {
+  --bs-btn-color: var(--bs-primary-text-emphasis);
+  --bs-btn-border-color: var(--bs-primary-text-emphasis);
+}
+
+.btn-outline-secondary {
+  --bs-btn-color: var(--bs-secondary-color);
+}
+
 // Wrap under the chips before the rate field gets too narrow to show its value
 .rate-col {
   min-width: 7rem;

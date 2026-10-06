@@ -4,6 +4,8 @@ $danger: #b02a37; // $red-600; the default #dc3545 is 4.53:1 on white
 $input-border-color: #6c757d; // $gray-600; Bootstrap's default field border is 1.3:1
 $input-focus-border-color: $primary;
 $table-color: var(--bs-body-color); // the default is pure black, darker than the text around it
+$form-feedback-icon-invalid-color: #dc3545; // a data URI, so dark mode keeps it; #b02a37 is 2.4:1 there
+$color-mode-type: media-query;
 
 @import "bootstrap/scss/bootstrap";
 @import "custom";
