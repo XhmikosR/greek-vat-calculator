@@ -13,7 +13,8 @@
 .btn:focus-visible,
 .btn-check:focus-visible + .btn,
 .form-control:focus,
-summary:focus-visible {
+summary:focus-visible,
+a:focus-visible {
   outline: 2px solid var(--bs-primary-text-emphasis);
   outline-offset: 2px;
 }
