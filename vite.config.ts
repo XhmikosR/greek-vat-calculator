@@ -1,4 +1,5 @@
 import process from 'node:process';
+import browserslistToEsbuild from 'browserslist-to-esbuild';
 import {defineConfig} from 'vite';
 import {viteSingleFile} from 'vite-plugin-singlefile';
 import {
@@ -29,12 +30,12 @@ export default defineConfig(({mode}) => {
       rollupOptions: {
         input: '/index.html'
       },
-      // target: 'es2017', // floor of .browserslistrc targets
+      target: browserslistToEsbuild(), // from .browserslistrc
       modulePreload: false, // single-file output has no chunks to preload
       minify: 'terser', // terser is slower than oxc but produces smaller output
       terserOptions,
       cssCodeSplit: false, // single-file output: keep all CSS in one bundle
-      cssMinify: 'lightningcss',
+      cssMinify: false, // clean-css in minifyHtml() does it; lightningcss ignored .browserslistrc
       reportCompressedSize: true
     },
 

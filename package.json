@@ -37,6 +37,7 @@
     "@types/node": "^26.6.5",
     "@types/vnu-jar": "^17.11.2",
     "autoprefixer": "^10.6.1",
+    "browserslist-to-esbuild": "^2.1.1",
     "cross-env": "^10.1.0",
     "globals": "^17.13.0",
     "html-minifier-terser": "^7.2.0",
