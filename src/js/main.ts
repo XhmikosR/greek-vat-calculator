@@ -6,7 +6,7 @@ const modeWithVat = document.querySelector<HTMLInputElement>('#modeWithVat')!;
 const vatRate = document.querySelector<HTMLInputElement>('#vatRate')!;
 const vatRateError = document.querySelector<HTMLElement>('#vatRateError')!;
 const vatPresets = document.querySelectorAll<HTMLInputElement>('[name="vatPreset"]');
-const vatLabel = document.querySelector<HTMLElement>('#label-totalVat')!;
+const totalVatLabel = document.querySelector<HTMLElement>('#totalVatLabel')!;
 const netAmount = document.querySelector<HTMLOutputElement>('#netAmount')!;
 const totalVat = document.querySelector<HTMLOutputElement>('#totalVat')!;
 const totalAmount = document.querySelector<HTMLOutputElement>('#totalAmount')!;
@@ -109,7 +109,7 @@ function render(): void {
   }
 
   amountLabel.textContent = includesVat ? 'Ποσό με ΦΠΑ' : 'Ποσό χωρίς ΦΠΑ';
-  vatLabel.textContent = hasRate ? `ΦΠΑ ${rateFormat.format(rate / 100)}%` : 'ΦΠΑ';
+  totalVatLabel.textContent = hasRate ? `ΦΠΑ ${rateFormat.format(rate / 100)}%` : 'ΦΠΑ';
 
   showValue(netAmount, net, hasResult && includesVat);
   showValue(totalVat, vat, hasResult);
@@ -127,7 +127,7 @@ function render(): void {
 function announce(): void {
   const hasResult = isValidAmount(parse(amount.value)) && isValidRate(parse(vatRate.value));
   const message = hasResult ?
-    `Ποσό χωρίς ΦΠΑ ${netAmount.value}, ${vatLabel.textContent} ${totalVat.value}, ποσό με ΦΠΑ ${totalAmount.value}.` :
+    `Ποσό χωρίς ΦΠΑ ${netAmount.value}, ${totalVatLabel.textContent} ${totalVat.value}, ποσό με ΦΠΑ ${totalAmount.value}.` :
     `${amountError.textContent} ${vatRateError.textContent}`.trim();
 
   // Enter and the change on the next blur bring the same text
