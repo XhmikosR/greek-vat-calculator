@@ -108,8 +108,8 @@ function render(): void {
     net = includesVat ? cents - vat : cents;
   }
 
-  amountLabel.textContent = includesVat ? 'Ποσό με Φ.Π.Α.' : 'Ποσό χωρίς Φ.Π.Α.';
-  vatLabel.textContent = hasRate ? `Φ.Π.Α. ${rateFormat.format(rate / 100)}%` : 'Φ.Π.Α.';
+  amountLabel.textContent = includesVat ? 'Ποσό με ΦΠΑ' : 'Ποσό χωρίς ΦΠΑ';
+  vatLabel.textContent = hasRate ? `ΦΠΑ ${rateFormat.format(rate / 100)}%` : 'ΦΠΑ';
 
   showValue(netAmount, net, hasResult && includesVat);
   showValue(totalVat, vat, hasResult);
@@ -127,7 +127,7 @@ function render(): void {
 function announce(): void {
   const hasResult = isValidAmount(parse(amount.value)) && isValidRate(parse(vatRate.value));
   const message = hasResult ?
-    `Ποσό χωρίς Φ.Π.Α. ${netAmount.value}, ${vatLabel.textContent} ${totalVat.value}, ποσό με Φ.Π.Α. ${totalAmount.value}.` :
+    `Ποσό χωρίς ΦΠΑ ${netAmount.value}, ${vatLabel.textContent} ${totalVat.value}, ποσό με ΦΠΑ ${totalAmount.value}.` :
     `${amountError.textContent} ${vatRateError.textContent}`.trim();
 
   // Enter and the change on the next blur bring the same text

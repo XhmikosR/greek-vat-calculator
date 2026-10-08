@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <title>Υπολογισμός Φ.Π.Α.</title>
-  <meta name="description" content="Δωρεάν online εργαλείο για τον υπολογισμό Φ.Π.Α. στην Ελλάδα. Υπολογίστε εύκολα το Φόρο Προστιθέμενης Αξίας με συντελεστές 24%, 13% και 6%.">
+  <title>Υπολογισμός ΦΠΑ - Greek VAT Calculator</title>
+  <meta name="description" content="Υπολογισμός ΦΠΑ online με συντελεστές 24%, 13% και 6%. Γράψτε ένα ποσό με ή χωρίς ΦΠΑ και δείτε αμέσως πόσος είναι ο φόρος.">
   <meta name="author" content="XhmikosR">
   <meta name="keywords" content="ΦΠΑ, Φ.Π.Α., υπολογιστής ΦΠΑ, φόρος προστιθέμενης αξίας, calculator, Ελλάδα, 24%, 13%, 6%, online calculator">
   <link rel="stylesheet" href="/css/main.scss">
@@ -22,28 +22,28 @@
   <meta name="theme-color" content="#212529" media="(prefers-color-scheme: dark)">
 
   <meta property="og:type" content="website">
-  <meta property="og:description" content="Δωρεάν online εργαλείο για τον υπολογισμό Φ.Π.Α. στην Ελλάδα. Υπολογίστε εύκολα το Φόρο Προστιθέμενης Αξίας με συντελεστές 24%, 13% και 6%.">
+  <meta property="og:description" content="Υπολογισμός ΦΠΑ online με συντελεστές 24%, 13% και 6%. Γράψτε ένα ποσό με ή χωρίς ΦΠΑ και δείτε αμέσως πόσος είναι ο φόρος.">
   <meta property="og:locale" content="el_GR">
-  <meta property="og:site_name" content="Υπολογισμός Φ.Π.Α.">
-  <meta property="og:title" content="Υπολογισμός Φ.Π.Α.">
+  <meta property="og:site_name" content="Υπολογισμός ΦΠΑ">
+  <meta property="og:title" content="Υπολογισμός ΦΠΑ - Greek VAT Calculator">
   <meta property="og:url" content="https://xhmikosr.github.io/greek-vat-calculator/">
   <meta property="og:image" content="https://xhmikosr.github.io/greek-vat-calculator/img/favicons/web-app-manifest-512x512.png">
   <meta property="og:image:width" content="512">
   <meta property="og:image:height" content="512">
-  <meta property="og:image:alt" content="Greek VAT Calculator - Υπολογισμός Φ.Π.Α.">
+  <meta property="og:image:alt" content="Greek VAT Calculator - Υπολογισμός ΦΠΑ">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Υπολογισμός Φ.Π.Α.">
-  <meta name="twitter:description" content="Δωρεάν online εργαλείο για τον υπολογισμό Φ.Π.Α. στην Ελλάδα. Υπολογίστε εύκολα το Φόρο Προστιθέμενης Αξίας με συντελεστές 24%, 13% και 6%.">
+  <meta name="twitter:title" content="Υπολογισμός ΦΠΑ - Greek VAT Calculator">
+  <meta name="twitter:description" content="Υπολογισμός ΦΠΑ online με συντελεστές 24%, 13% και 6%. Γράψτε ένα ποσό με ή χωρίς ΦΠΑ και δείτε αμέσως πόσος είναι ο φόρος.">
   <meta name="twitter:image" content="https://xhmikosr.github.io/greek-vat-calculator/img/favicons/web-app-manifest-512x512.png">
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "Υπολογισμός Φ.Π.Α.",
+    "name": "Υπολογισμός ΦΠΑ",
     "alternateName": "Greek VAT Calculator",
-    "description": "Δωρεάν online εργαλείο για τον υπολογισμό του Φόρου Προστιθέμενης Αξίας (Φ.Π.Α.) στην Ελλάδα. Υπολογίστε εύκολα τον Φ.Π.Α. με συντελεστές 24%, 13% και 6%.",
+    "description": "Υπολογισμός ΦΠΑ online με συντελεστές 24%, 13% και 6%. Γράψτε ένα ποσό με ή χωρίς ΦΠΑ και δείτε αμέσως πόσος είναι ο φόρος.",
     "url": "https://xhmikosr.github.io/greek-vat-calculator/",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "Any",
@@ -94,7 +94,7 @@
             <path fill="currentColor" d="m125.192 36.066-26.735 44-7.29-4.432L117.9 31.636l7.29 4.43zM94.36 27.038q-5.729 0-8.834 3.16-3.105 3.159-3.104 7.965v2.845q-.002 4.77 3.122 7.91 3.121 3.142 8.89 3.142 5.728 0 8.83-3.123 3.105-3.123 3.105-7.93v-2.844c0-3.203-1.04-5.858-3.11-7.965s-5.04-3.16-8.91-3.16zm3.99 13.96q0 1.835-1.02 3.068-1.012 1.23-2.898 1.23-1.96 0-2.993-1.23c-.69-.82-1.04-1.844-1.04-3.067v-2.83c0-1.23.34-2.26 1.03-3.11q1.034-1.268 2.92-1.268 1.921-.001 2.957 1.265 1.032 1.27 1.033 3.104V41zm34.51 19.487q-3.086-3.14-8.89-3.14-5.725 0-8.868 3.16-3.142 3.161-3.143 7.927v2.846c0 3.203 1.05 5.853 3.16 7.948 2.1 2.093 5.08 3.14 8.92 3.14 3.82 0 6.753-1.04 8.81-3.122q3.088-3.124 3.086-7.965v-2.85q.001-4.815-3.086-7.95zm-4.895 10.783q.001 2.058-.814 3.194c-.54.76-1.57 1.14-3.1 1.14q-1.695 0-2.88-1.285c-.79-.856-1.18-1.872-1.18-3.05V68.44c0-1.195.347-2.22 1.036-3.065q1.036-1.266 2.955-1.266c1.26 0 2.237.42 2.94 1.26.703.843 1.055 1.87 1.055 3.064v2.83zm-60.82 7.85H47.42v-8.533h19.723v8.533zm-4.677-36.36h11.19v9.485H62.47v12.832H52.13V52.243H40.907v-9.486H52.13v-12.47h10.338z"/>
           </svg>
           <div>
-            <h1 class="h4 mb-0">Υπολογισμός Φ.Π.Α.</h1>
+            <h1 class="h4 mb-0">Υπολογισμός ΦΠΑ</h1>
             <p class="small text-body-secondary mb-0">Φόρος Προστιθέμενης Αξίας</p>
           </div>
         </header>
@@ -103,10 +103,10 @@
           <noscript><p>Για τον υπολογισμό χρειάζεται JavaScript.</p></noscript>
 
           <form id="calcForm" aria-labelledby="form-heading" novalidate>
-            <h2 id="form-heading" class="visually-hidden">Φόρμα υπολογισμού Φ.Π.Α.</h2>
+            <h2 id="form-heading" class="visually-hidden">Φόρμα υπολογισμού ΦΠΑ</h2>
 
             <div class="mb-3">
-              <label id="amountLabel" for="amount" class="form-label">Ποσό με Φ.Π.Α.</label>
+              <label id="amountLabel" for="amount" class="form-label">Ποσό με ΦΠΑ</label>
               <div class="input-group input-group-lg has-validation">
                 <input id="amount" class="form-control" type="text" inputmode="decimal" enterkeyhint="done" autocomplete="off" spellcheck="false" autofocus required>
                 <span class="input-group-text">€</span>
@@ -118,14 +118,14 @@
               <legend class="visually-hidden">Το ποσό είναι</legend>
               <div class="btn-group">
                 <input id="modeWithVat" class="btn-check" type="radio" name="mode" value="incl" autocomplete="off" checked>
-                <label for="modeWithVat" class="btn btn-outline-primary">με Φ.Π.Α.</label>
+                <label for="modeWithVat" class="btn btn-outline-primary">με ΦΠΑ</label>
                 <input id="modeWithoutVat" class="btn-check" type="radio" name="mode" value="excl" autocomplete="off">
-                <label for="modeWithoutVat" class="btn btn-outline-primary">χωρίς Φ.Π.Α.</label>
+                <label for="modeWithoutVat" class="btn btn-outline-primary">χωρίς ΦΠΑ</label>
               </div>
             </fieldset>
 
             <fieldset class="mb-3">
-              <legend class="fs-6">Συντελεστής Φ.Π.Α.</legend>
+              <legend class="fs-6">Συντελεστής ΦΠΑ</legend>
               <div class="row gx-2">
                 <div class="col-auto">
                   <div class="btn-group">
@@ -151,28 +151,28 @@
             <h2 class="visually-hidden">Αποτέλεσμα</h2>
             <dl class="bg-body-tertiary border rounded px-3 py-2">
               <div class="d-flex flex-wrap align-items-center text-body-secondary py-1">
-                <dt id="label-netAmount" class="fw-normal">Ποσό χωρίς Φ.Π.Α.</dt>
+                <dt id="label-netAmount" class="fw-normal">Ποσό χωρίς ΦΠΑ</dt>
                 <dd class="d-flex align-items-center text-nowrap ms-auto mb-0">
                   <output id="netAmount" for="amount vatRate" aria-labelledby="label-netAmount" aria-live="off">0,00 €</output>
-                  <button class="btn btn-sm btn-outline-secondary border-0 invisible ms-2 d-print-none" type="button" aria-label="Αντιγραφή ποσού χωρίς Φ.Π.Α." hidden>
+                  <button class="btn btn-sm btn-outline-secondary border-0 invisible ms-2 d-print-none" type="button" aria-label="Αντιγραφή ποσού χωρίς ΦΠΑ" hidden>
                     <svg class="d-block" width="16" height="16" fill="currentColor" aria-hidden="true"><use href="#icon-copy"/></svg>
                   </button>
                 </dd>
               </div>
               <div class="d-flex flex-wrap align-items-center text-body-secondary py-1">
-                <dt id="label-totalVat" class="fw-normal">Φ.Π.Α. 24%</dt>
+                <dt id="label-totalVat" class="fw-normal">ΦΠΑ 24%</dt>
                 <dd class="d-flex align-items-center text-nowrap ms-auto mb-0">
                   <output id="totalVat" for="amount vatRate" aria-labelledby="label-totalVat" aria-live="off">0,00 €</output>
-                  <button class="btn btn-sm btn-outline-secondary border-0 invisible ms-2 d-print-none" type="button" aria-label="Αντιγραφή Φ.Π.Α." hidden>
+                  <button class="btn btn-sm btn-outline-secondary border-0 invisible ms-2 d-print-none" type="button" aria-label="Αντιγραφή ΦΠΑ" hidden>
                     <svg class="d-block" width="16" height="16" fill="currentColor" aria-hidden="true"><use href="#icon-copy"/></svg>
                   </button>
                 </dd>
               </div>
               <div class="d-flex flex-wrap align-items-center text-body-secondary border-top mt-1 pt-2 pb-1">
-                <dt id="label-totalAmount" class="fw-normal">Ποσό με Φ.Π.Α.</dt>
+                <dt id="label-totalAmount" class="fw-normal">Ποσό με ΦΠΑ</dt>
                 <dd class="d-flex align-items-center text-nowrap ms-auto mb-0">
                   <output id="totalAmount" for="amount vatRate" aria-labelledby="label-totalAmount" aria-live="off">0,00 €</output>
-                  <button class="btn btn-sm btn-outline-secondary border-0 invisible ms-2 d-print-none" type="button" aria-label="Αντιγραφή ποσού με Φ.Π.Α." hidden>
+                  <button class="btn btn-sm btn-outline-secondary border-0 invisible ms-2 d-print-none" type="button" aria-label="Αντιγραφή ποσού με ΦΠΑ" hidden>
                     <svg class="d-block" width="16" height="16" fill="currentColor" aria-hidden="true"><use href="#icon-copy"/></svg>
                   </button>
                 </dd>
@@ -184,8 +184,8 @@
           </form>
 
           <details class="border-top mt-5 pt-4 d-print-none" open>
-            <summary class="h5 mb-3"><h2 class="h5 d-inline">Τι είναι ο Φ.Π.Α.;</h2></summary>
-            <p>Ο <strong class="fw-semibold">Φόρος Προστιθέμενης Αξίας (Φ.Π.Α.)</strong> είναι έμμεσος φόρος που χρεώνεται στην αγορά αγαθών και υπηρεσιών. Στην Ελλάδα ισχύουν τρεις συντελεστές, ανάλογα με την κατηγορία του προϊόντος ή της υπηρεσίας.</p>
+            <summary class="h5 mb-3"><h2 class="h5 d-inline">Τι είναι ο ΦΠΑ;</h2></summary>
+            <p>Ο <strong class="fw-semibold">Φόρος Προστιθέμενης Αξίας (ΦΠΑ)</strong> είναι έμμεσος φόρος που χρεώνεται στην αγορά αγαθών και υπηρεσιών. Στην Ελλάδα ισχύουν τρεις συντελεστές, ανάλογα με την κατηγορία του προϊόντος ή της υπηρεσίας.</p>
             <table class="table table-bordered table-striped align-middle">
               <tbody>
                 <tr>
@@ -203,7 +203,14 @@
               </tbody>
             </table>
             <p>Σε ορισμένα νησιά οι συντελεστές μειώνονται κατά 30%: 17%, 9% και 4%. Μπορείτε να τους γράψετε στο πεδίο του συντελεστή.</p>
-            <p class="mb-0">Αν το ποσό περιλαμβάνει ήδη Φ.Π.Α., επιλέξτε «με Φ.Π.Α.» και θα δείτε το ποσό χωρίς Φ.Π.Α. και τον φόρο που περιέχει. Αλλιώς επιλέξτε «χωρίς Φ.Π.Α.» για να δείτε τον φόρο και το τελικό ποσό.</p>
+            <p class="mb-0">Αν το ποσό περιλαμβάνει ήδη ΦΠΑ, επιλέξτε «με ΦΠΑ» και θα δείτε το ποσό χωρίς ΦΠΑ και τον φόρο που περιέχει. Αλλιώς επιλέξτε «χωρίς ΦΠΑ» για να δείτε τον φόρο και το τελικό ποσό.</p>
+          </details>
+
+          <details class="border-top mt-4 pt-4 d-print-none" open>
+            <summary class="h5 mb-3"><h2 class="h5 d-inline">Πώς υπολογίζεται ο ΦΠΑ;</h2></summary>
+            <p>Για να προσθέσετε ΦΠΑ 24%, πολλαπλασιάστε το ποσό με 1,24 και για να τον αφαιρέσετε, διαιρέστε με 1,24. Για 13% και 6% χρησιμοποιήστε 1,13 και 1,06.</p>
+            <p>Για παράδειγμα, τα 100&nbsp;€ χωρίς ΦΠΑ γίνονται 124&nbsp;€ με ΦΠΑ. Αντίστροφα, τα 124&nbsp;€ με ΦΠΑ είναι 100&nbsp;€ χωρίς ΦΠΑ και 24&nbsp;€ φόρος.</p>
+            <p class="mb-0">Ένα συχνό λάθος είναι να αφαιρείτε το 24% από το ποσό με ΦΠΑ. Από τα 124&nbsp;€ θα βγάλετε 94,24&nbsp;€ αντί για 100&nbsp;€, γιατί ο φόρος υπολογίζεται στο ποσό χωρίς ΦΠΑ.</p>
           </details>
         </main>
 
