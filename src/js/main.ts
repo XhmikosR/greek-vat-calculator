@@ -271,12 +271,14 @@ function handleVatRateInput(): void {
 function handleSubmit(event: SubmitEvent): void {
   event.preventDefault();
 
-  if (validateInput(elements.inputs.amount) && validateInput(elements.inputs.vatRate)) {
-    calculateVAT();
+  if (!(validateInput(elements.inputs.amount) && validateInput(elements.inputs.vatRate))) {
+    return;
+  }
 
-    if (globalThis.matchMedia('(pointer: coarse)').matches && document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
-    }
+  calculateVAT();
+
+  if (globalThis.matchMedia('(pointer: coarse)').matches && document.activeElement instanceof HTMLElement) {
+    document.activeElement.blur();
   }
 }
 

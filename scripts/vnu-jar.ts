@@ -25,7 +25,6 @@ execFile('java', ['-version'], (error, _stdout, stderr) => {
   // vnu-jar accepts multiple ignores joined with a `|`.
   // Also note that the ignores are string regular expressions.
   const ignores = [
-    'The “inputmode” attribute is not supported in all browsers.*',
     'Attribute “autocomplete” is only allowed when the input type is.*',
     'Attribute “crossorigin” not allowed on element “style” at this point.*'
   ].join('|');
@@ -40,6 +39,8 @@ execFile('java', ['-version'], (error, _stdout, stderr) => {
   }
 
   const args = [
+    // For the 32-bit Java we need to pass `-Xss512k`
+    ...(is32bitJava ? ['-Xss512k'] : []),
     '-jar',
     vnu,
     '--asciiquotes',
@@ -49,11 +50,6 @@ execFile('java', ['-version'], (error, _stdout, stderr) => {
     ignores,
     ...htmlFiles
   ];
-
-  // For the 32-bit Java we need to pass `-Xss512k`
-  if (is32bitJava) {
-    args.unshift('-Xss512k');
-  }
 
   console.log(`command used: java ${args.join(' ')}`);
 
