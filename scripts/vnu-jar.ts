@@ -20,15 +20,6 @@ execFile('java', ['-version'], (error, _stdout, stderr) => {
 
   console.log('Running vnu-jar validation...');
 
-  const is32bitJava = !stderr.includes('64-Bit');
-
-  // vnu-jar accepts multiple ignores joined with a `|`.
-  // Also note that the ignores are string regular expressions.
-  const ignores = [
-    'Attribute “autocomplete” is only allowed when the input type is.*',
-    'Attribute “crossorigin” not allowed on element “style” at this point.*'
-  ].join('|');
-
   // Get all HTML files except those starting with 'google'
   const htmlFiles = globSync('_site/**/*.html')
     .filter((file: string) => !file.includes('google'));
@@ -37,6 +28,15 @@ execFile('java', ['-version'], (error, _stdout, stderr) => {
     console.log('No HTML files to validate.');
     return;
   }
+
+  const is32bitJava = !stderr.includes('64-Bit');
+
+  // vnu-jar accepts multiple ignores joined with a `|`.
+  // Also note that the ignores are string regular expressions.
+  const ignores = [
+    'Attribute “autocomplete” is only allowed when the input type is.*',
+    'Attribute “crossorigin” not allowed on element “style” at this point.*'
+  ].join('|');
 
   const args = [
     // For the 32-bit Java we need to pass `-Xss512k`
